@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface ITower
 {
-    public void Shoot();
-    public GameObject CreateTower();
+    public IEnumerator Shoot();
+    public void AddEnemyInArea(GameObject enemy);
+    public void RemoveEnemyInArea(GameObject enemy);
 }

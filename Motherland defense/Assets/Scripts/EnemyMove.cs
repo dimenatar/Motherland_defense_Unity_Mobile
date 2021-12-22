@@ -54,7 +54,6 @@ public class EnemyMove : MonoBehaviour, IEnemyMove
     {
         while (_targetCheckPoint)
         {
-            //enemyPosition.transform.Translate((_targetCheckPoint.transform.position - enemyPosition.position) * _speed);
             enemyPosition.position = Vector3.MoveTowards(enemyPosition.position, _targetCheckPoint.transform.position, Time.deltaTime * _speed);
             yield return new WaitForSeconds(0.01f);
         }

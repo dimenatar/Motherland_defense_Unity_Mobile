@@ -5,16 +5,14 @@ using UnityEngine;
 public class TowerFactory : MonoBehaviour
 {
 
-    public void CreateTower(ITower _tower, Vector2 position, DirectionEnum.Directions direction)
+    public void CreateTower(ITowerLoader _towerLoader, Vector3 position, DirectionEnum.Directions direction)
     {
-        GameObject tower = _tower.CreateTower();
+        GameObject tower = Instantiate(_towerLoader.LoadTower());
         SetTowerPosition(tower, position, direction);
     }
-    public void SetTowerPosition(GameObject towerObject, Vector2 position, DirectionEnum.Directions direction)
+    public void SetTowerPosition(GameObject towerObject, Vector3 position, DirectionEnum.Directions direction)
     {
-        towerObject.transform.position = position;
-        float angle = 0;
-        DirectionDictionaryValues.DirectionValues.TryGetValue(direction, out angle);
-        towerObject.transform.rotation = Quaternion.Euler(0, angle, 0);
+        DirectionDictionaryValues.DirectionValues.TryGetValue(direction, out float angle);
+        towerObject.transform.SetPositionAndRotation(position, Quaternion.Euler(0, angle, 0));
     }
 }
