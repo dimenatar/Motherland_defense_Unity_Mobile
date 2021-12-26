@@ -8,7 +8,7 @@ public class Tower : MonoBehaviour, ITower
     [SerializeField] Transform _shotStartPosition;
 
     public GameObject _target = null;
-    private List<GameObject> _enemiesInArea = new List<GameObject>();
+    public List<GameObject> _enemiesInArea = new List<GameObject>();
     
     public virtual IEnumerator Shoot()
     {
@@ -20,6 +20,7 @@ public class Tower : MonoBehaviour, ITower
         if (!_enemiesInArea.Contains(enemy))
         {
             _enemiesInArea.Add(enemy);
+            enemy.GetComponent<Enemy>().OnDied += RemoveTarget;
         }
 
         if (!_target)
@@ -51,6 +52,13 @@ public class Tower : MonoBehaviour, ITower
     public Transform GetShotStartPosition()
     {
         return _shotStartPosition;
+    }
+
+    private void RemoveTarget()
+    {
+        _enemiesInArea.Remove(_target);
+        _target.GetComponent<Enemy>().OnDied -= RemoveTarget;
+        ChangeTarget();
     }
 
     private void ChangeTarget()

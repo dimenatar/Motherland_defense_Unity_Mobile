@@ -12,9 +12,23 @@ public class Enemy : MonoBehaviour
     public delegate void Damaged(int value);
     public event Damaged OnDamageTaken;
 
+    public delegate void State();
+    public event State OnStartMove;
+    public event State OnStartFight;
+    public event State OnDied;
+
+    public void Initialize()
+    {
+        OnStartMove?.Invoke();
+    }
     private void Awake()
     {
 
+    }
+
+    private void Start()
+    {
+        Initialize();
     }
 
     private void OnEnable()
@@ -41,5 +55,9 @@ public class Enemy : MonoBehaviour
     {
         _health -= damage;
         OnDamageTaken?.Invoke(GetHealth());
+        if (_health <= 0)
+        {
+            OnDied?.Invoke();
+        }
     }
 }

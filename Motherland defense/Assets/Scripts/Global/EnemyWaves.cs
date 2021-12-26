@@ -16,6 +16,11 @@ public class EnemyWaves : MonoBehaviour
     {
         StopCoroutine(nameof(StartNewWave));
     }
+    //убрать потом
+    private void Start()
+    {
+        StartOffense();
+    }
     private IEnumerator StartNewWave()
     {
         _waveIndex++;

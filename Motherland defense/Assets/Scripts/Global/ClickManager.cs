@@ -19,10 +19,8 @@ public class ClickManager : MonoBehaviour
     }
     private void ClickOnScreen()
     {
-        
-        RaycastHit hit;
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-
+        RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
         {

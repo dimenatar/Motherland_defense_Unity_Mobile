@@ -10,7 +10,6 @@ public class ShootAreaTrigger : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Enemy>())
         {
-            Debug.Log("pidor zdes");
             _tower.AddEnemyInArea(other.gameObject);
         }
     }

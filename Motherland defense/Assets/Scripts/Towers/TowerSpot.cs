@@ -30,6 +30,6 @@ public class TowerSpot : MonoBehaviour, IClickable
     private void Start()
     {
         towerLoader = new CreateTing();
-        _clickManager.OnObjectClick += ObjectClick;
+        _clickManager.OnObjectClick += Deselect;
     }
 }

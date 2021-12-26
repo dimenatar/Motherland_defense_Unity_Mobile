@@ -24,16 +24,19 @@ public class EnemyWave : MonoBehaviour
 
     private IEnumerator SpawnNextEnemy()
     {
-        if (_currentEnemyIndex >= _enemies.Count)
+        while (true)
         {
-            StopWave();
+            if (_currentEnemyIndex >= _enemies.Count-1)
+            {
+                StopWave();
+            }
+            else
+            {
+                _currentEnemyIndex++;
+                SpawnEnemy();
+            }
+            yield return new WaitForSeconds(_spawnPause);
         }
-        else
-        {
-            _currentEnemyIndex++;
-            SpawnEnemy();
-        }
-        yield return new WaitForSeconds(_spawnPause);
     }
 
     private void SpawnEnemy()
