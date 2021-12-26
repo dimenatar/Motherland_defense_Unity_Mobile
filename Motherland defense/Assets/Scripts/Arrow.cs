@@ -40,6 +40,11 @@ public class Arrow : MonoBehaviour
         _target = target;
     }
 
+    public float GetSpeed()
+    {
+        return (transform.forward * _speed).magnitude;
+    }
+
     private void MoveArrow()
     {
         transform.position += transform.forward * _speed;

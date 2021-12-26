@@ -55,17 +55,24 @@ public class EnemyMove : MonoBehaviour
     {
         StopCoroutine(nameof(Move));
     }
-    private Vector3 GetNextCheckPointDirection()
-    {
-        return Vector3.RotateTowards(enemyPosition.position, _targetCheckPoint.transform.position, 1,0);
-    }    
+
     public IEnumerator Move()
     {
         while (_targetCheckPoint)
         {
-            Debug.DrawLine(enemyPosition.position, _targetCheckPoint.transform.position, Color.red, 10);
+            //Debug.DrawLine(enemyPosition.position, _targetCheckPoint.transform.position, Color.red, 10);
             enemyPosition.position = Vector3.MoveTowards(enemyPosition.position, _targetCheckPoint.transform.position, Time.deltaTime * _speed);
             yield return new WaitForSeconds(0.01f);
         }
     }
+    
+    public float GetSpeed()
+    {
+        return _speed;
+    }
+
+    private Vector3 GetNextCheckPointDirection()
+    {
+        return Vector3.RotateTowards(enemyPosition.position, _targetCheckPoint.transform.position, 1,0);
+    }    
 }

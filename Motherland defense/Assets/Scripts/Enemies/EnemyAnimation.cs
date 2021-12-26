@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class EnemyAnimation : MonoBehaviour
 {
-    //[Header("0 - Walk, 1 - Fight, 2 - Dead")]
-    //[SerializeField] private List<AnimationClip> _enemyAnimations;
+    [Header("0 - Walk, 1 - Fight, 2 - Dead")]
+    [SerializeField] private List<string> _enemyAnimationNames;
     private Animator _enemyAnimator;
     private EnemyStates _enemyState;
     private Enemy _enemy;
@@ -44,17 +44,17 @@ public class EnemyAnimation : MonoBehaviour
             case EnemyStates.Dead:
                 {
                     //_enemyAnimations[2].wrapMode = WrapMode.Once;
-                    _enemyAnimator.Play("Death");
+                    _enemyAnimator.Play(_enemyAnimationNames[2]);
                     break;
                 }
             case EnemyStates.Fight:
                 {
-                    _enemyAnimator.Play("Fight");
+                    _enemyAnimator.Play(_enemyAnimationNames[1]);
                     break;
                 }
             case EnemyStates.Walk:
                 {
-                    _enemyAnimator.Play("Walk");
+                    _enemyAnimator.Play(_enemyAnimationNames[0]);
                     break;
                 }
         }

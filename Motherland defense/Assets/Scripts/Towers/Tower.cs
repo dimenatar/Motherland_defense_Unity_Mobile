@@ -9,7 +9,7 @@ public class Tower : MonoBehaviour, ITower
 
     public GameObject _target = null;
     public List<GameObject> _enemiesInArea = new List<GameObject>();
-    
+
     public virtual IEnumerator Shoot()
     {
         yield return null;
@@ -32,7 +32,7 @@ public class Tower : MonoBehaviour, ITower
     public void RemoveEnemyInArea(GameObject enemy)
     {
         _enemiesInArea.Remove(enemy);
-
+        enemy.GetComponent<Enemy>().OnDied -= RemoveTarget;
         if (_target == enemy)
         {
             ChangeTarget();

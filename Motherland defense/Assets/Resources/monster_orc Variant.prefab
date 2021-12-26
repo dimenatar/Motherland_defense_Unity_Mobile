@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c589e3e8efa604a85788e3ded969d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  _health: 5
   _enemyClassName: ORK
   _points: 10
 --- !u!114 &5105316485275699277
@@ -55,7 +55,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78eaa9c436a1b55448f64600524b72d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyAnimations: []
+  _enemyAnimationNames:
+  - Walk
+  - Fight
+  - Death
 --- !u!1001 &995789878793010179
 PrefabInstance:
   m_ObjectHideFlags: 0

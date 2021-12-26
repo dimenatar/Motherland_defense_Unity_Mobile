@@ -30,12 +30,25 @@ public class Ting : Tower
     }
     private void CreateArrow()
     {
+
+        // get t
+        
+
+
         Debug.DrawLine(GetShotStartPosition().position, GetTarget().transform.position - GetShotStartPosition().position);
         SetUpArrow(Instantiate(Resources.Load<GameObject>("ArrowPrefab"), GetShotStartPosition().position, Quaternion.Euler(0f,GetTransform(), 0f)));
 
     }
     private void SetUpArrow(GameObject arrow)
     {
+        float time = Vector3.Distance(GetTarget().transform.position, GetShotStartPosition().position) / arrow.GetComponent<Arrow>().GetSpeed();
+        Debug.Log(time);
+        //float s = GetTarget().GetComponent<EnemyMove>().GetSpeed()*time;
+
+
+        //Vector3 point = GetTarget().transform.position + new Vector3( s,s,s);
+       // Debug.DrawLine(GetShotStartPosition().position, point, Color.blue, 10);
+
         //arrow.transform.LookAt(GetTarget().transform.position+new Vector3(0,35,0));
         arrow.GetComponent<Arrow>().SetTarget(GetTarget());
         arrow.SetActive(true);
