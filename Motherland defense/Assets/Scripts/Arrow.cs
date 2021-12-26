@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+
 public class Arrow : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private int _damage;
     [SerializeField] private float _hitRange; //specify range where we hit enemy even if we dont actually
+   
     private GameObject _target;
 
     private void Start()
@@ -47,8 +50,8 @@ public class Arrow : MonoBehaviour
 
     private void MoveArrow()
     {
-        transform.position += transform.forward * _speed;
-        transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, Time.deltaTime * _speed);
+        transform.LookAt(_target.transform.position);
+        GetComponent<Rigidbody>().velocity = transform.forward *_speed;
     }
 
     //this is pretty bad and heavy function 

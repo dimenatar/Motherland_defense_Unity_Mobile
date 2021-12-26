@@ -4,6 +4,7 @@ using UnityEngine;
 
 //[RequireComponent(typeof(Enemy))]
 [RequireComponent(typeof(Transform))]
+[RequireComponent(typeof(Rigidbody))]
 public class EnemyMove : MonoBehaviour
 {
 
@@ -12,15 +13,16 @@ public class EnemyMove : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private int _targetCheckPointIndex;
 
-    private Transform enemyPosition;
     private EnemyCheckPoint _targetCheckPoint;
     private Enemy _enemy;
-
+    private Rigidbody _rigidbody;
     public virtual void ChangeNextCheckPoint(int index)
     {
         _targetCheckPoint = _enemyCheckPoints.GetEnemyCheckPointByIndex(index);
         if (_targetCheckPoint)
-            enemyPosition.transform.LookAt(_targetCheckPoint.transform);
+        {
+            transform.LookAt(_targetCheckPoint.transform.position);
+        }
     }
     public void Initialize()
     {
@@ -30,10 +32,13 @@ public class EnemyMove : MonoBehaviour
         _enemy.OnDied += StopMove;
 
         _targetCheckPoint = _enemyCheckPoints.GetEnemyCheckPointByIndex(_targetCheckPointIndex);
-        enemyPosition = GetComponent<Transform>();
+        
         StartMove();
     }
-    
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
     private void Start()
     {
         Initialize();
@@ -41,7 +46,7 @@ public class EnemyMove : MonoBehaviour
     // это вынести в другой класс
     public void StartFight()
     {
-       // StopCoroutine(nameof(Move));
+        // StopCoroutine(nameof(Move));
     }
     public void StartMove()
     {
@@ -58,13 +63,13 @@ public class EnemyMove : MonoBehaviour
 
     public IEnumerator Move()
     {
-        while (_targetCheckPoint)
+        while (true)
         {
-            //Debug.DrawLine(enemyPosition.position, _targetCheckPoint.transform.position, Color.red, 10);
-            enemyPosition.position = Vector3.MoveTowards(enemyPosition.position, _targetCheckPoint.transform.position, Time.deltaTime * _speed);
+            GetComponent<Rigidbody>().velocity = transform.forward * _speed;
             yield return new WaitForSeconds(0.01f);
         }
     }
+    
     
     public float GetSpeed()
     {
@@ -73,6 +78,6 @@ public class EnemyMove : MonoBehaviour
 
     private Vector3 GetNextCheckPointDirection()
     {
-        return Vector3.RotateTowards(enemyPosition.position, _targetCheckPoint.transform.position, 1,0);
+        return Vector3.RotateTowards(transform.position, _targetCheckPoint.transform.position, 1,0);
     }    
 }

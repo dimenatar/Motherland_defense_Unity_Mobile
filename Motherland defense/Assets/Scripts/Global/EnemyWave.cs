@@ -26,6 +26,7 @@ public class EnemyWave : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(_spawnPause);
             if (_currentEnemyIndex >= _enemies.Count-1)
             {
                 StopWave();
@@ -35,7 +36,7 @@ public class EnemyWave : MonoBehaviour
                 _currentEnemyIndex++;
                 SpawnEnemy();
             }
-            yield return new WaitForSeconds(_spawnPause);
+            
         }
     }
 
@@ -45,6 +46,7 @@ public class EnemyWave : MonoBehaviour
         enemy.transform.position =_spawnPoint.position;
         enemy.transform.rotation = _spawnPoint.rotation;
         enemy.SetActive(true);
+        enemy.GetComponent<Enemy>().Initialize();
     }
 
 }

@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private string _enemyClassName;
     [SerializeField] private int _points;
 
-
     public delegate void Damaged(int value);
     public event Damaged OnDamageTaken;
 
@@ -18,12 +17,11 @@ public class Enemy : MonoBehaviour
     public event State OnStartFight;
     public event State OnDied;
 
-    private Transform targetPoint;
-
     public void Initialize()
     {
         OnStartMove?.Invoke();
     }
+
     private void Awake()
     {
 
@@ -31,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        Initialize();
+       // Initialize();
     }
 
     private void OnEnable()

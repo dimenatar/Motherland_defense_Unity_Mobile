@@ -7,25 +7,36 @@ public class EnemyAnimation : MonoBehaviour
 {
     [Header("0 - Walk, 1 - Fight, 2 - Dead")]
     [SerializeField] private List<string> _enemyAnimationNames;
+    [SerializeField] private float _animationSpeed;
     private Animator _enemyAnimator;
-    private EnemyStates _enemyState;
+    private EnemyStates? _enemyState = null;
     private Enemy _enemy;
+
     private void Start()
     {
         _enemy = GetComponent<Enemy>();
         _enemy.OnStartFight += StartFight;
+        Debug.Log("+=");
         _enemy.OnStartMove += StartWalk;
         _enemy.OnDied += Dead;
         _enemyAnimator = GetComponent<Animator>();
     }
+
+    private void FixedUpdate()
+    {
+        _enemyAnimator.SetFloat("Speed", _animationSpeed);
+    }
+
     private void StartWalk()
     {
         ChangeState(EnemyStates.Walk);
     }
+
     private void StartFight()
     {
         ChangeState(EnemyStates.Fight);
     }
+
     private void Dead()
     {
         ChangeState(EnemyStates.Dead);
@@ -33,6 +44,7 @@ public class EnemyAnimation : MonoBehaviour
         _enemy.OnStartMove -= StartWalk;
         _enemy.OnDied -= Dead;
     }
+
     private void ChangeState(EnemyStates newState)
     {
         if (_enemyState == newState || _enemyState == EnemyStates.Dead)
@@ -43,7 +55,6 @@ public class EnemyAnimation : MonoBehaviour
         {
             case EnemyStates.Dead:
                 {
-                    //_enemyAnimations[2].wrapMode = WrapMode.Once;
                     _enemyAnimator.Play(_enemyAnimationNames[2]);
                     break;
                 }
