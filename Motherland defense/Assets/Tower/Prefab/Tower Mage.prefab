@@ -495,7 +495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 411524}
-  - component: {fileID: 9566220}
+  - component: {fileID: 9063026811642680090}
   m_Layer: 0
   m_Name: Tower Mage
   m_TagString: Untagged
@@ -523,22 +523,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &9566220
-Animator:
-  serializedVersion: 3
+--- !u!114 &9063026811642680090
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187918}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: d052d933598dac241a51c227cfe7a313, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc5a99e5fb5856439363f3eb8913a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reloadTime: 1
+  _shotStartPosition: {fileID: 0}
+  _target: {fileID: 0}
+  _enemiesInArea: []
+  _freezeBall: {fileID: 0}

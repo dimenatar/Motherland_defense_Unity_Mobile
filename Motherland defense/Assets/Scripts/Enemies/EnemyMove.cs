@@ -7,8 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMove : MonoBehaviour
 {
-
-
     [SerializeField] private EnemyCheckPoints _enemyCheckPoints;
     [SerializeField] private float _speed;
     [SerializeField] private int _targetCheckPointIndex;
@@ -71,15 +69,21 @@ public class EnemyMove : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
     }
-    
-    
+
     public float GetSpeed()
     {
         return _speed;
     }
 
-    private Vector3 GetNextCheckPointDirection()
+    public void SetSpeed(float speed)
     {
-        return Vector3.RotateTowards(transform.position, _targetCheckPoint.transform.position, 1,0);
-    }    
+        if (speed >= 0)
+        {
+            _speed = speed;
+        }
+        else
+        {
+            _speed = 0;
+        }
+    }
 }
