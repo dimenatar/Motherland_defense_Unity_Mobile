@@ -16,7 +16,6 @@ public class EnemyAnimation : MonoBehaviour
     {
         _enemy = GetComponent<Enemy>();
         _enemy.OnStartFight += StartFight;
-        Debug.Log("+=");
         _enemy.OnStartMove += StartWalk;
         _enemy.OnDied += Dead;
         _enemyAnimator = GetComponent<Animator>();

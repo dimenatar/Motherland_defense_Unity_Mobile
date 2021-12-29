@@ -6,20 +6,16 @@ public class EnemyView : MonoBehaviour
 {
     // change type later
     [SerializeField] private GameObject _healthBar;
-
-    public Enemy ThisEnemy;
+    public LevelStatistics _levelStatistics;
+    private Enemy _enemy;
 
     private void Start()
     {
-        ThisEnemy.OnDamageTaken += SetNewHealthValue;
+        _enemy.OnDamageTaken += _levelStatistics.AddTotalDamage;
+        _enemy.OnDamageTaken += SetNewHealthValue;
     }
 
-    private void OnDestroy()
-    {
-        ThisEnemy.OnDamageTaken -= SetNewHealthValue;
-    }
-
-    private void SetNewHealthValue(int value)
+    private void SetNewHealthValue(int newHealth, int damage)
     {
         
     }

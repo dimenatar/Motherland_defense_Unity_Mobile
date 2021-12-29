@@ -1,68 +1,176 @@
 fileFormatVersion: 2
 guid: dd7f7570f26fc4e4aab4c4c2fc42fda5
-timeCreated: 1548406075
-licenseType: Store
 ModelImporter:
-  serializedVersion: 21
-  fileIDToRecycleName:
-    100000: arm_handle_L
-    100002: arm_handle_R
-    100004: arm_L
-    100006: arm_R
-    100008: Armature
-    100010: ear_L
-    100012: ear_R
-    100014: foot_L
-    100016: foot_R
-    100018: hand_L
-    100020: hand_R
-    100022: head
-    100024: hip_L
-    100026: hip_R
-    100028: leg_handle_L
-    100030: leg_handle_R
-    100032: leg_L
-    100034: leg_R
-    100036: master
-    100038: neck
-    100040: //RootNode
-    100042: shoulder_L
-    100044: shoulder_R
-    100046: spine1
-    100048: spine2
-    100050: spine3
-    400000: arm_handle_L
-    400002: arm_handle_R
-    400004: arm_L
-    400006: arm_R
-    400008: Armature
-    400010: ear_L
-    400012: ear_R
-    400014: foot_L
-    400016: foot_R
-    400018: hand_L
-    400020: hand_R
-    400022: head
-    400024: hip_L
-    400026: hip_R
-    400028: leg_handle_L
-    400030: leg_handle_R
-    400032: leg_L
-    400034: leg_R
-    400036: master
-    400038: neck
-    400040: //RootNode
-    400042: shoulder_L
-    400044: shoulder_R
-    400046: spine1
-    400048: spine2
-    400050: spine3
-    7400000: Run
-    9500000: //RootNode
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: arm_handle_L
+  - first:
+      1: 100002
+    second: arm_handle_R
+  - first:
+      1: 100004
+    second: arm_L
+  - first:
+      1: 100006
+    second: arm_R
+  - first:
+      1: 100008
+    second: Armature
+  - first:
+      1: 100010
+    second: ear_L
+  - first:
+      1: 100012
+    second: ear_R
+  - first:
+      1: 100014
+    second: foot_L
+  - first:
+      1: 100016
+    second: foot_R
+  - first:
+      1: 100018
+    second: hand_L
+  - first:
+      1: 100020
+    second: hand_R
+  - first:
+      1: 100022
+    second: head
+  - first:
+      1: 100024
+    second: hip_L
+  - first:
+      1: 100026
+    second: hip_R
+  - first:
+      1: 100028
+    second: leg_handle_L
+  - first:
+      1: 100030
+    second: leg_handle_R
+  - first:
+      1: 100032
+    second: leg_L
+  - first:
+      1: 100034
+    second: leg_R
+  - first:
+      1: 100036
+    second: master
+  - first:
+      1: 100038
+    second: neck
+  - first:
+      1: 100040
+    second: //RootNode
+  - first:
+      1: 100042
+    second: shoulder_L
+  - first:
+      1: 100044
+    second: shoulder_R
+  - first:
+      1: 100046
+    second: spine1
+  - first:
+      1: 100048
+    second: spine2
+  - first:
+      1: 100050
+    second: spine3
+  - first:
+      4: 400000
+    second: arm_handle_L
+  - first:
+      4: 400002
+    second: arm_handle_R
+  - first:
+      4: 400004
+    second: arm_L
+  - first:
+      4: 400006
+    second: arm_R
+  - first:
+      4: 400008
+    second: Armature
+  - first:
+      4: 400010
+    second: ear_L
+  - first:
+      4: 400012
+    second: ear_R
+  - first:
+      4: 400014
+    second: foot_L
+  - first:
+      4: 400016
+    second: foot_R
+  - first:
+      4: 400018
+    second: hand_L
+  - first:
+      4: 400020
+    second: hand_R
+  - first:
+      4: 400022
+    second: head
+  - first:
+      4: 400024
+    second: hip_L
+  - first:
+      4: 400026
+    second: hip_R
+  - first:
+      4: 400028
+    second: leg_handle_L
+  - first:
+      4: 400030
+    second: leg_handle_R
+  - first:
+      4: 400032
+    second: leg_L
+  - first:
+      4: 400034
+    second: leg_R
+  - first:
+      4: 400036
+    second: master
+  - first:
+      4: 400038
+    second: neck
+  - first:
+      4: 400040
+    second: //RootNode
+  - first:
+      4: 400042
+    second: shoulder_L
+  - first:
+      4: 400044
+    second: shoulder_R
+  - first:
+      4: 400046
+    second: spine1
+  - first:
+      4: 400048
+    second: spine2
+  - first:
+      4: 400050
+    second: spine3
+  - first:
+      74: 7400000
+    second: Run
+  - first:
+      95: 9500000
+    second: //RootNode
+  externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -75,6 +183,8 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -86,6 +196,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Run
       takeName: Run
+      internalID: 0
       firstFrame: 0
       lastFrame: 40
       wrapMode: 0
@@ -117,19 +228,31 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
@@ -137,10 +260,13 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 1
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -150,15 +276,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: master
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 0962bdca27eaca34aaa15f7fdf608faf,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 0962bdca27eaca34aaa15f7fdf608faf, type: 3}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 2
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

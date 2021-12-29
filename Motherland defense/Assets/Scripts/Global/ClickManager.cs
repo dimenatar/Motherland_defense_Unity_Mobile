@@ -27,9 +27,10 @@ public class ClickManager : MonoBehaviour
             RaycastHit[] rays = Physics.RaycastAll(ray);
             FilterRaycast(ref rays);
             if (rays.Length > 0)
-            {
+            { 
                 IClickable clickable = rays[0].collider.GetComponent<IClickable>();
                 clickedObject = clickable;
+                Debug.Log(rays[0].collider.gameObject.name);
                 clickable.ObjectClick();
             }
 
@@ -38,7 +39,13 @@ public class ClickManager : MonoBehaviour
         {
             OnObjectClick -= clickedObject.Deselect;
         }
+
         OnObjectClick?.Invoke();
+        if (clickedObject != null)
+        {
+            OnObjectClick += clickedObject.Deselect;
+        }
+        
         clickedObject = null;
     }
     private void FilterRaycast(ref RaycastHit[] raycasts)

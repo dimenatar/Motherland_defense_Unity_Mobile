@@ -10,11 +10,20 @@ public class Tower : MonoBehaviour, ITower
     public GameObject _target = null;
     public List<GameObject> _enemiesInArea = new List<GameObject>();
 
+    private Vector3 diff;
+    private float rotateZ;
+
     public virtual IEnumerator Shoot()
     {
         yield return null;
     }
 
+    public float GetTransform()
+    {
+        diff = GetTarget().transform.position - GetShotStartPosition().position;
+        rotateZ = Mathf.Atan2(diff.x, diff.z) * Mathf.Rad2Deg;
+        return rotateZ;
+    }
     public void AddEnemyInArea(GameObject enemy)
     {
         if (!_enemiesInArea.Contains(enemy))

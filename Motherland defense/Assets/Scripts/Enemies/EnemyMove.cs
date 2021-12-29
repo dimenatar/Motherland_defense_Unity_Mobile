@@ -65,7 +65,9 @@ public class EnemyMove : MonoBehaviour
     {
         while (true)
         {
-            GetComponent<Rigidbody>().velocity = transform.forward * _speed;
+            transform.position = Vector3.MoveTowards(transform.position, _targetCheckPoint.transform.position, _speed);
+            transform.LookAt(_targetCheckPoint.transform.position);
+            //transform.Translate(transform.forward * _speed);
             yield return new WaitForSeconds(0.01f);
         }
     }

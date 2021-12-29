@@ -5,10 +5,11 @@ using UnityEngine;
 public class TowerFactory : MonoBehaviour
 {
 
-    public void CreateTower(ITowerLoader _towerLoader, Vector3 position, DirectionEnum.Directions direction)
+    public GameObject CreateTower(ITowerLoader _towerLoader, Vector3 position, DirectionEnum.Directions direction)
     {
         GameObject tower = Instantiate(_towerLoader.LoadTower());
         SetTowerPosition(tower, position, direction);
+        return tower;
     }
     public void SetTowerPosition(GameObject towerObject, Vector3 position, DirectionEnum.Directions direction)
     {

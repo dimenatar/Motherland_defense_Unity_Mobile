@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private string _enemyClassName;
     [SerializeField] private int _points;
 
-    public delegate void Damaged(int value);
+    public delegate void Damaged(int health, int damage);
     public event Damaged OnDamageTaken;
 
     public delegate void State();
@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _health -= damage;
-        OnDamageTaken?.Invoke(GetHealth());
+        OnDamageTaken?.Invoke(GetHealth(), damage);
         if (_health <= 0)
         {
             OnDied?.Invoke();
