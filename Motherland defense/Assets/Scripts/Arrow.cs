@@ -12,12 +12,6 @@ public class Arrow : MonoBehaviour
    
     private GameObject _target;
 
-    private void Start()
-    {
-
-    }
-
-
     private void Update()
     {
         MoveArrow();
@@ -41,11 +35,6 @@ public class Arrow : MonoBehaviour
     public void SetTarget(GameObject target)
     {
         _target = target;
-    }
-
-    public float GetSpeed()
-    {
-        return (transform.forward * _speed).magnitude;
     }
 
     private void MoveArrow()

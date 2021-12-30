@@ -6,5 +6,4 @@ public interface IClickable
 {
     public void ObjectClick();
     public void Deselect();
-    public bool IsSelected { get; set; }
 }

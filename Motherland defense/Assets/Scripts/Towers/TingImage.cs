@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class TingImage : MonoBehaviour, IClickable, ITowerLoader
 {
-    [SerializeField] private TowerFactory _towerFactory;
     private GameObject _towerSpot;
 
     public bool IsSelected { get; set; }
