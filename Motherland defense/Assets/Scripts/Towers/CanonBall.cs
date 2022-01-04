@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -9,17 +11,18 @@ public class CanonBall : MonoBehaviour
     [SerializeField] private float _fireForce;
     [SerializeField] private float _speed;
     [SerializeField] private float _flyHeight;
+    [SerializeField] private float _hitRadius;
+    [SerializeField] private float _damage;
+
     private float _animation;
     private Rigidbody _rigidbody;
     private GameObject _target;
-    private Vector3 _fallPoint;
 
     public bool IsReadyToFire { get; private set; } = true;
 
     public void FireBall()
     {
         _animation = 0;
-        
         StopCoroutine(nameof(MoveBall));
         IsReadyToFire = false;
         if (!_rigidbody)
@@ -71,6 +74,7 @@ public class CanonBall : MonoBehaviour
     {
         if (LayerMask.LayerToName(other.gameObject.layer) == "Ground")
         {
+            Explode();
             gameObject.SetActive(false);
         }
     }
@@ -78,5 +82,39 @@ public class CanonBall : MonoBehaviour
     private void Explode()
     {
         IsReadyToFire = true;
+        CreateExplosion();
+        HitEnemies(FindEnemies());
+    }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawSphere(transform.position, _hitRadius);
+    //}
+
+    private List<Collider> FindEnemies()
+    {
+        return Physics.OverlapSphere(transform.position, _hitRadius).ToList().Where(enemy => enemy.GetComponent<Enemy>() != null).ToList();
+    }
+
+    private void HitEnemies(List<Collider> enemies)
+    {
+        Vector3 explosionPosition = transform.position;
+        float proximity, effect;
+        foreach (Collider enemy in enemies)
+        {
+            proximity = (explosionPosition - enemy.transform.position).magnitude;
+            effect = 1 - (proximity / _hitRadius);
+            enemy.GetComponent<Enemy>().TakeDamage(Mathf.RoundToInt(effect*_damage));
+        }
+    }
+
+    private void CreateExplosion()
+    {
+        GameObject explosion = Resources.Load<GameObject>("CanonBallExplosion");
+        if (explosion)
+        {
+            Instantiate(explosion, transform.position, transform.rotation);
+        }
     }
 }

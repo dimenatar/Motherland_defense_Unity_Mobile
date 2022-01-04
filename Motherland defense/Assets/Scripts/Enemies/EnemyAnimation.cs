@@ -9,7 +9,7 @@ public class EnemyAnimation : MonoBehaviour
     [SerializeField] private List<string> _enemyAnimationNames;
     [SerializeField] private float _animationSpeed;
     private Animator _enemyAnimator;
-    private EnemyStates? _enemyState = null;
+    private CharacterStates? _enemyState = null;
     private Enemy _enemy;
 
     private void Start()
@@ -28,41 +28,41 @@ public class EnemyAnimation : MonoBehaviour
 
     private void StartWalk()
     {
-        ChangeState(EnemyStates.Walk);
+        ChangeState(CharacterStates.Walk);
     }
 
     private void StartFight()
     {
-        ChangeState(EnemyStates.Fight);
+        ChangeState(CharacterStates.Fight);
     }
 
     private void Dead()
     {
-        ChangeState(EnemyStates.Dead);
+        ChangeState(CharacterStates.Dead);
         _enemy.OnStartFight -= StartFight;
         _enemy.OnStartMove -= StartWalk;
         _enemy.OnDied -= Dead;
     }
 
-    private void ChangeState(EnemyStates newState)
+    private void ChangeState(CharacterStates newState)
     {
-        if (_enemyState == newState || _enemyState == EnemyStates.Dead)
+        if (_enemyState == newState || _enemyState == CharacterStates.Dead)
         {
             return;
         }
         switch (newState)
         {
-            case EnemyStates.Dead:
+            case CharacterStates.Dead:
                 {
                     _enemyAnimator.Play(_enemyAnimationNames[2]);
                     break;
                 }
-            case EnemyStates.Fight:
+            case CharacterStates.Fight:
                 {
                     _enemyAnimator.Play(_enemyAnimationNames[1]);
                     break;
                 }
-            case EnemyStates.Walk:
+            case CharacterStates.Walk:
                 {
                     _enemyAnimator.Play(_enemyAnimationNames[0]);
                     break;

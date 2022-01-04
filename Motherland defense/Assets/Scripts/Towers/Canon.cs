@@ -16,7 +16,6 @@ public class Canon : Tower
             }
             yield return new WaitForEndOfFrame();
         }
-
     }
 
     private void Start()
@@ -28,7 +27,6 @@ public class Canon : Tower
     {
         _ball.SetActive(true);
         _ball.GetComponent<CanonBall>().SetToStartPoint(GetShotStartPosition().position);
-
         _ball.GetComponent<CanonBall>().SetTarget(GetTarget());
         _ball.GetComponent<CanonBall>().FireBall();
     }

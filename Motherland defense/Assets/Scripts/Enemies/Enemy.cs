@@ -20,26 +20,7 @@ public class Enemy : MonoBehaviour
     public void Initialize()
     {
         OnStartMove?.Invoke();
-    }
-
-    private void Awake()
-    {
-
-    }
-
-    private void Start()
-    {
-       // Initialize();
-    }
-
-    private void OnEnable()
-    {
-        
-    }
-
-    private void OnDestroy()
-    {
-        OnDamageTaken = null;
+        OnDied += RemoveComponents;
     }
 
     public int GetPoints()
@@ -50,6 +31,18 @@ public class Enemy : MonoBehaviour
     public int GetHealth()
     {
         return _health;
+    }
+
+    private void RemoveComponents()
+    {
+
+        var scripts = GetComponents<ScriptableObject>();
+        foreach (var item in scripts)
+        {
+            Destroy(item);
+        }
+        Destroy(GetComponent<BoxCollider>());
+        Destroy(GetComponent<Animator>());
     }
 
     public void TakeDamage(int damage)

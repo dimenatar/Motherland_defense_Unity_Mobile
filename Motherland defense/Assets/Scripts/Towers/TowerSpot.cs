@@ -11,10 +11,7 @@ public class TowerSpot : MonoBehaviour, IClickable
     [SerializeField] private ClickManager _clickManager;
     [SerializeField] private Canvas _towerMenu;
     private GameObject _tower = null;
-    private ITowerLoader _towerLoader;
     private BoxCollider _collider;
-
-    public bool IsSelected { get; set; }
 
     public void ObjectClick()
     {
@@ -24,10 +21,8 @@ public class TowerSpot : MonoBehaviour, IClickable
         }
         else
         {
-            //_towerFactory.CreateTower(towerLoader, transform.position, _direction);
             _clickManager.OnObjectClick -= Deselect;
             _collider.enabled = false;
-
             _towerMenu.gameObject.transform.position = transform.position + new Vector3(0,0.1f,0);
             _towerMenu.gameObject.SetActive(true);
         }
@@ -35,27 +30,26 @@ public class TowerSpot : MonoBehaviour, IClickable
 
     public void CreateTower(ITowerLoader towerLoader)
     {
-            _tower = _towerFactory.CreateTower(towerLoader, transform.position, _direction);
-            _tower.transform.SetParent(transform);
-        
+        _tower = _towerFactory.CreateTower(towerLoader, transform.position, _direction);
+        _tower.transform.SetParent(transform);
     }
 
-    public void SetTowerLoader(ITowerLoader towerLoader)
-    {
-        _towerLoader = towerLoader;
-    }
+    //public void SetTowerLoader(ITowerLoader towerLoader)
+    //{
+    //    _towerLoader = towerLoader;
+    //}
 
-    public DirectionEnum.Directions GetDirection()
-    {
-        return _direction;
-    }
+    //public DirectionEnum.Directions GetDirection()
+    //{
+    //    return _direction;
+    //}
 
-    public void BuildTower()
-    {
-        _towerFactory.CreateTower(_towerLoader, transform.position, _direction);
-        _collider.enabled = true;
-        _clickManager.OnObjectClick += Deselect;
-    }
+    //public void BuildTower()
+    //{
+    //    _towerFactory.CreateTower(_towerLoader, transform.position, _direction);
+    //    _collider.enabled = true;
+    //    _clickManager.OnObjectClick += Deselect;
+    //}
 
     public void Deselect()
     {

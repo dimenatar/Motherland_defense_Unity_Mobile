@@ -7,10 +7,7 @@ public class FreezerImage : MonoBehaviour, IClickable, ITowerLoader
 {
     private GameObject _towerSpot;
 
-    public void Deselect()
-    {
-
-    }
+    public void Deselect(){}
 
     public GameObject LoadTower()
     {
