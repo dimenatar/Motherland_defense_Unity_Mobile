@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class HeroMove : MonoBehaviour
@@ -13,11 +13,20 @@ public class HeroMove : MonoBehaviour
 
     private void SetNewPoint(GameObject target)
     {
-        
-        if (target)
+        Debug.Log("set new point");
+        if (target != null)
         {
-            Debug.Log(target.gameObject.name);
-            currentPointToMove = target.transform;
+           
+            if (target.GetComponent<Enemy>())
+            {
+                target.GetComponent<Enemy>().FoundOpponent();
+                currentPointToMove = target.transform;
+            }
+            else
+            {
+                Debug.Log(target.name);
+                throw new FormatException();
+            }
         }
         else
         {
@@ -37,8 +46,8 @@ public class HeroMove : MonoBehaviour
         hero = GetComponent<Hero>();
         hero.OnTargetChanged += SetNewPoint;
         hero.OnStartFight += StopMove;
-        
-    }
+    }        
+
 
     private IEnumerator MoveToPoint()
     {
@@ -48,21 +57,24 @@ public class HeroMove : MonoBehaviour
             {
                 if (currentPointToMove.gameObject.GetComponent<Enemy>())
                 {
+                    Debug.Log("Invoke");
+                    currentPointToMove.gameObject.GetComponent<Enemy>().StartFightWith(gameObject);
                     hero.OnStartFight?.Invoke(currentPointToMove.gameObject);
                 }
                 else
                 {
-                    StopMove(null);
+                    GetComponent<Hero>().ReachBasePoint();
                 }
+                StopMove(null);
             }
             else
             {
-                transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, currentPointToMove.position, 1, 0.1f));
+                transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, currentPointToMove.position, 1, 5f));
                 Vector2 pos = new Vector2(transform.position.x, transform.position.z);
                 pos = Vector2.MoveTowards(pos, new Vector2(currentPointToMove.position.x, currentPointToMove.position.z), _moveSpeed);
                 transform.position = new Vector3(pos.x, transform.position.y, pos.y);
             }
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
     }
     private bool CheckDistance(Vector3 currentPosition, Vector3 targetPosition)

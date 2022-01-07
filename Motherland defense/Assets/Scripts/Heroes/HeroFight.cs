@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HeroFight : MonoBehaviour
 {
-    private float _attackDelay= 0.5f;
-    private int _damage = 1;
+    [SerializeField] private float _attackDelay= 0.5f;
+    [SerializeField] private int _damage = 1;
     private Enemy _target;
     private Hero hero;
 
@@ -17,7 +17,7 @@ public class HeroFight : MonoBehaviour
 
     private void StartFight(GameObject enemy)
     {
-        Debug.Log("StartFight");
+        Debug.Log("enemy " + enemy.name);
         _target = enemy.GetComponent<Enemy>();
         _target.OnDied += StopFight;
         StartCoroutine(nameof(FightWithEnemy));
@@ -25,14 +25,16 @@ public class HeroFight : MonoBehaviour
 
     private void StopFight()
     {
-        StopCoroutine(nameof(FightWithEnemy));
         _target.OnDied -= StopFight;
+        StopCoroutine(nameof(FightWithEnemy));
+
     }
 
     public IEnumerator FightWithEnemy()
     {
         while (true)
         {
+            Debug.Log("hero hit");
             _target.TakeDamage(_damage);
             yield return new WaitForSeconds(_attackDelay);
         }

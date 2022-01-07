@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class EnemyAnimation : MonoBehaviour
 {
-    [Header("0 - Walk, 1 - Fight, 2 - Dead")]
+    [Header("0 - Walk, 1 - Fight, 2 - Dead, 3 - Idle,")]
     [SerializeField] private List<string> _enemyAnimationNames;
     [SerializeField] private float _animationSpeed;
     private Animator _enemyAnimator;
@@ -18,12 +18,15 @@ public class EnemyAnimation : MonoBehaviour
         _enemy.OnStartFight += StartFight;
         _enemy.OnStartMove += StartWalk;
         _enemy.OnDied += Dead;
+        _enemy.OnFoundOpponent += FoundOpponent;
+        GetComponent<EnemyFight>().OnHitOpponent += PlayFightAnimation;
         _enemyAnimator = GetComponent<Animator>();
+        _enemyAnimator.SetFloat("Speed", _animationSpeed);
     }
 
-    private void FixedUpdate()
+    private void FoundOpponent()
     {
-        _enemyAnimator.SetFloat("Speed", _animationSpeed);
+        ChangeState(CharacterStates.Idle);
     }
 
     private void StartWalk()
@@ -31,9 +34,15 @@ public class EnemyAnimation : MonoBehaviour
         ChangeState(CharacterStates.Walk);
     }
 
-    private void StartFight()
+    private void StartFight(GameObject opponent)
     {
+        transform.LookAt(opponent.transform.position);
         ChangeState(CharacterStates.Fight);
+    }
+
+    private void PlayFightAnimation(Hero hero)
+    {
+        _enemyAnimator.SetTrigger("Hit");
     }
 
     private void Dead()
@@ -50,21 +59,30 @@ public class EnemyAnimation : MonoBehaviour
         {
             return;
         }
+
         switch (newState)
         {
+            case CharacterStates.Walk:
+                {
+                    _enemyAnimator.SetBool("IsIdle", false);
+                    _enemyAnimator.Play(_enemyAnimationNames[0]);
+                    break;
+                }
+            case CharacterStates.Fight:
+                {
+                    _enemyAnimator.SetTrigger("Hit");
+                    _enemyAnimator.Play(_enemyAnimationNames[1]);
+                    break;
+                }
             case CharacterStates.Dead:
                 {
                     _enemyAnimator.Play(_enemyAnimationNames[2]);
                     break;
                 }
-            case CharacterStates.Fight:
+            case CharacterStates.Idle:
                 {
-                    _enemyAnimator.Play(_enemyAnimationNames[1]);
-                    break;
-                }
-            case CharacterStates.Walk:
-                {
-                    _enemyAnimator.Play(_enemyAnimationNames[0]);
+                    _enemyAnimator.SetBool("IsIdle", true);
+                    _enemyAnimator.Play(_enemyAnimationNames[3]);
                     break;
                 }
         }

@@ -1,30 +1,56 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyFight : MonoBehaviour
 {
     // изменить тип потом
-    public GameObject Opponent = null;
-
     [SerializeField] private float _pauseBetweenAttacks;
+    [SerializeField] private int _damage;
+
+    public delegate void HitOpponent(Hero hero);
+    public event HitOpponent OnHitOpponent;
+
+    private GameObject Opponent = null;
+    private Enemy _enemy;
+
     public IEnumerator FightWithOpponent()
     {
-        while (Opponent)
+        while (true)
         {
-            //Го пиздиться лох
+            if (Opponent)
+            {
+                OnHitOpponent?.Invoke(Opponent.GetComponent<Hero>());
+            }
             yield return new WaitForSeconds(_pauseBetweenAttacks);
         }
     }
 
-    public void StartFight(GameObject _opponent)
+    private void HitHero(Hero hero)
     {
-        Opponent = _opponent;
-        StartCoroutine(nameof(FightWithOpponent));
+        hero.TakeDamage(_damage);
+    }
+
+    private void Start()
+    {
+        _enemy = GetComponent<Enemy>();
+        _enemy.OnStartFight += StartFight;
+        _enemy.OnDied += StopFight;
+        OnHitOpponent += HitHero;
+    }
+
+    public void StartFight(GameObject opponent)
+    {
+        Debug.Log(opponent.name);
+        if (opponent.GetComponent<Hero>() && !Opponent)
+        {
+            Opponent = opponent;
+            StartCoroutine(nameof(FightWithOpponent));
+        }
     }
 
     public void StopFight()
     {
+        Debug.Log("enemy stop fight");
         Opponent = null;
         StopCoroutine(nameof(FightWithOpponent));
     }

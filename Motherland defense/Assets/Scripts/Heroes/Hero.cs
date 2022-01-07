@@ -1,21 +1,24 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _health;
     [SerializeField] private float _attackDelay;
 
-    private GameObject _currentTarget;
+    public GameObject _currentTarget;
 
     public delegate void EnemyInteract(GameObject enemy);
-
     public EnemyInteract OnTargetChanged;
     public EnemyInteract OnStartFight;
 
-    private List<GameObject> _enemies = new List<GameObject>();
+    public event Action OnDied;
+    public event Action OnStartMove;
+    public event Action OnBasePointReached;
+
+    public List<GameObject> _enemies = new List<GameObject>();
 
     private GameObject FindClosestEnemy()
     {
@@ -38,11 +41,25 @@ public class Hero : MonoBehaviour
     public void SetNewTarget()
     {
         _currentTarget = FindClosestEnemy();
+        OnDied += _currentTarget.GetComponent<EnemyFight>().StopFight;
+        OnDied += _currentTarget.GetComponent<EnemyMove>().StartMove;
+        _currentTarget.GetComponent<Enemy>().OnDied += RemoveCurrentTarget;
         OnTargetChanged?.Invoke(_currentTarget);
     }
 
-    private void ChangeTarget()
+    public void ReachBasePoint()
     {
+        OnBasePointReached?.Invoke();
+    }
+
+    public void RemoveCurrentTarget()
+    {
+        RemoveTarget(_currentTarget);
+    }
+
+    public void ChangeTarget()
+    {
+        Debug.Log("ChangeTarget");
         if (_enemies.Count > 0)
         {
             SetNewTarget();
@@ -63,13 +80,27 @@ public class Hero : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        _health -= damage;
+        if (_health <= 0)
+        {
+            OnDied?.Invoke();
+        }
+    }
+
     public void RemoveTarget(GameObject target)
     {
         if (_enemies.Contains(target))
         {
+            OnDied -= target.GetComponent<EnemyFight>().StopFight;
             _enemies.Remove(target);
-            _currentTarget = null;
+            if (_currentTarget == target)
+            {
+                Debug.Log("if");
+                _currentTarget = null;
+                ChangeTarget();
+            }
         }
-        ChangeTarget();
     }
 }

@@ -26,9 +26,8 @@ public class EnemyMove : MonoBehaviour
     {
         _enemy = GetComponent<Enemy>();
         _enemy.OnStartMove += StartMove;
-        _enemy.OnStartFight += StartFight;
         _enemy.OnDied += StopMove;
-
+        _enemy.OnFoundOpponent += StopMove;
         _targetCheckPoint = _enemyCheckPoints.GetEnemyCheckPointByIndex(_targetCheckPointIndex);
         
         StartMove();
@@ -41,11 +40,7 @@ public class EnemyMove : MonoBehaviour
     {
         Initialize();
     }
-    // это вынести в другой класс
-    public void StartFight()
-    {
-        // StopCoroutine(nameof(Move));
-    }
+
     public void StartMove()
     {
         StartCoroutine(nameof(Move));
@@ -66,7 +61,7 @@ public class EnemyMove : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, _targetCheckPoint.transform.position, _speed);
             transform.LookAt(_targetCheckPoint.transform.position);
             //transform.Translate(transform.forward * _speed);
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForFixedUpdate();
         }
     }
 
