@@ -17,6 +17,7 @@ public class HeroAnimation : MonoBehaviour
         hero.OnDied += Dead;
         hero.OnStartFight += StartFight;
         hero.OnBasePointReached += StartWait;
+        GetComponent<HeroMove>().OnStartMove += StartWalk;
         _animator = GetComponent<Animator>();
     }
 

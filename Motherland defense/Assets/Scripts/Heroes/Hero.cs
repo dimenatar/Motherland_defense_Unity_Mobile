@@ -15,7 +15,7 @@ public class Hero : MonoBehaviour
     public EnemyInteract OnStartFight;
 
     public event Action OnDied;
-    public event Action OnStartMove;
+    
     public event Action OnBasePointReached;
 
     public List<GameObject> _enemies = new List<GameObject>();

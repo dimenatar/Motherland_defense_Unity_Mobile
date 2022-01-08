@@ -5,6 +5,7 @@ using UnityEngine;
 public class HeroMove : MonoBehaviour
 {
     //[SerializeField] Transform _targetPointToMove;
+    public event Action OnStartMove;
     public Transform _basePointToMove;
     public Transform currentPointToMove;
     public float _arrivalToPointRange = 0.5f;
@@ -32,6 +33,11 @@ public class HeroMove : MonoBehaviour
         {
             currentPointToMove = _basePointToMove;
         }
+        OnStartMove?.Invoke();
+    }
+
+    public void StartMove()
+    {
         StartCoroutine(nameof(MoveToPoint));
     }
 
@@ -46,6 +52,7 @@ public class HeroMove : MonoBehaviour
         hero = GetComponent<Hero>();
         hero.OnTargetChanged += SetNewPoint;
         hero.OnStartFight += StopMove;
+        OnStartMove += StartMove;
     }        
 
 
