@@ -3,15 +3,19 @@ using UnityEngine;
 
 public class EnemyFight : MonoBehaviour
 {
-    // изменить тип потом
-    [SerializeField] private float _pauseBetweenAttacks;
-    [SerializeField] private int _damage;
+    private GameObject Opponent = null;
+    private Enemy _enemy;
+    private float _pauseBetweenAttacks;
+    private int _damage;
 
     public delegate void HitOpponent(Hero hero);
     public event HitOpponent OnHitOpponent;
 
-    private GameObject Opponent = null;
-    private Enemy _enemy;
+    public void InitialiseFight(float pauseBetweenAttacks, int damage)
+    {
+        _pauseBetweenAttacks = pauseBetweenAttacks;
+        _damage = damage;
+    }
 
     public IEnumerator FightWithOpponent()
     {

@@ -5,12 +5,20 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class EnemyAnimation : MonoBehaviour
 {
-    [Header("0 - Walk, 1 - Fight, 2 - Dead, 3 - Idle,")]
-    [SerializeField] private List<string> _enemyAnimationNames;
-    [SerializeField] private float _animationSpeed;
+    private float _animationSpeed;
     private Animator _enemyAnimator;
     private CharacterStates? _enemyState = null;
     private Enemy _enemy;
+
+    private readonly string _walkAnimation = "Walk";
+    private readonly string _idleAnimation = "Idle";
+    private readonly string _fightAnimation = "Fight";
+    private readonly string _deadAnimation = "Death";
+
+    public void InitialiseAnimation(float animationSpeed)
+    {
+        _animationSpeed = animationSpeed;
+    }
 
     private void Start()
     {
@@ -65,24 +73,24 @@ public class EnemyAnimation : MonoBehaviour
             case CharacterStates.Walk:
                 {
                     _enemyAnimator.SetBool("IsIdle", false);
-                    _enemyAnimator.Play(_enemyAnimationNames[0]);
+                    _enemyAnimator.Play(_walkAnimation);
                     break;
                 }
             case CharacterStates.Fight:
                 {
                     _enemyAnimator.SetTrigger("Hit");
-                    _enemyAnimator.Play(_enemyAnimationNames[1]);
+                    _enemyAnimator.Play(_fightAnimation);
                     break;
                 }
             case CharacterStates.Dead:
                 {
-                    _enemyAnimator.Play(_enemyAnimationNames[2]);
+                    _enemyAnimator.Play(_deadAnimation);
                     break;
                 }
             case CharacterStates.Idle:
                 {
                     _enemyAnimator.SetBool("IsIdle", true);
-                    _enemyAnimator.Play(_enemyAnimationNames[3]);
+                    _enemyAnimator.Play(_idleAnimation);
                     break;
                 }
         }

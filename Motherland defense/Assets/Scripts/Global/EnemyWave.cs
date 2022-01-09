@@ -5,13 +5,14 @@ using UnityEngine;
 public class EnemyWave : MonoBehaviour
 {
     [Header("Place in right order")]
-    [SerializeField] private List<GameObject> _enemies;
+    [SerializeField] private List<EnemyList> _enemies;
     [Header("Seconds")]
     [SerializeField] private float _spawnPause;
     [SerializeField] private Transform _spawnPoint;
 
     private int _currentEnemyIndex = -1;
-    
+    private EnemyFactory _enemyFactory;
+
     public void StartWave()
     {
         StartCoroutine(nameof(SpawnNextEnemy));
@@ -40,13 +41,16 @@ public class EnemyWave : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy()
+    private void Start()
     {
-        GameObject enemy = _enemies[_currentEnemyIndex];
-        enemy.transform.position =_spawnPoint.position;
-        enemy.transform.rotation = _spawnPoint.rotation;
-        enemy.SetActive(true);
-        enemy.GetComponent<Enemy>().Initialize();
+        _enemyFactory = transform.parent.parent.GetComponent<EnemyFactory>();
     }
 
+    private void SpawnEnemy()
+    {
+        if (_enemyFactory)
+        {
+            _enemyFactory.SpawnEnemy(_enemies[_currentEnemyIndex]);
+        }
+    }
 }

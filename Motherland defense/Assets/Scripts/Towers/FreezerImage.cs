@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class FreezerImage : MonoBehaviour, IClickable, ITowerLoader
 {
+    [SerializeField] private int _cost;
     private GameObject _towerSpot;
 
     public void Deselect(){}
@@ -16,7 +17,11 @@ public class FreezerImage : MonoBehaviour, IClickable, ITowerLoader
 
     public void ObjectClick()
     {
-        _towerSpot.GetComponent<TowerSpot>().CreateTower(this);
+        if (UserMoney.IsEnoughMoney(_cost))
+        {
+            UserMoney.ReduceMoney(_cost);
+            _towerSpot.GetComponent<TowerSpot>().CreateTower(this);
+        }
     }
 
     private void Start()

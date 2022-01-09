@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class TingImage : MonoBehaviour, IClickable, ITowerLoader
 {
+    [SerializeField] private int _cost;
     private GameObject _towerSpot;
 
     public bool IsSelected { get; set; }
@@ -16,14 +17,16 @@ public class TingImage : MonoBehaviour, IClickable, ITowerLoader
 
     public GameObject LoadTower()
     {
-        GameObject gym = Resources.Load<GameObject>("TingPrefab");
-        gym.transform.position += new Vector3(0, 4, 0);
-        return gym;
+        return Resources.Load<GameObject>("TingPrefab");
     }
 
     public void ObjectClick()
     {
-        _towerSpot.GetComponent<TowerSpot>().CreateTower(this);
+        if (UserMoney.IsEnoughMoney(_cost))
+        {
+            UserMoney.ReduceMoney(_cost);
+            _towerSpot.GetComponent<TowerSpot>().CreateTower(this);
+        }
     }
 
     private void Start()

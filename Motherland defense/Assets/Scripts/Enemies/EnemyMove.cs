@@ -7,14 +7,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMove : MonoBehaviour
 {
-    [SerializeField] private EnemyCheckPoints _enemyCheckPoints;
-    [SerializeField] private float _speed;
-    [SerializeField] private int _targetCheckPointIndex;
-
+    private float _speed;
+    private int _targetCheckPointIndex;
+    private EnemyCheckPoints _enemyCheckPoints;
     private EnemyCheckPoint _targetCheckPoint;
     private Enemy _enemy;
     private Rigidbody _rigidbody;
-    public virtual void ChangeNextCheckPoint(int index)
+
+    public void ChangeNextCheckPoint(int index)
     {
         _targetCheckPoint = _enemyCheckPoints.GetEnemyCheckPointByIndex(index);
         if (_targetCheckPoint)
@@ -22,8 +22,10 @@ public class EnemyMove : MonoBehaviour
             transform.LookAt(_targetCheckPoint.transform.position);
         }
     }
-    public void Initialize()
+    public void InitializeMove(EnemyCheckPoints enemyCheckPoints, float speed)
     {
+        _enemyCheckPoints = enemyCheckPoints;
+        _speed = speed;
         _enemy = GetComponent<Enemy>();
         _enemy.OnStartMove += StartMove;
         _enemy.OnDied += StopMove;
@@ -38,7 +40,7 @@ public class EnemyMove : MonoBehaviour
     }
     private void Start()
     {
-        Initialize();
+        //Initialize();
     }
 
     public void StartMove()

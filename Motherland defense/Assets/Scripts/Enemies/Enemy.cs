@@ -6,9 +6,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [InspectorName("Enemy name")]
-    [SerializeField] private string _enemyClassName;
-    [SerializeField] private int _points;
-    [SerializeField] private int _health;
+    private EnemyList _enemyName;
+    private int _points;
+    private int _health;
 
     public delegate void Damaged(int health, int damage);
     public delegate void StartFight(GameObject opponent);
@@ -18,10 +18,16 @@ public class Enemy : MonoBehaviour
     public event Action OnDied;
     public event Action OnFoundOpponent;
 
-    public void Initialize()
+    public void Initialize(EnemyList enemyName, int points, int health, float pauseBetweenAttacks, int damage, EnemyCheckPoints enemyCheckPoints, float speed, float animationSpeed)
     {
+        _enemyName = enemyName;
+        _points = points;
+        _health = health;
+        GetComponent<EnemyMove>().InitializeMove(enemyCheckPoints, speed);
+        GetComponent<EnemyFight>().InitialiseFight(pauseBetweenAttacks, damage);
+        GetComponent<EnemyAnimation>().InitialiseAnimation(animationSpeed);
         OnStartMove?.Invoke();
-       // OnDied += RemoveComponents;
+        OnDied += RemoveComponents;
     }
 
     public int GetPoints()

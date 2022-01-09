@@ -5,4 +5,5 @@ using UnityEngine;
 public interface ITowerLoader
 {
     public GameObject LoadTower();
+
 }

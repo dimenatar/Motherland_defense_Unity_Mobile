@@ -4,7 +4,7 @@ public class Gym : MonoBehaviour
 {
     [SerializeField] private float _spawnTime;
     [SerializeField] private Transform _spawnPoint;
-
+    
     [Header("Set up hero")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float health;

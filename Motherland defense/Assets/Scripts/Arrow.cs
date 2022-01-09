@@ -27,6 +27,13 @@ public class Arrow : MonoBehaviour
         //}
         //Destroy(gameObject);
     }
+
+    private void RemoveTarget()
+    {
+        _target = null;
+        Destroy(gameObject);
+    }
+
     public void HitEnemy()
     {
         _target.GetComponent<Enemy>().TakeDamage(_damage);
@@ -35,6 +42,7 @@ public class Arrow : MonoBehaviour
     public void SetTarget(GameObject target)
     {
         _target = target;
+        _target.GetComponent<Enemy>().OnDied += RemoveTarget;
     }
 
     private void MoveArrow()
