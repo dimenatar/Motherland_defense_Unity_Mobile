@@ -16,7 +16,9 @@ public class TingImage : MonoBehaviour, IClickable, ITowerLoader
 
     public GameObject LoadTower()
     {
-        return Resources.Load<GameObject>("TingPrefab");
+        GameObject gym = Resources.Load<GameObject>("TingPrefab");
+        gym.transform.position += new Vector3(0, 4, 0);
+        return gym;
     }
 
     public void ObjectClick()

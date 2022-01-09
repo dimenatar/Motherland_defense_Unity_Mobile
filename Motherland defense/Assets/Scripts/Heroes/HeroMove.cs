@@ -4,23 +4,37 @@ using UnityEngine;
 
 public class HeroMove : MonoBehaviour
 {
-    //[SerializeField] Transform _targetPointToMove;
-    public Transform _basePointToMove;
-    public Transform currentPointToMove;
-    public float _arrivalToPointRange = 0.5f;
-    [SerializeField] private float _moveSpeed;
-    public Hero hero;
+    public event Action OnStartMove;
+
+    private Transform _basePointToMove;
+    private Transform _currentPointToMove;
+    private float _arrivalToPointRange;
+    private float _moveSpeed;
+    private Hero hero;
+
+    public void Initialise(Transform basePointToMove, float moveSpeed, float arrivalToPointRange)
+    {
+        _basePointToMove = basePointToMove;
+        _moveSpeed = moveSpeed;
+        _arrivalToPointRange = arrivalToPointRange;
+
+        hero = GetComponent<Hero>();
+        hero.OnTargetChanged += SetNewPoint;
+        hero.OnStartFight += StopMove;
+        hero.OnDied += StopMove;
+        OnStartMove += StartMove;
+        SetNewPoint(null);
+    }
+
 
     private void SetNewPoint(GameObject target)
     {
-        Debug.Log("set new point");
         if (target != null)
         {
-           
             if (target.GetComponent<Enemy>())
             {
                 target.GetComponent<Enemy>().FoundOpponent();
-                currentPointToMove = target.transform;
+                _currentPointToMove = target.transform;
             }
             else
             {
@@ -30,8 +44,13 @@ public class HeroMove : MonoBehaviour
         }
         else
         {
-            currentPointToMove = _basePointToMove;
+            _currentPointToMove = _basePointToMove;
         }
+        OnStartMove?.Invoke();
+    }
+
+    public void StartMove()
+    {
         StartCoroutine(nameof(MoveToPoint));
     }
 
@@ -40,26 +59,22 @@ public class HeroMove : MonoBehaviour
         StopCoroutine(nameof(MoveToPoint));
     }
 
-    private void Start()
+    public void StopMove()
     {
-        SetNewPoint(null);
-        hero = GetComponent<Hero>();
-        hero.OnTargetChanged += SetNewPoint;
-        hero.OnStartFight += StopMove;
-    }        
-
+        StopCoroutine(nameof(MoveToPoint));
+    }   
 
     private IEnumerator MoveToPoint()
     {
         while (true)
         {
-            if (CheckDistance(transform.position, currentPointToMove.position))
+            if (CheckDistance(transform.position, _currentPointToMove.position))
             {
-                if (currentPointToMove.gameObject.GetComponent<Enemy>())
+                if (_currentPointToMove.gameObject.GetComponent<Enemy>())
                 {
                     Debug.Log("Invoke");
-                    currentPointToMove.gameObject.GetComponent<Enemy>().StartFightWith(gameObject);
-                    hero.OnStartFight?.Invoke(currentPointToMove.gameObject);
+                    _currentPointToMove.gameObject.GetComponent<Enemy>().StartFightWith(gameObject);
+                    hero.OnStartFight?.Invoke(_currentPointToMove.gameObject);
                 }
                 else
                 {
@@ -69,9 +84,9 @@ public class HeroMove : MonoBehaviour
             }
             else
             {
-                transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, currentPointToMove.position, 1, 5f));
+                transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, _currentPointToMove.position, 1, 5f));
                 Vector2 pos = new Vector2(transform.position.x, transform.position.z);
-                pos = Vector2.MoveTowards(pos, new Vector2(currentPointToMove.position.x, currentPointToMove.position.z), _moveSpeed);
+                pos = Vector2.MoveTowards(pos, new Vector2(_currentPointToMove.position.x, _currentPointToMove.position.z), _moveSpeed);
                 transform.position = new Vector3(pos.x, transform.position.y, pos.y);
             }
             yield return new WaitForFixedUpdate();

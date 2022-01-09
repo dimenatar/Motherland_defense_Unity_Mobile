@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroAnimation : MonoBehaviour
 {
-    [SerializeField] private float _animationSpeed;
-    [Header("0 - Walk, 1 - Fight, 2 - Dead, 3 - Idle,")]
-    [SerializeField] private List<string> _animationNames;
     private Animator _animator;
     private CharacterStates? _state = null;
     private Hero hero;
+
+    private readonly string _walkAnimation = "Walk";
+    private readonly string _idleAnimation = "Idle";
+    private readonly string _fightAnimation = "Fight";
+    private readonly string _deadAnimation = "Dead";
 
     private void Start()
     {
@@ -17,6 +17,8 @@ public class HeroAnimation : MonoBehaviour
         hero.OnDied += Dead;
         hero.OnStartFight += StartFight;
         hero.OnBasePointReached += StartWait;
+        GetComponent<HeroMove>().OnStartMove += StartWalk;
+        GetComponent<HeroFight>().OnHitEnemy += PlayFightAnimation;
         _animator = GetComponent<Animator>();
     }
 
@@ -36,7 +38,7 @@ public class HeroAnimation : MonoBehaviour
         ChangeState(CharacterStates.Fight);
     }
 
-    private void PlayFightAnimation(Hero hero)
+    private void PlayFightAnimation(Enemy enemy)
     {
         _animator.SetTrigger("Hit");
     }
@@ -58,24 +60,24 @@ public class HeroAnimation : MonoBehaviour
             case CharacterStates.Walk:
                 {
                     _animator.SetBool("IsIdle", false);
-                    _animator.Play(_animationNames[0]);
+                    _animator.Play(_walkAnimation);
                     break;
                 }
             case CharacterStates.Fight:
                 {
                     _animator.SetTrigger("Hit");
-                    _animator.Play(_animationNames[1]);
+                    //_animator.Play(_fightAnimation);
                     break;
                 }
             case CharacterStates.Dead:
                 {
-                    _animator.Play(_animationNames[2]);
+                    _animator.Play(_deadAnimation);
                     break;
                 }
             case CharacterStates.Idle:
                 {
                     _animator.SetBool("IsIdle", true);
-                    _animator.Play(_animationNames[3]);
+                    _animator.Play(_idleAnimation);
                     break;
                 }
         }

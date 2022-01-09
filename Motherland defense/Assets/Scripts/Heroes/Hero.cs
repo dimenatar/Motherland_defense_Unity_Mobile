@@ -4,47 +4,23 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _health;
-    [SerializeField] private float _attackDelay;
-
-    public GameObject _currentTarget;
+    private float _health;
+    private GameObject _currentTarget;
 
     public delegate void EnemyInteract(GameObject enemy);
     public EnemyInteract OnTargetChanged;
     public EnemyInteract OnStartFight;
 
     public event Action OnDied;
-    public event Action OnStartMove;
     public event Action OnBasePointReached;
 
-    public List<GameObject> _enemies = new List<GameObject>();
+    private List<GameObject> _enemies = new List<GameObject>();
 
-    private GameObject FindClosestEnemy()
+    public void InitializeHero(float moveSpeed, float health, float attackDelay, Transform basePointToMove, float arrivalToPointRange, int damage)
     {
-        GameObject closestEnemy = _enemies[0];
-        Vector3 heroPosition = transform.position;
-        float closestDistance = Mathf.Abs(Vector3.Distance(heroPosition, closestEnemy.transform.position));
-        float currentDistance = 0;
-        for (int i = 1; i < _enemies.Count; i++)
-        {
-            currentDistance = Mathf.Abs(Vector3.Distance(heroPosition, _enemies[i].transform.position));
-            if (closestDistance > currentDistance)
-            {
-                closestDistance = currentDistance;
-                closestEnemy = _enemies[i];
-            }
-        }
-        return closestEnemy;
-    }
-
-    public void SetNewTarget()
-    {
-        _currentTarget = FindClosestEnemy();
-        OnDied += _currentTarget.GetComponent<EnemyFight>().StopFight;
-        OnDied += _currentTarget.GetComponent<EnemyMove>().StartMove;
-        _currentTarget.GetComponent<Enemy>().OnDied += RemoveCurrentTarget;
-        OnTargetChanged?.Invoke(_currentTarget);
+        _health = health;
+        GetComponent<HeroMove>().Initialise(basePointToMove, moveSpeed, arrivalToPointRange);
+        GetComponent<HeroFight>().Initialise(attackDelay, damage);
     }
 
     public void ReachBasePoint()
@@ -80,12 +56,14 @@ public class Hero : MonoBehaviour
         }
     }
 
+
     public void TakeDamage(int damage)
     {
         _health -= damage;
         if (_health <= 0)
         {
             OnDied?.Invoke();
+            RemoveScripts();
         }
     }
 
@@ -95,12 +73,47 @@ public class Hero : MonoBehaviour
         {
             OnDied -= target.GetComponent<EnemyFight>().StopFight;
             _enemies.Remove(target);
+
             if (_currentTarget == target)
             {
-                Debug.Log("if");
                 _currentTarget = null;
                 ChangeTarget();
             }
         }
+    }
+    private GameObject FindClosestEnemy()
+    {
+        GameObject closestEnemy = _enemies[0];
+        Vector3 heroPosition = transform.position;
+        float closestDistance = Mathf.Abs(Vector3.Distance(heroPosition, closestEnemy.transform.position));
+        float currentDistance = 0;
+        for (int i = 1; i < _enemies.Count; i++)
+        {
+            currentDistance = Mathf.Abs(Vector3.Distance(heroPosition, _enemies[i].transform.position));
+            if (closestDistance > currentDistance)
+            {
+                closestDistance = currentDistance;
+                closestEnemy = _enemies[i];
+            }
+        }
+        return closestEnemy;
+    }
+
+    private void RemoveScripts()
+    {
+        var scripts = GetComponents<MonoBehaviour>();
+        foreach (var script in scripts)
+        {
+            Destroy(script);
+        }
+    }
+
+    private void SetNewTarget()
+    {
+        _currentTarget = FindClosestEnemy();
+        OnDied += _currentTarget.GetComponent<EnemyFight>().StopFight;
+        OnDied += _currentTarget.GetComponent<EnemyMove>().StartMove;
+        _currentTarget.GetComponent<Enemy>().OnDied += RemoveCurrentTarget;
+        OnTargetChanged?.Invoke(_currentTarget);
     }
 }
