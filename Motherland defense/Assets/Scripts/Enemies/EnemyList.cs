@@ -6,5 +6,6 @@ public enum EnemyList : uint
 {
     Ork,
     Anime,
-    Rabbit
+    Rabbit,
+    Zombie
 }
