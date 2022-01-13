@@ -2,26 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Timer))]
 public class EnemyWaves : MonoBehaviour
 {
+    [SerializeField] private StartWaves _startWave;
     [SerializeField] private List<EnemyWave> _enemyWaves;
     [SerializeField] private float _waveActivatePause;
     private int _waveIndex = -1;
+    private Timer _timer;
 
-    public void StartOffense()
+    public float StartOffense()
     {
-        StartCoroutine(nameof(StartNewWave));
+        _startWave.OnStartOffense -= StartOffense;
+        _timer.Initialise(_waveActivatePause);
+        StartNewWave();
+        return _waveActivatePause;
     }
     public void EndOffense()
     {
-        StopCoroutine(nameof(StartNewWave));
+        
     }
     //убрать потом
     private void Start()
     {
-        StartOffense();
+        _timer = GetComponent<Timer>();
+        _timer.OnTime += StartNewWave;
+        _startWave.OnStartOffense += StartOffense;
+        //StartOffense();
     }
-    private IEnumerator StartNewWave()
+
+
+    private void StartNewWave()
     {
         _waveIndex++;
         if (_waveIndex >= _enemyWaves.Count)
@@ -32,6 +43,5 @@ public class EnemyWaves : MonoBehaviour
         {
             _enemyWaves[_waveIndex].StartWave();
         }
-        yield return new WaitForSeconds(_waveActivatePause);
     }
 }

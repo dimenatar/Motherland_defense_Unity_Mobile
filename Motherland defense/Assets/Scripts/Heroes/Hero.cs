@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    private float _health;
+    private int _health;
     private GameObject _currentTarget;
 
+    public delegate void Damaged(int updatedHealth, int damage);
+    public event Damaged OnDamageTaken;
     public delegate void EnemyInteract(GameObject enemy);
     public EnemyInteract OnTargetChanged;
     public EnemyInteract OnStartFight;
@@ -16,7 +18,7 @@ public class Hero : MonoBehaviour
 
     private List<GameObject> _enemies = new List<GameObject>();
 
-    public void InitializeHero(float moveSpeed, float health, float attackDelay, Transform basePointToMove, float arrivalToPointRange, int damage)
+    public void InitializeHero(float moveSpeed, int health, float attackDelay, Transform basePointToMove, float arrivalToPointRange, int damage)
     {
         _health = health;
         GetComponent<HeroMove>().Initialise(basePointToMove, moveSpeed, arrivalToPointRange);
@@ -60,11 +62,17 @@ public class Hero : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _health -= damage;
+        OnDamageTaken?.Invoke(_health, damage);
         if (_health <= 0)
         {
             OnDied?.Invoke();
             RemoveScripts();
         }
+    }
+
+    public int GetHealth()
+    {
+        return _health;
     }
 
     public void RemoveTarget(GameObject target)

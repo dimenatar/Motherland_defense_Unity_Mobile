@@ -54,8 +54,10 @@ public class EnemyFight : MonoBehaviour
 
     public void StopFight()
     {
-        Debug.Log("enemy stop fight");
-        Opponent = null;
-        StopCoroutine(nameof(FightWithOpponent));
+        if (Opponent)
+        {
+            Opponent = null;
+            StopCoroutine(nameof(FightWithOpponent));
+        }
     }
 }

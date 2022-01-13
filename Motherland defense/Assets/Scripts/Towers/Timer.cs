@@ -3,14 +3,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Timer
+public class Timer : MonoBehaviour
 {
+    public event Action OnTime;
+    private float _delay;
+    private float _time;
+    private bool _isInitialised;
 
-    public delegate void Time(float delay);
-    public event Time OnTime;
-    
-    public IEnumerator WaitTime(float delay)
+    public void Initialise(float delay) 
     {
-        yield return new WaitForSeconds(delay);
+        _delay = delay;
+        _isInitialised = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (_isInitialised)
+        {
+            if (_time >= _delay)
+            {
+                OnTime?.Invoke();
+                _time = 0;
+            }
+            else
+            {
+                _time += Time.deltaTime;
+            }
+        }
+    }
+
+    public void StopTimer()
+    {
+        _isInitialised = false;
+        _time = 0;
+    }
+
+    public float GetPassedTime()
+    {
+        return _time;
+    }
+
+    public void UpdateTimer()
+    {
+        _time = 0;
+    }
+
+    public void UpdateTimer(float newDelay)
+    {
+        _delay = newDelay;
+        _time = 0;
     }
 }

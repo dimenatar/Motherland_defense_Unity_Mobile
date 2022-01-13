@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthTriggerConnector : MonoBehaviour
+public class UserHealthTriggerConnector : MonoBehaviour
 {
     [SerializeField] private int _startHealth;
     [SerializeField] private Health _health;
