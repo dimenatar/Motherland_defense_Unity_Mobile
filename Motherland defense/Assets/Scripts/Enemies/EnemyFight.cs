@@ -44,7 +44,6 @@ public class EnemyFight : MonoBehaviour
 
     public void StartFight(GameObject opponent)
     {
-        Debug.Log(opponent.name);
         if (opponent.GetComponent<Hero>() && !Opponent)
         {
             Opponent = opponent;

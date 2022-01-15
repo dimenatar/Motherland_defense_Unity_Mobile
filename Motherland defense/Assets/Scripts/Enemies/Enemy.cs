@@ -18,7 +18,8 @@ public class Enemy : MonoBehaviour
     public event Action OnDied;
     public event Action OnFoundOpponent;
 
-    public void Initialize(EnemyList enemyName, int points, int health, float pauseBetweenAttacks, int damage, EnemyCheckPoints enemyCheckPoints, float speed, float animationSpeed)
+    public void Initialize(EnemyList enemyName, int points, int health, float pauseBetweenAttacks, int damage, EnemyCheckPoints enemyCheckPoints, 
+                           float speed, float animationSpeed, AudioClip hitSound, AudioClip attackSound, AudioClip dieSound)
     {
         _enemyName = enemyName;
         _points = points;
@@ -26,6 +27,7 @@ public class Enemy : MonoBehaviour
         GetComponent<EnemyMove>().InitializeMove(enemyCheckPoints, speed);
         GetComponent<EnemyFight>().InitialiseFight(pauseBetweenAttacks, damage);
         GetComponent<EnemyAnimation>().InitialiseAnimation(animationSpeed);
+        GetComponent<EnemyAudio>().Initialise(hitSound, attackSound, dieSound);
         OnStartMove?.Invoke();
         OnDied += RemoveComponents;
     }
@@ -54,13 +56,10 @@ public class Enemy : MonoBehaviour
             Destroy(item);
         }
         Destroy(GetComponent<BoxCollider>());
-        //Destroy(GetComponent<Animator>());
-        Debug.Log("Destroyed");
     }
 
     public void FoundOpponent()
     {
-        Debug.Log("FoundOpponent");
         OnFoundOpponent?.Invoke();
     }
 

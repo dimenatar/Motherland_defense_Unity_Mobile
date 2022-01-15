@@ -72,7 +72,6 @@ public class HeroMove : MonoBehaviour
             {
                 if (_currentPointToMove.gameObject.GetComponent<Enemy>())
                 {
-                    Debug.Log("Invoke");
                     _currentPointToMove.gameObject.GetComponent<Enemy>().StartFightWith(gameObject);
                     hero.OnStartFight?.Invoke(_currentPointToMove.gameObject);
                 }

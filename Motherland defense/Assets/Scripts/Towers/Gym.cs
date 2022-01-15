@@ -12,7 +12,9 @@ public class Gym : MonoBehaviour
     [SerializeField] private Transform basePointToMove;
     [SerializeField] private float arrivalToPointRange;
     [SerializeField] private int damage;
-
+    [SerializeField] private AudioClip _hitSound;
+    [SerializeField] private AudioClip _attackSound;
+    [SerializeField] private AudioClip _dieSound;
     public void SpawnHero()
     {
         SetUpHero(InstantiateHero());
@@ -31,7 +33,7 @@ public class Gym : MonoBehaviour
     {
         hero.transform.position = _spawnPoint.position;
         hero.SetActive(true);
-        hero.GetComponent<Hero>().InitializeHero(moveSpeed, health, attackDelay, basePointToMove, arrivalToPointRange, damage);
+        hero.GetComponent<Hero>().InitializeHero(moveSpeed, health, attackDelay, basePointToMove, arrivalToPointRange, damage, _hitSound, _attackSound, _dieSound);
         hero.GetComponent<Hero>().OnDied += SpawnHeroAfterTime;
     }
 

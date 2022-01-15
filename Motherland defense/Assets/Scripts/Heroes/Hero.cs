@@ -18,11 +18,12 @@ public class Hero : MonoBehaviour
 
     private List<GameObject> _enemies = new List<GameObject>();
 
-    public void InitializeHero(float moveSpeed, int health, float attackDelay, Transform basePointToMove, float arrivalToPointRange, int damage)
+    public void InitializeHero(float moveSpeed, int health, float attackDelay, Transform basePointToMove, float arrivalToPointRange, int damage, AudioClip hitSound, AudioClip attackSound, AudioClip dieSound)
     {
         _health = health;
         GetComponent<HeroMove>().Initialise(basePointToMove, moveSpeed, arrivalToPointRange);
         GetComponent<HeroFight>().Initialise(attackDelay, damage);
+        GetComponent<HeroAudio>().Initialise(hitSound, attackSound, dieSound);
     }
 
     public void ReachBasePoint()
@@ -37,7 +38,6 @@ public class Hero : MonoBehaviour
 
     public void ChangeTarget()
     {
-        Debug.Log("ChangeTarget");
         if (_enemies.Count > 0)
         {
             SetNewTarget();

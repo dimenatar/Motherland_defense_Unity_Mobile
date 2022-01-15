@@ -14,6 +14,9 @@ public class EnemyFactory : MonoBehaviour
     [SerializeField] private int _orkDamage;
     [SerializeField] private float _orkPauseBetweenAttacks;
     [SerializeField] private float _orkAnimationSpeed;
+    [SerializeField] private AudioClip _orkHitSound;
+    [SerializeField] private AudioClip _orkAttackSound;
+    [SerializeField] private AudioClip _orkDieSound;
     [Header("Set up Rabbit")]
     [SerializeField] private int _rabbitHealth;
     [SerializeField] private int _rabbitPoints;
@@ -21,6 +24,9 @@ public class EnemyFactory : MonoBehaviour
     [SerializeField] private int _rabbitDamage;
     [SerializeField] private float _rabbitPauseBetweenAttacks;
     [SerializeField] private float _rabbitAnimationSpeed;
+    [SerializeField] private AudioClip _rabbitHitSound;
+    [SerializeField] private AudioClip _rabbitAttackSound;
+    [SerializeField] private AudioClip _rabbitDieSound;
     [Header("Set up Zombie")]
     [SerializeField] private int _zombieHealth;
     [SerializeField] private int _zombiePoints;
@@ -28,6 +34,9 @@ public class EnemyFactory : MonoBehaviour
     [SerializeField] private int _zombieDamage;
     [SerializeField] private float _zombiePauseBetweenAttacks;
     [SerializeField] private float _zombieAnimationSpeed;
+    [SerializeField] private AudioClip _zombieHitSound;
+    [SerializeField] private AudioClip _zombieAttackSound;
+    [SerializeField] private AudioClip _zombieDieSound;
 
     private EnemyCheckPoints _enemyCheckPoints;
 
@@ -62,7 +71,7 @@ public class EnemyFactory : MonoBehaviour
     {
         var ork = LoadOrk();
         ork.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
-        ork.GetComponent<Enemy>().Initialize(EnemyList.Ork, _orkPoints, _orkHealth, _orkPauseBetweenAttacks, _orkDamage, _enemyCheckPoints, _orkSpeed, _orkAnimationSpeed);
+        ork.GetComponent<Enemy>().Initialize(EnemyList.Ork, _orkPoints, _orkHealth, _orkPauseBetweenAttacks, _orkDamage, _enemyCheckPoints, _orkSpeed, _orkAnimationSpeed, _orkHitSound, _orkAttackSound, _orkDieSound);
     }
 
     private GameObject LoadOrk()
@@ -78,7 +87,7 @@ public class EnemyFactory : MonoBehaviour
             throw new FileNotFoundException();
         }
         rabbit.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
-        rabbit.GetComponent<Enemy>().Initialize(EnemyList.Rabbit, _rabbitPoints, _rabbitHealth, _rabbitPauseBetweenAttacks, _rabbitDamage, _enemyCheckPoints, _rabbitSpeed, _rabbitAnimationSpeed);
+        rabbit.GetComponent<Enemy>().Initialize(EnemyList.Rabbit, _rabbitPoints, _rabbitHealth, _rabbitPauseBetweenAttacks, _rabbitDamage, _enemyCheckPoints, _rabbitSpeed, _rabbitAnimationSpeed, _rabbitHitSound, _rabbitAttackSound, _rabbitDieSound);
     }
 
     private void SpawnZombie()
@@ -89,6 +98,6 @@ public class EnemyFactory : MonoBehaviour
             throw new FileNotFoundException();
         }
         zombie.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
-        zombie.GetComponent<Enemy>().Initialize(EnemyList.Zombie, _zombiePoints, _zombieHealth, _zombiePauseBetweenAttacks, _zombieDamage, _enemyCheckPoints, _zombieSpeed, _zombieAnimationSpeed);
+        zombie.GetComponent<Enemy>().Initialize(EnemyList.Zombie, _zombiePoints, _zombieHealth, _zombiePauseBetweenAttacks, _zombieDamage, _enemyCheckPoints, _zombieSpeed, _zombieAnimationSpeed, _zombieHitSound, _zombieAttackSound, _zombieDieSound);
     }
 }
