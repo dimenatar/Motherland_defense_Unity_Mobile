@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ClickManager : MonoBehaviour
 {
@@ -19,11 +20,13 @@ public class ClickManager : MonoBehaviour
     }
     private void ClickOnScreen()
     {
+        
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
         {
+            Debug.Log("1");
             RaycastHit[] rays = Physics.RaycastAll(ray);
             FilterRaycast(ref rays);
             if (rays.Length > 0)
