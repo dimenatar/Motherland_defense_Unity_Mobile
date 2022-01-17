@@ -18,7 +18,6 @@ public class CameraMove : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
             _isHolding = true;
@@ -49,24 +48,24 @@ public class CameraMove : MonoBehaviour
 
 
 
-#else
 
 
-        if (Input.touchCount > 0)
-        {
-            Debug.Log("1");
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
-            {
-                _startPosition = touch.position;
-            }
-            else if (touch.phase == TouchPhase.Moved)
-            {
-                _difference = touch.position - _startPosition;
-                transform.position += new Vector3(_difference.x, _difference.y);
-            }
-        }
-#endif
+
+        //if (Input.touchCount > 0)
+        //{
+        //    Debug.Log("1");
+        //    Touch touch = Input.GetTouch(0);
+        //    if (touch.phase == TouchPhase.Began)
+        //    {
+        //        _startPosition = touch.position;
+        //    }
+        //    else if (touch.phase == TouchPhase.Moved)
+        //    {
+        //        _difference = touch.position - _startPosition;
+        //        transform.position += new Vector3(_difference.x, _difference.y);
+        //    }
+        //}
+
     }
 
 }
