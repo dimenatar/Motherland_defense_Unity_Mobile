@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,93 +6,94 @@ using UnityEngine;
 
 public class ModelSpawner : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _models;
-    [SerializeField] private Transform _spawnPosition;
+    [SerializeField] private CharacterBundle _characters; 
+    [SerializeField] private TowerBundle _towers;
+    [SerializeField] private Transform _spawnPoint;
     [SerializeField] private float _rotationSpeed;
-    [SerializeField] private float _slowerRotationForce;
+    [SerializeField] private float _rotationSlowerForce;
+    [SerializeField] private float _modelScale;
 
-    private List<GameObject> _actualObjectList = new List<GameObject>();
-    private GameObject _currentObject;
-    private int index;
+    public delegate void ModelSpawned(int characteristic1, int characteristic2, int characteristic3, string name);
+    public event ModelSpawned OnTowerSpawned;
+    public event ModelSpawned OnCharacterSpawned;
+
+    public delegate void IndexChanged(int index);
+    public event IndexChanged OnIndexChanged;
+
+    public event Action OnSwitchedToTowers;
+    public event Action OnSwitchedToCharacters;
+
+    private GameObject _currentModel;
+    private bool _isCurrentTower = true;
+    private int index = 0;
+
+    public void LoadModel()
+    {
+        UnloadCurrentModel();
+        if (_isCurrentTower)
+        {
+            LoadTower();
+        }
+        else
+        {
+            LoadCharacter();
+        }
+        _currentModel.transform.localScale *= _modelScale;
+        _currentModel.AddComponent<Rotater>().SetRotationSpeed(_rotationSpeed, _rotationSlowerForce);
+    }
+
+    public void SwitchToTowers()
+    {
+        UpdateIndex(0);
+        _isCurrentTower = true;
+        LoadModel();
+        OnSwitchedToTowers?.Invoke();
+    }
+
+    public void SwitchToCharacters()
+    {
+        UpdateIndex(0);
+        _isCurrentTower = false;
+        LoadModel();
+        OnSwitchedToCharacters?.Invoke();
+    }
 
     public void LoadNextModel()
     {
-        if (index < _actualObjectList.Count-1)
-        {
-            index++;
-        }
-        else
-        {
-            index = 0;
-        }
-        LoadModel(_actualObjectList[index]);
+        UpdateIndex(++index);
+        LoadModel();
     }
 
-    public void LoadPreviosModel()
+    public void LoadPreviousModel()
     {
-        if (index > 1)
-        {
-            index--;
-        }
-        else
-        {
-            index = _actualObjectList.Count-1;
-        }
-        LoadModel(_actualObjectList[index]);
-    }
-    public void LoadTower()
-    {
-        _actualObjectList = _models.Where(tower => tower.GetComponent<Tower>() != null).ToList();
-        if (index < _actualObjectList.Count)
-        {
-            LoadModel(_actualObjectList[index]);
-        }
-    }
-
-    public void LoadCharacter()
-    {
-        _actualObjectList = _models.Where(character => character.GetComponent<Enemy>() != null || character.GetComponent<Hero>() != null).ToList();
-        index = 0;
-        if (index < _actualObjectList.Count)
-        {
-            LoadModel(_actualObjectList[index]);
-        }
-    }
-
-    public List<GameObject> GetObjects()
-    {
-        return _models;
-    }
-
-    private void SetTowerSize(GameObject tower)
-    {
-        tower.transform.localScale /= 2;
+        UpdateIndex(--index);
+        LoadModel();
     }
 
     private void Start()
     {
-        LoadTower();
+        LoadModel();
     }
 
-    private void LoadModel(GameObject model)
+    private void LoadTower()
     {
-        UnloadCurrentModel();
-        _currentObject = Instantiate(model, _spawnPosition.position, Quaternion.Euler(0, 0, 0));
-        _currentObject.AddComponent<Rotater>().SetRotationSpeed(_rotationSpeed, _slowerRotationForce);
+        _currentModel = Instantiate(_towers.Towers[index].Model, _spawnPoint.position, Quaternion.Euler(0, 0, 0));
+        OnTowerSpawned.Invoke(_towers.Towers[index].Radius, _towers.Towers[index].Damage, _towers.Towers[index].Cost, _towers.Towers[index].Name);
+    }
 
-        _currentObject.SetActive(true);
-        if (_currentObject.GetComponent<Enemy>() || _currentObject.GetComponent<Hero>())
-        { 
-
-        }
-        else if (_currentObject.GetComponent<Tower>())
-        {
-            SetTowerSize(_currentObject);
-        }
+    private void LoadCharacter()
+    {
+        _currentModel = Instantiate(_characters.Characters[index].Model, _spawnPoint.position, Quaternion.Euler(0, 0, 0));
+        OnCharacterSpawned?.Invoke(_characters.Characters[index].Speed, _characters.Characters[index].Damage, _characters.Characters[index].Speed, _characters.Characters[index].Name);
     }
 
     private void UnloadCurrentModel()
     {
-        Destroy(_currentObject);
+        Destroy(_currentModel);
+    }
+    private void UpdateIndex(int value)
+    {
+        index = value;
+        OnIndexChanged?.Invoke(index);
     }
 }

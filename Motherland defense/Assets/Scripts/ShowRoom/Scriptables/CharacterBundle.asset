@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf6abe90388e704395d386630633df9, type: 3}
+  m_Name: CharacterBundle
+  m_EditorClassIdentifier: 
+  _characters:
+  - _model: {fileID: 2526731173044857286, guid: 3aafae6e9f931df46a4aaffd6499d364, type: 3}
+    _name: Gachi
+    _speed: 10
+    _damage: 10
+    _health: 10
+  - _model: {fileID: 7594588740412289247, guid: fa3de611b08afd945a78d93b7e553b03, type: 3}
+    _name: Ork
+    _speed: 2
+    _damage: 5
+    _health: 50
+  - _model: {fileID: 6664464092381045461, guid: dba52a4e50df90a43b15b0d037278218, type: 3}
+    _name: Zombie
+    _speed: 5
+    _damage: 2
+    _health: 10
