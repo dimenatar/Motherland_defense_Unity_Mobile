@@ -13,13 +13,7 @@ MonoBehaviour:
   m_Name: TowerBundle
   m_EditorClassIdentifier: 
   _towers:
-  - _model: {fileID: 6095877300724936405, guid: fe658fa20960b65468f5dc7b6281d060, type: 3}
-    _name: Ting
-    _radius: 15
-    _damage: 10
-    _cost: 30
-  - _model: {fileID: 6137243549709688209, guid: 9f850540629d1574185a6ed006d54888, type: 3}
-    _name: Canon
-    _radius: 20
-    _damage: 20
-    _cost: 50
+  - {fileID: 11400000, guid: c39f1862213ec1a4a8a6733332a76284, type: 2}
+  - {fileID: 11400000, guid: 547a50447b0702c48aebc7d186bd28c6, type: 2}
+  - {fileID: 11400000, guid: 9ff77aaa37ac6554081b9730dd0a870c, type: 2}
+  - {fileID: 11400000, guid: c3a0e0661fb92c744a73bd9b059702f0, type: 2}

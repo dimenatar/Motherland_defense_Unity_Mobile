@@ -5,31 +5,40 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [InspectorName("Enemy name")]
     private EnemyList _enemyName;
     private int _points;
     private int _health;
+    private int _moneyAmountOnDeath;
+    private UserMoney _money;
+    private CharacterData _data;
 
     public delegate void Damaged(int health, int damage);
     public delegate void StartFight(GameObject opponent);
+
     public event Damaged OnDamageTaken;
     public event StartFight OnStartFight;
     public event Action OnStartMove;
     public event Action OnDied;
     public event Action OnFoundOpponent;
 
-    public void Initialize(EnemyList enemyName, int points, int health, float pauseBetweenAttacks, int damage, EnemyCheckPoints enemyCheckPoints, 
-                           float speed, float animationSpeed, AudioClip hitSound, AudioClip attackSound, AudioClip dieSound)
+    public CharacterData Data => _data;
+
+    public void Initialize(CharacterData data, EnemyCheckPoints enemyCheckPoints, UserMoney money, ViewPanel viewPanel)
     {
-        _enemyName = enemyName;
-        _points = points;
-        _health = health;
-        GetComponent<EnemyMove>().InitializeMove(enemyCheckPoints, speed);
-        GetComponent<EnemyFight>().InitialiseFight(pauseBetweenAttacks, damage);
-        GetComponent<EnemyAnimation>().InitialiseAnimation(animationSpeed);
-        GetComponent<EnemyAudio>().Initialise(hitSound, attackSound, dieSound);
+        _data = data;
+        _enemyName = data.Name;
+        _points = data.Points;
+        _health = data.Health;
+        _money = money;
+        _moneyAmountOnDeath = data.MoneyAmountOnDeath;
+        GetComponent<EnemyMove>().InitializeMove(enemyCheckPoints, data.Speed);
+        GetComponent<EnemyFight>().InitialiseFight(data.PauseBetweenAttacks, data.Damage);
+        GetComponent<EnemyAnimation>().InitialiseAnimation(data.AnimationSpeed);
+        GetComponent<EnemyAudio>().Initialise(data.HitSound, data.AttackSound, data.DieSound);
+        GetComponent<EnemyView>().Initialise(viewPanel);
         OnStartMove?.Invoke();
-        OnDied += RemoveComponents;
+        //OnDied += RemoveComponents;
+        OnDied += AddUserMoney;
     }
 
     public int GetPoints()
@@ -47,17 +56,6 @@ public class Enemy : MonoBehaviour
         OnStartFight?.Invoke(opponent);
     }
 
-    private void RemoveComponents()
-    {
-
-        var scripts = GetComponents<MonoBehaviour>();
-        foreach (var item in scripts)
-        {
-            Destroy(item);
-        }
-        Destroy(GetComponent<BoxCollider>());
-    }
-
     public void FoundOpponent()
     {
         OnFoundOpponent?.Invoke();
@@ -70,6 +68,28 @@ public class Enemy : MonoBehaviour
         if (_health <= 0)
         {
             OnDied?.Invoke();
+            RemoveComponents();
         }
+    }
+
+    private void RemoveComponents()
+    {
+
+        var scripts = GetComponents<MonoBehaviour>();
+        foreach (var item in scripts)
+        {
+            Destroy(item);
+        }
+        Destroy(GetComponent<BoxCollider>());
+    }
+
+    private void AddUserMoney()
+    {
+        _money.AddMoney(_moneyAmountOnDeath);
+    }
+
+    private void OnDestroy()
+    {
+        OnDied?.Invoke();
     }
 }

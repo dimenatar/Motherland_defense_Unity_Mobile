@@ -162,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reloadTime: 0.5
   _shotStartPosition: {fileID: 7188966173196493439}
+  _shotSound: {fileID: 0}
   _target: {fileID: 0}
   _enemiesInArea: []
 --- !u!1 &1989504604785234

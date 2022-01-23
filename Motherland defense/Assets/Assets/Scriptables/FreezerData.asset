@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37fbc1de458f6e747a74d6733a3ce2e8, type: 3}
+  m_Name: FreezerData
+  m_EditorClassIdentifier: 
+  _model: {fileID: 8613969864240480739, guid: d0c8dcd46266bc944bdb1c072538da1e, type: 3}
+  _name: 1
+  _radius: 6
+  _damage: 0
+  _cost: 30
+  _reloadTime: 1.5
+  _shotSound: {fileID: 8300000, guid: f985e67a8042ba547a55103157bba47a, type: 3}

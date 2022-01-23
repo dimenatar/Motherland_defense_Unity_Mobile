@@ -3,34 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class TingImage : MonoBehaviour, IClickable, ITowerLoader
+public class TingImage : TowerImage, IClickable, ITowerLoader
 {
-    [SerializeField] private int _cost;
-    private GameObject _towerSpot;
-
-    public bool IsSelected { get; set; }
-
-    public void Deselect()
+    public override GameObject LoadTower()
     {
-        IsSelected = false;
-    }
-
-    public GameObject LoadTower()
-    {
-        return Resources.Load<GameObject>("TingPrefab");
-    }
-
-    public void ObjectClick()
-    {
-        if (UserMoney.IsEnoughMoney(_cost))
-        {
-            UserMoney.ReduceMoney(_cost);
-            _towerSpot.GetComponent<TowerSpot>().CreateTower(this);
-        }
-    }
-
-    private void Start()
-    {
-        _towerSpot = transform.parent.parent.gameObject;
+        GameObject ting = Instantiate(Resources.Load<GameObject>("Ting"));
+        ting.name = "Ting";
+        return ting;
     }
 }

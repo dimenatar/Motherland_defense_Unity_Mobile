@@ -268,7 +268,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1189956007
 MonoBehaviour:
@@ -368,7 +368,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 187918, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
       propertyPath: m_Name
-      value: Freezer Variant
+      value: Freezer
       objectReference: {fileID: 0}
     - target: {fileID: 187918, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
       propertyPath: m_IsActive
@@ -430,6 +430,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3153850699942854085, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
+      propertyPath: m_Volume
+      value: 0.267
+      objectReference: {fileID: 0}
+    - target: {fileID: 3153850699942854085, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063026811642680090, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
+      propertyPath: _shotSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f985e67a8042ba547a55103157bba47a, type: 3}
     - target: {fileID: 9063026811642680090, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
       propertyPath: _freezeBall
       value: 

@@ -3,29 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class FreezerImage : MonoBehaviour, IClickable, ITowerLoader
+public class FreezerImage : TowerImage, IClickable, ITowerLoader
 {
-    [SerializeField] private int _cost;
-    private GameObject _towerSpot;
-
-    public void Deselect(){}
-
-    public GameObject LoadTower()
+    public override GameObject LoadTower()
     {
-        return Resources.Load<GameObject>("FreezerPrefab");
-    }
-
-    public void ObjectClick()
-    {
-        if (UserMoney.IsEnoughMoney(_cost))
-        {
-            UserMoney.ReduceMoney(_cost);
-            _towerSpot.GetComponent<TowerSpot>().CreateTower(this);
-        }
-    }
-
-    private void Start()
-    {
-        _towerSpot = transform.parent.parent.gameObject;
+        GameObject freezer = Instantiate(Resources.Load<GameObject>("Freezer"));
+        freezer.name = "Freezer";
+        return freezer;
     }
 }

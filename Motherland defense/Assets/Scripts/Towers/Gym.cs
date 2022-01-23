@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Gym : MonoBehaviour
+public class Gym : Tower
 {
     [SerializeField] private float _spawnTime;
     [SerializeField] private Transform _spawnPoint;
@@ -15,10 +15,12 @@ public class Gym : MonoBehaviour
     [SerializeField] private AudioClip _hitSound;
     [SerializeField] private AudioClip _attackSound;
     [SerializeField] private AudioClip _dieSound;
+
     public void SpawnHero()
     {
         SetUpHero(InstantiateHero());
     }
+
     public void SpawnHeroAfterTime()
     {
         Invoke(nameof(SpawnHero), _spawnTime);

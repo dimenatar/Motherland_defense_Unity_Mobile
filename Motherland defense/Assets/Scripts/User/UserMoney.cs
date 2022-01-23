@@ -4,43 +4,39 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public static class UserMoney
+public class UserMoney : MonoBehaviour
 {
-    public delegate void MoneyChanged(int amount);
-    public static event MoneyChanged OnMoneyChanged;
+    [SerializeField] private int _startMoney;
 
-    private static int _money;
-    public static int Money 
-    {   
-        get => _money;
-        set
-        {
-            _money = value;
-            OnMoneyChanged?.Invoke(_money);
-        }
+    public delegate void MoneyChanged(int changedValue);
+    public event MoneyChanged OnMoneyChanged;
+
+    private int _money = 0;
+
+    private void Start()
+    {
+        AddMoney(_startMoney);
     }
 
-    public static void Initialise(int money)
+    public void ReduceMoney(int cost)
     {
-        Money = money;
+        _money -= cost;
+        OnMoneyChanged?.Invoke(_money);
     }
 
-    public static void ReduceMoney(int amount)
+    public bool IsEnoghtMoney(int value)
     {
-        if (Money < amount)
-        {
-            throw new ArgumentOutOfRangeException(nameof(amount));
-        }
-        Money -= amount;
+        return _money >= value;
     }
 
-    public static bool IsEnoughMoney(int amount)
+    public void AddMoney(int amount)
     {
-        return Money >= amount;
+        _money += amount;
+        OnMoneyChanged?.Invoke(_money);
     }
 
-    public static void Increment()
+    public int GetMoney()
     {
-        Money++;    
+        return _money;
     }
 }

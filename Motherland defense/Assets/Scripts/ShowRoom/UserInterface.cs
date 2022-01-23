@@ -49,30 +49,30 @@ public class UserInterface : MonoBehaviour
         _listCount.text = _characters.Characters.Count.ToString();
     }
 
-    private void SetTowerValues(int radius, int damage, int cost, string name)
+    private void SetTowerValues(string radius, string damage, string cost, string name)
     {
         _towerPanel.SetValues(radius, damage, cost, name);
     }
 
-    private void SetCharacterValues(int speed, int damage, int health, string name)
+    private void SetCharacterValues(string speed, string damage, string health, string name)
     {
         _characterPanel.SetValues(speed, damage, health, name);
     }
 
     private void SetCharacterMaxValues()
     {
-        int maxSpeed = _characters.Characters.Select(speed => speed.Speed).Max();
+        float maxSpeed = _characters.Characters.Select(speed => speed.Speed).Max();
         int maxCharacterDamage = _characters.Characters.Select(damage => damage.Damage).Max();
         int maxHealth = _characters.Characters.Select(health => health.Health).Max();
-        _characterPanel.SetMaxValues(maxSpeed, maxCharacterDamage, maxHealth);
+        _characterPanel.SetMaxValues(maxSpeed.ToString(), maxCharacterDamage.ToString(), maxHealth.ToString());
     }
 
     private void SetTowerMaxValues()
     {
-        int maxRadius = _towers.Towers.Select(radius => radius.Radius).Max();
+        float maxRadius = _towers.Towers.Select(radius => radius.Radius).Max();
         int maxTowerDamage = _towers.Towers.Select(damage => damage.Damage).Max();
         int maxCost = _towers.Towers.Select(cost => cost.Cost).Max();
-        _towerPanel.SetMaxValues(maxRadius, maxTowerDamage, maxCost);
+        _towerPanel.SetMaxValues(maxRadius.ToString(), maxTowerDamage.ToString(), maxCost.ToString());
     }
 
     private void UpdateCurrentIndex(int index)

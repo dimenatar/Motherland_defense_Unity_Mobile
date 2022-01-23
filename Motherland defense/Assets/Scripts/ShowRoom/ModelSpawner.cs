@@ -13,7 +13,7 @@ public class ModelSpawner : MonoBehaviour
     [SerializeField] private float _rotationSlowerForce;
     [SerializeField] private float _modelScale;
 
-    public delegate void ModelSpawned(int characteristic1, int characteristic2, int characteristic3, string name);
+    public delegate void ModelSpawned(string characteristic1, string characteristic2, string characteristic3, string name);
     public event ModelSpawned OnTowerSpawned;
     public event ModelSpawned OnCharacterSpawned;
 
@@ -78,19 +78,20 @@ public class ModelSpawner : MonoBehaviour
     private void LoadTower()
     {
         _currentModel = Instantiate(_towers.Towers[index].Model, _spawnPoint.position, Quaternion.Euler(0, 0, 0));
-        OnTowerSpawned.Invoke(_towers.Towers[index].Radius, _towers.Towers[index].Damage, _towers.Towers[index].Cost, _towers.Towers[index].Name);
+        OnTowerSpawned.Invoke(_towers.Towers[index].Radius.ToString(), _towers.Towers[index].Damage.ToString(), _towers.Towers[index].Cost.ToString(), _towers.Towers[index].Name.ToString());
     }
 
     private void LoadCharacter()
     {
         _currentModel = Instantiate(_characters.Characters[index].Model, _spawnPoint.position, Quaternion.Euler(0, 0, 0));
-        OnCharacterSpawned?.Invoke(_characters.Characters[index].Speed, _characters.Characters[index].Damage, _characters.Characters[index].Speed, _characters.Characters[index].Name);
+        OnCharacterSpawned?.Invoke(_characters.Characters[index].Speed.ToString(), _characters.Characters[index].Damage.ToString(), _characters.Characters[index].Health.ToString(), _characters.Characters[index].Name.ToString());
     }
 
     private void UnloadCurrentModel()
     {
         Destroy(_currentModel);
     }
+
     private void UpdateIndex(int value)
     {
         index = value;

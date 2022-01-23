@@ -3,29 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class GymImage : MonoBehaviour, IClickable, ITowerLoader
+public class GymImage : TowerImage, IClickable, ITowerLoader
 {
-    [SerializeField] private int _cost;
-    private GameObject _towerSpot;
-
-    public void Deselect() { }
-
-    public GameObject LoadTower()
+    public  override GameObject LoadTower()
     {
-        return Resources.Load<GameObject>("GymPrefab");
-    }
-
-    public void ObjectClick()
-    {
-        if (UserMoney.IsEnoughMoney(_cost))
-        {
-            UserMoney.ReduceMoney(_cost);
-            _towerSpot.GetComponent<TowerSpot>().CreateTower(this);
-        }
-    }
-
-    private void Start()
-    {
-        _towerSpot = transform.parent.parent.gameObject;
+        GameObject gym = Instantiate(Resources.Load<GameObject>("Gym"));
+        gym.name = "Gym";
+        return gym;
     }
 }

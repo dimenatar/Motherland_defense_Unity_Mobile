@@ -26,7 +26,6 @@ public class ClickManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.Log("1");
             RaycastHit[] rays = Physics.RaycastAll(ray);
             FilterRaycast(ref rays);
             if (rays.Length > 0)

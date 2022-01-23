@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecead4243937d174b9d8641898a865cf, type: 3}
+  m_Name: OrkData
+  m_EditorClassIdentifier: 
+  _model: {fileID: 7594588740412289247, guid: fa3de611b08afd945a78d93b7e553b03, type: 3}
+  _name: 0
+  _points: 3
+  _pauseBetweenAttacks: 1
+  _animationSpeed: 1
+  _moneyAmountOnDeath: 10
+  _hitSound: {fileID: 8300000, guid: cafe5d2014e1fed4c89560601d0ca8e6, type: 3}
+  _attackSound: {fileID: 8300000, guid: 396e3e48e60e4614a9636b69589c488d, type: 3}
+  _dieSound: {fileID: 8300000, guid: 8c6990f39cdfc6743bf226c6fbd59f9f, type: 3}
+  _speed: 0.08
+  _damage: 5
+  _health: 30

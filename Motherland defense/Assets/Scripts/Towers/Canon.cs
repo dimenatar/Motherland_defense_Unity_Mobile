@@ -11,6 +11,7 @@ public class Canon : Tower
         {
             if (GetTarget())
             {
+                PlayShotSound();
                 SetUpBall();
                 yield return new WaitForSeconds(GetReloadTime());
             }
@@ -26,7 +27,7 @@ public class Canon : Tower
     private void SetUpBall()
     {
         _ball.SetActive(true);
-        _ball.GetComponent<CanonBall>().SetToStartPoint(GetShotStartPosition().position);
+        _ball.GetComponent<CanonBall>().ReturnToStartPoint(GetShotStartPosition().position);
         _ball.GetComponent<CanonBall>().SetTarget(GetTarget());
         _ball.GetComponent<CanonBall>().FireBall();
     }

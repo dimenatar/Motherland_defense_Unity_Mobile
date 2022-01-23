@@ -17,6 +17,7 @@ public class CanonBall : MonoBehaviour
     private float _animation;
     private Rigidbody _rigidbody;
     private GameObject _target;
+    private AudioSource _source;
 
     public bool IsReadyToFire { get; private set; } = true;
 
@@ -41,7 +42,7 @@ public class CanonBall : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void SetToStartPoint(Vector3 point)
+    public void ReturnToStartPoint(Vector3 point)
     {
         transform.position = point;
     }
@@ -49,6 +50,11 @@ public class CanonBall : MonoBehaviour
     public void SetTarget(GameObject target)
     {
         _target = target;
+    }
+
+    private void RemoveTarget()
+    {
+        _target = null;
     }
 
     private void Update()
@@ -72,7 +78,7 @@ public class CanonBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (LayerMask.LayerToName(other.gameObject.layer) == "Ground")
+        if (LayerMask.LayerToName(other.gameObject.layer) == "Ground" || other.GetComponent<Enemy>())
         {
             Explode();
             gameObject.SetActive(false);
@@ -81,6 +87,7 @@ public class CanonBall : MonoBehaviour
 
     private void Explode()
     {
+        RemoveTarget();
         IsReadyToFire = true;
         CreateExplosion();
         HitEnemies(FindEnemies());

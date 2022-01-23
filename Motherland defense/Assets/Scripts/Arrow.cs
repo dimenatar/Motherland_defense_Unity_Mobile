@@ -7,10 +7,12 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private int _damage;
     [SerializeField] private float _hitRange; //specify range where we hit enemy even if we dont actually
+    private int _damage;
    
     private GameObject _target;
+    private Rigidbody _rigidbody;
+    private bool _isHit = false;
 
     private void Update()
     {
@@ -18,45 +20,37 @@ public class Arrow : MonoBehaviour
         CheckDistance();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void Start()
     {
-        //Enemy collidedEnemy = collision.collider.GetComponent<Enemy>();
-        //if (collidedEnemy)
-        //{
-        //    collidedEnemy.TakeDamage(_damage);
-        //}
-        //Destroy(gameObject);
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void RemoveTarget()
     {
-        Debug.Log(_target.name + " remove ");
         _target = null;
-        Destroy(gameObject);
+        if (!_isHit)
+        { 
+            Destroy(gameObject);
+        }
     }
 
     public void HitEnemy()
     {
-        if (_target)
-        {
-            if (_target.GetComponent<Enemy>())
-            {
-                _target.GetComponent<Enemy>().TakeDamage(_damage);
-            }
-        }
-        Destroy(this.gameObject);
+        _target.GetComponent<Enemy>().TakeDamage(_damage);
+        _isHit = true;
+        Destroy(gameObject);
     }
-    public void SetTarget(GameObject target)
+    public void SetTarget(GameObject target, int damage)
     {
         _target = target;
+        _damage = damage;
         _target.GetComponent<Enemy>().OnDied += RemoveTarget;
-        Debug.Log(_target.name + " assigned ");
     }
 
     private void MoveArrow()
     {
         transform.LookAt(_target.transform.position);
-        GetComponent<Rigidbody>().velocity = transform.forward *_speed;
+        _rigidbody.velocity = transform.forward *_speed;
     }
 
     //this is pretty bad and heavy function 

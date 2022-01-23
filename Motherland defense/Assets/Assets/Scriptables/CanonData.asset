@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37fbc1de458f6e747a74d6733a3ce2e8, type: 3}
+  m_Name: CanonData
+  m_EditorClassIdentifier: 
+  _model: {fileID: 6137243549709688209, guid: 9f850540629d1574185a6ed006d54888, type: 3}
+  _name: 2
+  _radius: 7
+  _damage: 10
+  _cost: 50
+  _reloadTime: 4
+  _shotSound: {fileID: 8300000, guid: d8574e460cfa19f4bbd8dd4d3bf7b39d, type: 3}

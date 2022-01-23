@@ -2,16 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Tower : MonoBehaviour, ITower
 {
-    [SerializeField] float _reloadTime;
-    [SerializeField] Transform _shotStartPosition;
+    [SerializeField] private Transform _shotStartPosition;
 
-    public GameObject _target = null;
-    public List<GameObject> _enemiesInArea = new List<GameObject>();
-
+    private float _reloadTime;
+    private GameObject _target = null;
+    private List<GameObject> _enemiesInArea = new List<GameObject>();
+    private AudioSource _source;
+    private AudioClip _shotSound;
     private Vector3 diff;
     private float rotateZ;
+    private TowerData _data;
+
+    public TowerData Data => _data;
+
+    public void Initialise(TowerData data)
+    {
+        _data = data;
+        _reloadTime = data.ReloadTime;
+        _shotSound = data.ShotSound;
+    }
 
     public virtual IEnumerator Shoot()
     {
@@ -24,6 +36,16 @@ public class Tower : MonoBehaviour, ITower
         rotateZ = Mathf.Atan2(diff.x, diff.z) * Mathf.Rad2Deg;
         return rotateZ;
     }
+
+    public void PlayShotSound()
+    {
+        if (_source == null)
+        {
+            _source = GetComponent<AudioSource>();
+        }
+        _source.PlayOneShot(_shotSound);
+    }
+
     public void AddEnemyInArea(GameObject enemy)
     {
         if (!_enemiesInArea.Contains(enemy))
@@ -65,16 +87,19 @@ public class Tower : MonoBehaviour, ITower
 
     private void RemoveTarget()
     {
-        _enemiesInArea.Remove(_target);
-        _target.GetComponent<Enemy>().OnDied -= RemoveTarget;
-        ChangeTarget();
+        if (_target)
+        {
+            Debug.Log(gameObject.name + " " + _target.name + " removed target");
+            _enemiesInArea.Remove(_target);
+            ChangeTarget();
+        }
     }
 
     private void ChangeTarget()
     {
         if (_enemiesInArea.Count > 0)
         {
-            _target = _enemiesInArea[Random.Range(0, _enemiesInArea.Count - 1)];
+            _target = _enemiesInArea[Random.Range(0, _enemiesInArea.Count)];
         }
         else
         {

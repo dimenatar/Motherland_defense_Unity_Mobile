@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Ting : Tower
 {
-
     public override IEnumerator Shoot()
     {
         while (true)
@@ -12,6 +11,7 @@ public class Ting : Tower
             if (GetTarget())
             {
                 CreateArrow();
+                PlayShotSound();
             }
             yield return new WaitForSeconds(GetReloadTime());
         }
@@ -28,7 +28,7 @@ public class Ting : Tower
     }
     private void SetUpArrow(GameObject arrow)
     {
-        arrow.GetComponent<Arrow>().SetTarget(GetTarget());
+        arrow.GetComponent<Arrow>().SetTarget(GetTarget(), Data.Damage);
         arrow.SetActive(true);
     }
 }

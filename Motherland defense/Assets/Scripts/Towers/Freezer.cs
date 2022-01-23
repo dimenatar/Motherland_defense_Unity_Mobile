@@ -15,6 +15,7 @@ public class Freezer : Tower
         {
             if (GetTarget())
             {
+                PlayShotSound();
                 CreateFreezeBall();
             }
             yield return new WaitForSeconds(GetReloadTime());

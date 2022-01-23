@@ -11,14 +11,14 @@ public class UIPanel : MonoBehaviour
     [SerializeField] private UICharacteristic _characteristic2;
     [SerializeField] private Text _name;
     
-    public void SetMaxValues(int maxValue1, int maxValue2, int maxValue3)
+    public void SetMaxValues(string maxValue1, string maxValue2, string maxValue3)
     {
         _characteristic.SetSliderMaxValue(maxValue1);
         _characteristic1.SetSliderMaxValue(maxValue2);
         _characteristic2.SetSliderMaxValue(maxValue3);
     }
 
-    public void SetValues(int value1, int value2, int value3, string name)
+    public void SetValues(string value1, string value2, string value3, string name)
     {
         _characteristic.SetValues(value1);
         _characteristic1.SetValues(value2);

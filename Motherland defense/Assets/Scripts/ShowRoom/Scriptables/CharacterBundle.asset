@@ -13,18 +13,6 @@ MonoBehaviour:
   m_Name: CharacterBundle
   m_EditorClassIdentifier: 
   _characters:
-  - _model: {fileID: 2526731173044857286, guid: 3aafae6e9f931df46a4aaffd6499d364, type: 3}
-    _name: Gachi
-    _speed: 10
-    _damage: 10
-    _health: 10
-  - _model: {fileID: 7594588740412289247, guid: fa3de611b08afd945a78d93b7e553b03, type: 3}
-    _name: Ork
-    _speed: 2
-    _damage: 5
-    _health: 50
-  - _model: {fileID: 6664464092381045461, guid: dba52a4e50df90a43b15b0d037278218, type: 3}
-    _name: Zombie
-    _speed: 5
-    _damage: 2
-    _health: 10
+  - {fileID: 11400000, guid: 96f26aa573d9e654786decddb51ddac4, type: 2}
+  - {fileID: 11400000, guid: 618a3b5e5d1f522449bc1278da376002, type: 2}
+  - {fileID: 11400000, guid: 9374e39c5be94ad4da891125b276ed90, type: 2}
