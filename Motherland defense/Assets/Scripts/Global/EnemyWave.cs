@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyWave : MonoBehaviour
 {
     [Header("Place in right order")]
-    [SerializeField] private List<EnemyList> _enemies;
+    [SerializeField] private List<CharacterList> _enemies;
     [Header("Seconds")]
     [SerializeField] private float _spawnPause;
     [SerializeField] private Transform _spawnPoint;

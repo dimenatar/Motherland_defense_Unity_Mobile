@@ -23,7 +23,6 @@ public class ClickManager : MonoBehaviour
         
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
         if (Physics.Raycast(ray, out hit))
         {
             RaycastHit[] rays = Physics.RaycastAll(ray);
@@ -33,20 +32,24 @@ public class ClickManager : MonoBehaviour
                 IClickable clickable = rays[0].collider.GetComponent<IClickable>();
                 clickedObject = clickable;
                 Debug.Log(rays[0].collider.gameObject.name);
+                if (clickedObject != null)
+                {
+                    OnObjectClick -= clickedObject.Deselect;
+                }
+                OnObjectClick?.Invoke();
+                if (clickedObject != null)
+                {
+                    OnObjectClick += clickedObject.Deselect;
+                }
                 clickable.ObjectClick();
+            }
+            else
+            {
+                OnObjectClick?.Invoke();
             }
 
         }
-        if (clickedObject != null)
-        {
-            OnObjectClick -= clickedObject.Deselect;
-        }
 
-        OnObjectClick?.Invoke();
-        if (clickedObject != null)
-        {
-            OnObjectClick += clickedObject.Deselect;
-        }
         
         clickedObject = null;
     }

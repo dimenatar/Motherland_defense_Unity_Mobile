@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecead4243937d174b9d8641898a865cf, type: 3}
+  m_Name: HeroData
+  m_EditorClassIdentifier: 
+  _model: {fileID: 2526731173044857286, guid: 3aafae6e9f931df46a4aaffd6499d364, type: 3}
+  _name: 4
+  _points: 0
+  _pauseBetweenAttacks: 1
+  _animationSpeed: 1
+  _moneyAmountOnDeath: 0
+  _hitSound: {fileID: 8300000, guid: cafe5d2014e1fed4c89560601d0ca8e6, type: 3}
+  _attackSound: {fileID: 8300000, guid: 6702e370b8c299d41a2c481e66f7ee51, type: 3}
+  _dieSound: {fileID: 8300000, guid: ebfa0746b8bd2f64294e611f422c6f2c, type: 3}
+  _speed: 0.05
+  _damage: 1
+  _health: 10

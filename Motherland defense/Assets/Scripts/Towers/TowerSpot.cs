@@ -30,7 +30,7 @@ public class TowerSpot : MonoBehaviour, IClickable
         }
         else
         {
-            _clickManager.OnObjectClick -= Deselect;
+            //_clickManager.OnObjectClick -= Deselect;
             _collider.enabled = false;
             _towerMenu.gameObject.transform.position = transform.position + new Vector3(0,0.1f,0);
             _towerMenu.gameObject.SetActive(true);
@@ -40,7 +40,9 @@ public class TowerSpot : MonoBehaviour, IClickable
     public void CreateTower(ITowerLoader towerLoader)
     {
         GameObject tower = _towerFactory.CreateTower(towerLoader, transform.position, _direction);
+        if (tower == null) Debug.Log("tower null");
         _tower = tower.GetComponent<Tower>();
+        if (_tower == null) Debug.Log("_tower null");
         _tower.GetComponent<Tower>().Initialise(_towers.Towers.Where(towerName => towerName.Name.ToString() == _tower.name).First());
         _tower.transform.SetParent(transform);
     }
@@ -59,7 +61,7 @@ public class TowerSpot : MonoBehaviour, IClickable
 
     private void Start()
     {
-        _clickManager.OnObjectClick += Deselect;
+        //_clickManager.OnObjectClick += Deselect;
         _collider = GetComponent<BoxCollider>();
     }
 }

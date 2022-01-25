@@ -171,7 +171,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 753248164652450200}
-  - component: {fileID: 753248164652450201}
   m_Layer: 0
   m_Name: Gym
   m_TagString: Untagged
@@ -196,29 +195,6 @@ Transform:
   m_Father: {fileID: 3734331212409352762}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &753248164652450201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 753248164652450203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02fc9628795c70f43b4afde3de42874c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawnTime: 2
-  _spawnPoint: {fileID: 753248166278678547}
-  moveSpeed: 1
-  health: 10
-  attackDelay: 1
-  basePointToMove: {fileID: 753248166271577365}
-  arrivalToPointRange: 4
-  damage: 1
-  _hitSound: {fileID: 8300000, guid: cafe5d2014e1fed4c89560601d0ca8e6, type: 3}
-  _attackSound: {fileID: 8300000, guid: 6702e370b8c299d41a2c481e66f7ee51, type: 3}
-  _dieSound: {fileID: 8300000, guid: ebfa0746b8bd2f64294e611f422c6f2c, type: 3}
 --- !u!1 &753248166271577364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,6 +1480,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3734331212409352762}
+  - component: {fileID: 5829582129066136263}
+  - component: {fileID: 4789193626179767068}
   m_Layer: 0
   m_Name: Gym
   m_TagString: Untagged
@@ -1526,6 +1504,120 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &5829582129066136263
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5163323238438279653}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &4789193626179767068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5163323238438279653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02fc9628795c70f43b4afde3de42874c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shotStartPosition: {fileID: 0}
+  _spawnTime: 2
+  _spawnPoint: {fileID: 753248166278678547}
+  _characterData: {fileID: 11400000, guid: a9ccacc7e9035ee49a50cb82e097dc97, type: 2}
+  basePointToMove: {fileID: 753248166271577365}
+  arrivalToPointRange: 4
 --- !u!1 &5403406945110027382
 GameObject:
   m_ObjectHideFlags: 0

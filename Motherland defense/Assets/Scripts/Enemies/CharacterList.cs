@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyList : uint
+public enum CharacterList : uint
 {
     Ork,
     Anime,
     Rabbit,
-    Zombie
+    Zombie,
+    Hero
 }

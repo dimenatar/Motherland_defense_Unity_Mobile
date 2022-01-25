@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-    private int _health;
-    private GameObject _currentTarget;
 
     public delegate void Damaged(int updatedHealth, int damage);
     public event Damaged OnDamageTaken;
@@ -16,14 +14,21 @@ public class Hero : MonoBehaviour
     public event Action OnDied;
     public event Action OnBasePointReached;
 
+    public CharacterData HeroData => _characterData;
+
+    private int _health;
+    private GameObject _currentTarget;
+    private CharacterData _characterData;
     private List<GameObject> _enemies = new List<GameObject>();
 
-    public void InitializeHero(float moveSpeed, int health, float attackDelay, Transform basePointToMove, float arrivalToPointRange, int damage, AudioClip hitSound, AudioClip attackSound, AudioClip dieSound)
+    public void InitializeHero(CharacterData characterData,  Transform basePointToMove, float arrivalToPointRange, ViewPanel viewPanel)
     {
-        _health = health;
-        GetComponent<HeroMove>().Initialise(basePointToMove, moveSpeed, arrivalToPointRange);
-        GetComponent<HeroFight>().Initialise(attackDelay, damage);
-        GetComponent<HeroAudio>().Initialise(hitSound, attackSound, dieSound);
+        _health = characterData.Health;
+        _characterData = characterData;
+        GetComponent<HeroMove>().Initialise(basePointToMove, characterData.Speed, arrivalToPointRange);
+        GetComponent<HeroFight>().Initialise(characterData.PauseBetweenAttacks, characterData.Damage);
+        GetComponent<HeroAudio>().Initialise(characterData.HitSound, characterData.AttackSound, characterData.DieSound);
+        GetComponent<HeroView>().Initialise(viewPanel);
     }
 
     public void ReachBasePoint()

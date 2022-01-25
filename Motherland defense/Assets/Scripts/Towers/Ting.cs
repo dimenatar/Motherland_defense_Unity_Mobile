@@ -15,7 +15,6 @@ public class Ting : Tower
             }
             yield return new WaitForSeconds(GetReloadTime());
         }
-
     }
 
     private void Start()

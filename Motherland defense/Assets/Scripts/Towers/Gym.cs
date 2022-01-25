@@ -4,18 +4,13 @@ public class Gym : Tower
 {
     [SerializeField] private float _spawnTime;
     [SerializeField] private Transform _spawnPoint;
-    
+
     [Header("Set up hero")]
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private int health;
-    [SerializeField] private float attackDelay;
+    [SerializeField] private CharacterData _characterData;
     [SerializeField] private Transform basePointToMove;
     [SerializeField] private float arrivalToPointRange;
-    [SerializeField] private int damage;
-    [SerializeField] private AudioClip _hitSound;
-    [SerializeField] private AudioClip _attackSound;
-    [SerializeField] private AudioClip _dieSound;
 
+    private ViewPanel _viewPanel;
     public void SpawnHero()
     {
         SetUpHero(InstantiateHero());
@@ -35,12 +30,13 @@ public class Gym : Tower
     {
         hero.transform.position = _spawnPoint.position;
         hero.SetActive(true);
-        hero.GetComponent<Hero>().InitializeHero(moveSpeed, health, attackDelay, basePointToMove, arrivalToPointRange, damage, _hitSound, _attackSound, _dieSound);
+        hero.GetComponent<Hero>().InitializeHero(_characterData ,basePointToMove, arrivalToPointRange, _viewPanel);
         hero.GetComponent<Hero>().OnDied += SpawnHeroAfterTime;
     }
 
     private void Start()
     {
+        _viewPanel = transform.parent.GetComponent<ViewPanel>();
         SpawnHero();
     }
 }

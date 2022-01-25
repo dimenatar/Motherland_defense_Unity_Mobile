@@ -13,21 +13,21 @@ public class EnemyFactory : MonoBehaviour
     [SerializeField] private ViewPanel _viewPanel;
     private EnemyCheckPoints _enemyCheckPoints;
 
-    public void SpawnEnemy(EnemyList type)
+    public void SpawnEnemy(CharacterList type)
     {
         switch (type)
         {
-            case EnemyList.Ork:
+            case CharacterList.Ork:
                 {
                     SpawnOrk();
                     break;
                 }
-            case EnemyList.Rabbit:
+            case CharacterList.Rabbit:
                 {
                     SpawnRabbit();
                     break;
                 }
-            case EnemyList.Zombie:
+            case CharacterList.Zombie:
                 {
                     SpawnZombie();
                     break;
@@ -44,7 +44,7 @@ public class EnemyFactory : MonoBehaviour
     {
         var ork = LoadOrk();
         ork.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
-        ork.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(ork => ork.Name == EnemyList.Ork).First(), _enemyCheckPoints, _money, _viewPanel);
+        ork.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(ork => ork.Name == CharacterList.Ork).First(), _enemyCheckPoints, _money, _viewPanel);
     }
 
     private GameObject LoadOrk()
@@ -60,7 +60,7 @@ public class EnemyFactory : MonoBehaviour
             throw new FileNotFoundException();
         }
         rabbit.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
-        rabbit.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(rabbit => rabbit.Name == EnemyList.Rabbit).First(), _enemyCheckPoints, _money, _viewPanel);
+        rabbit.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(rabbit => rabbit.Name == CharacterList.Rabbit).First(), _enemyCheckPoints, _money, _viewPanel);
     }
 
     private void SpawnZombie()
@@ -71,6 +71,6 @@ public class EnemyFactory : MonoBehaviour
             throw new FileNotFoundException();
         }
         zombie.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
-        zombie.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(zombie => zombie.Name == EnemyList.Zombie).First(), _enemyCheckPoints, _money, _viewPanel);
+        zombie.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(zombie => zombie.Name == CharacterList.Zombie).First(), _enemyCheckPoints, _money, _viewPanel);
     }
 }

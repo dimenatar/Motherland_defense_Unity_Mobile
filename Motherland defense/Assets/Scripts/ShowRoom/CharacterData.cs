@@ -8,7 +8,7 @@ using UnityEngine;
 public class CharacterData : ScriptableObject
 {
     [SerializeField] private GameObject _model;
-    [SerializeField] private EnemyList _name;
+    [SerializeField] private CharacterList _name;
     [SerializeField] private int _points;
     [SerializeField] private float _pauseBetweenAttacks;
     [SerializeField] private float _animationSpeed;
@@ -21,7 +21,7 @@ public class CharacterData : ScriptableObject
     [SerializeField] private int _health;
 
     public GameObject Model => _model;
-    public EnemyList Name => _name;
+    public CharacterList Name => _name;
     public float Speed => _speed;
     public int Damage => _damage;
     public int Health => _health;

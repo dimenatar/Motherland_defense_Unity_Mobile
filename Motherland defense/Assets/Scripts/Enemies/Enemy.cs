@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private EnemyList _enemyName;
+    private CharacterList _enemyName;
     private int _points;
     private int _health;
     private int _moneyAmountOnDeath;

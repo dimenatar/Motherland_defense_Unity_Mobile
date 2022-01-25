@@ -21,7 +21,6 @@ public class EnemyView : MonoBehaviour, IClickable
     public void Initialise(ViewPanel viewPanel)
     {
         _viewPanel = viewPanel;
-        Debug.Log("Initialise");
     }
 
     private void SetNewHealthValue(int newHealth, int damage)
