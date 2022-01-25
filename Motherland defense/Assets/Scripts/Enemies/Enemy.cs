@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour
         Destroy(GetComponent<BoxCollider>());
     }
 
-    private void AddUserMoney()
+    public void AddUserMoney()
     {
         _money.AddMoney(_moneyAmountOnDeath);
     }
