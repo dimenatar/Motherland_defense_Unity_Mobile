@@ -9,16 +9,24 @@ public class LevelLoader : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
     }
+
     public void LoadLevelAdditive(string name)
     {
         SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
     }
+
     public void UnloadScene(string name)
     {
         SceneManager.UnloadSceneAsync(name);
-    }   
+    }
+    
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void Reload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

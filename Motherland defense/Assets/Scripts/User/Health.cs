@@ -6,20 +6,25 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class Health : MonoBehaviour
 {
+    public delegate void HealthChanged(int value);
+    public event HealthChanged OnHealthChanged;
+    public event HealthChanged OnHealthSetted;
+
     private Text _healthText;
-    private int _startHealth;
     private int _currentHealth;
 
     public void Initialise(int startValue)
     {
-        _startHealth = startValue;
         _currentHealth = startValue;
+        OnHealthSetted?.Invoke(startValue);
+        OnHealthChanged?.Invoke(startValue);
         SetText(_currentHealth);
     }
 
     public void ReduceHealth(int value)
     {
         _currentHealth -= value;
+        OnHealthChanged?.Invoke(value);
         SetText(_currentHealth);
     }
 
@@ -28,19 +33,8 @@ public class Health : MonoBehaviour
         _healthText = GetComponent<Text>();
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void SetText(int value)
     {
         _healthText.text = value.ToString();
     }
-
-    public float GetHealthRatio()
-    {
-        return _startHealth / _currentHealth;
-    }
-
 }

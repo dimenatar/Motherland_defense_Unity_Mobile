@@ -2,28 +2,33 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 [Serializable]
-public class UserData : MonoBehaviour
+public class UserData
 {
-    [SerializeField] private string _path;
+    public UserData()
+    {
+        _levelData = new List<LevelData>();
+        _levelData.Add(new LevelData());
+    }
+
     private List<LevelData> _levelData;
-    private int _currentLevel;
 
-    public void CompleteLevel()
-    {
-        // save progress
-    }
+    public List<LevelData> LevelData => _levelData;
 
-    private void Start()
+    public void CompleteLevel(LevelData levelData)
     {
-        
-    }
-
-    public int GetAmountCompletedLevels()
-    {
-        return _levelData.Count;
+        if (_levelData.Select(number => number.LevelNumber).Contains(levelData.LevelNumber))
+        {
+            int index = _levelData.FindIndex(number => number.LevelNumber == levelData.LevelNumber);
+            _levelData[index] = levelData;
+        }
+        else
+        {
+            _levelData.Add(levelData);
+        }
     }
 }

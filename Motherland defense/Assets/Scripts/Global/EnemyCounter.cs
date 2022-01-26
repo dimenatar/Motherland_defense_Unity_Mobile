@@ -12,11 +12,13 @@ public class EnemyCounter : MonoBehaviour
     public void AddEnemy()
     {
         _enemyCounter++;
+        Debug.Log(_enemyCounter);
     }
 
     public void ReduceEnemy()
     {
         _enemyCounter--;
+        Debug.Log(_enemyCounter);
         if (_enemyCounter == 0)
         {
             OnCounterEmpty?.Invoke();

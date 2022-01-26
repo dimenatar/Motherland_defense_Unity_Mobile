@@ -12,6 +12,8 @@ public class EnemyFactory : MonoBehaviour
     [SerializeField] private CharacterBundle _characterBundle;
     [SerializeField] private ViewPanel _viewPanel;
     [SerializeField] private EnemyCounter _enemyCounter;
+    [SerializeField] private LevelStatistics _levelStatistics;
+
     private EnemyCheckPoints _enemyCheckPoints;
 
     public void SpawnEnemy(CharacterList type)
@@ -41,6 +43,7 @@ public class EnemyFactory : MonoBehaviour
                 }
         }
         _enemyCounter.AddEnemy();
+        _levelStatistics.AddEnemy();
         SubscribeEnemy(enemy.GetComponent<Enemy>());
     }
 
@@ -89,5 +92,6 @@ public class EnemyFactory : MonoBehaviour
     private void SubscribeEnemy(Enemy enemy)
     {
         enemy.OnDied += _enemyCounter.ReduceEnemy;
+        enemy.OnDamageTaken += _levelStatistics.AddTotalDamage;
     }
 }
