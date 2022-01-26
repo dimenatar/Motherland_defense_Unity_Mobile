@@ -15,6 +15,12 @@ public class LevelLoader : MonoBehaviour
         SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
     }
 
+    public void ExitFromLevel()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("LevelSelectionScene");
+    }
+
     public void UnloadScene(string name)
     {
         SceneManager.UnloadSceneAsync(name);
@@ -27,6 +33,7 @@ public class LevelLoader : MonoBehaviour
 
     public void Reload()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
