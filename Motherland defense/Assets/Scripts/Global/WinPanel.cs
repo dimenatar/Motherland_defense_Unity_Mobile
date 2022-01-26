@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class WinPanel : MonoBehaviour
 {
@@ -25,6 +26,6 @@ public class WinPanel : MonoBehaviour
     private void GetAndFillStatisctics()
     {
         LevelData levelData = _levelStatistics.GetLevelStatistic();
-        _statiscticsPanel.Initialise(levelData.AmountRemainingHealth, levelData.DamageToUnits, levelData.AmountEnemies, levelData.Time.ToString());
+        _statiscticsPanel.Initialise(levelData.AmountRemainingHealth, levelData.DamageToUnits, levelData.AmountEnemies, levelData.Time);
     }
 }

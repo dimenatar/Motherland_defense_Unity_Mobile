@@ -12,6 +12,7 @@ public class Health : MonoBehaviour
 
     private Text _healthText;
     private int _currentHealth;
+    public int CurrentHealth => _currentHealth;
 
     public void Initialise(int startValue)
     {

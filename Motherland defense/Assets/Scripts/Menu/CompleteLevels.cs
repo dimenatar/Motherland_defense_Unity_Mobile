@@ -19,16 +19,14 @@ public class CompleteLevels : MonoBehaviour
     {
         if (_userData == null)
         {
-            Debug.Log("user data null");
             _userData=new UserData();
             UserProgressManager.SaveUserData(UserProgressManager.Path, _userData);
-            InitialiseLevelMarker(0, new LevelData());
+            InitialiseLevelMarker(0, _userData.LevelData[0]);
         }
         else
         {
             for (int i = 0; i < _userData.LevelData.Count; i++)
             {
-                Debug.Log(_userData.LevelData[i].LevelNumber + " " + _userData.LevelData[i].Time);
                 InitialiseLevelMarker(i, _userData.LevelData[i]);
             }
             if (_userData.LevelData.Count < _totalAmountLevels)

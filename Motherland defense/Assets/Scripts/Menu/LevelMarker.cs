@@ -8,7 +8,6 @@ public class LevelMarker : MonoBehaviour
 {
     [SerializeField] private int _levelNumber;
     [SerializeField] private string _loadingLevelName;
-    [SerializeField] private Text _levelNumberText;
     [SerializeField] private LevelLoader _loader;
     [SerializeField] private StatiscticsPanel _levelPanel;
 
@@ -19,6 +18,7 @@ public class LevelMarker : MonoBehaviour
 
     public void SetLevelData(LevelData levelData)
     {
+        Debug.Log("set");
         _levelData = levelData;
     }
 
@@ -27,17 +27,12 @@ public class LevelMarker : MonoBehaviour
         if (_isFirstClick)
         {
             _levelPanel.gameObject.SetActive(true);
-            _levelPanel.Initialise(_levelData.AmountRemainingHealth, _levelData.DamageToUnits, _levelData.AmountEnemies, ConvertFloatTimeToString(_levelData.Time));
+            _levelPanel.Initialise(_levelData.AmountRemainingHealth, _levelData.DamageToUnits, _levelData.AmountEnemies, _levelData.Time);
             _isFirstClick = false;
         }
         else
         {
             _loader.LoadLevel(_loadingLevelName);
         }
-    }
-
-    private string ConvertFloatTimeToString(float time)
-    {
-        return TimeSpan.FromSeconds(time).ToString("mm':'ss");
     }
 }

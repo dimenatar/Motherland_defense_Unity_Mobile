@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [Serializable]
 public class LevelData
 {
-    public LevelData(int levelNumber, int amountRemainingHealth, int damageToUnits, int amountEnemies, float time)
+    public LevelData(int levelNumber, int amountRemainingHealth, int damageToUnits, int amountEnemies, string time)
     {
         _levelNumber = levelNumber;
         _amountRemainingHealth = amountRemainingHealth;
@@ -20,11 +20,11 @@ public class LevelData
     private int _amountRemainingHealth;
     private int _damageToUnits;
     private int _amountEnemies;
-    private float _time;
+    private string _time = "123";
 
     public int LevelNumber { get => _levelNumber;}
     public int AmountRemainingHealth { get => _amountRemainingHealth;}
     public int DamageToUnits { get => _damageToUnits;}
     public int AmountEnemies { get => _amountEnemies;}
-    public float Time { get => _time;}
+    public string Time { get => _time;}
 }

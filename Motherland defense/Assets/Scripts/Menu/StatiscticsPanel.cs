@@ -16,6 +16,6 @@ public class StatiscticsPanel : MonoBehaviour
         _remainingHealth.text = health.ToString();
         _damageToUnits.text = damage.ToString();
         _amountEnemies.text = amount.ToString();
-        _timeToComplete.text = time.ToString();
+        _timeToComplete.text = time;
     }
 }

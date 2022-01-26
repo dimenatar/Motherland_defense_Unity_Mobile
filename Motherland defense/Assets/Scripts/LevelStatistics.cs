@@ -10,12 +10,11 @@ public class LevelStatistics : MonoBehaviour
     [SerializeField] private int _levelNumber;
     private int _totalDamage;
     private int _amountEnemies;
-    private int _healthAmount;
     private float _levelTimer = 0;
 
     public LevelData GetLevelStatistic()
     {
-        return new LevelData(_levelNumber, _healthAmount, _totalDamage, _amountEnemies, _levelTimer);
+        return new LevelData(_levelNumber, _health.CurrentHealth, _totalDamage, _amountEnemies, ConvertFloatTimeToString(_levelTimer));
     }
 
     public void AddTotalDamage(int health, int damage)
@@ -28,24 +27,13 @@ public class LevelStatistics : MonoBehaviour
         _amountEnemies++;
     }
 
-    private void SetStartHealth(int value)
-    {
-        _healthAmount = value;
-    }
-
-    private void ChangeHealthAmount(int value)
-    {
-        _healthAmount -= value;
-    }
-
-    private void Start()
-    {
-        _health.OnHealthChanged += ChangeHealthAmount;
-        _health.OnHealthSetted += SetStartHealth;
-    }
-
     private void FixedUpdate()
     {
         _levelTimer += Time.deltaTime;
+    }
+
+    private string ConvertFloatTimeToString(float time)
+    {
+        return TimeSpan.FromSeconds(time).ToString("mm':'ss");
     }
 }
