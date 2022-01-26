@@ -4,42 +4,37 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    public bool _isHolding;
+    private bool _isHolding;
     private Vector2 _startPosition = Vector2.zero;
     private Vector2 _endPosition = Vector2.zero;
     private Vector2 _difference;
 
-    private void Start()
-    {
-
-    }
-
-
-
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Time.deltaTime != 0)
         {
-            _isHolding = true;
-            _startPosition = Input.mousePosition;
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            _startPosition = Input.mousePosition;
-            if (_endPosition != Vector2.zero && _isHolding)
+            if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                _difference = _endPosition - _startPosition;
-                transform.position += new Vector3(_difference.x, 0, _difference.y)/10;
+                _isHolding = true;
+                _startPosition = Input.mousePosition;
             }
-            _endPosition = _startPosition;
+            else if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
+            {
+                _startPosition = Input.mousePosition;
+                if (_endPosition != Vector2.zero && _isHolding)
+                {
+                    _difference = _endPosition - _startPosition;
+                    transform.position += new Vector3(_difference.x, 0, _difference.y) / 10;
+                }
+                _endPosition = _startPosition;
+            }
+            if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                _isHolding = false;
+                _startPosition = Vector2.zero;
+                _endPosition = Vector2.zero;
+            }
         }
-        if (Input.GetMouseButtonUp(0))
-        {
-            _isHolding = false;
-             _startPosition = Vector2.zero;
-             _endPosition = Vector2.zero;
-        }
-
 
 
 
