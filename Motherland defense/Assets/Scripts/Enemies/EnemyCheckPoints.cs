@@ -16,4 +16,9 @@ public class EnemyCheckPoints : MonoBehaviour
         }
         return checkPoints[index];
     }
+
+    public int GetCheckPointIndex(EnemyCheckPoint enemyCheckPoint)
+    {
+        return checkPoints.Contains(enemyCheckPoint) ? checkPoints.IndexOf(enemyCheckPoint) : 0;
+    }
 }

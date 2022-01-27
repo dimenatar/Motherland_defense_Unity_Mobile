@@ -17,13 +17,12 @@ public class Enemy : MonoBehaviour
 
     public event Damaged OnDamageTaken;
     public event StartFight OnStartFight;
-    public event Action OnStartMove;
     public event Action OnDied;
     public event Action OnFoundOpponent;
 
     public CharacterData Data => _data;
 
-    public void Initialize(CharacterData data, EnemyCheckPoints enemyCheckPoints, UserMoney money, ViewPanel viewPanel)
+    public void Initialize(CharacterData data, EnemyCheckPoints enemyCheckPoints, EnemyCheckPoint targetCheckPoint, UserMoney money, ViewPanel viewPanel)
     {
         _data = data;
         _enemyName = data.Name;
@@ -31,13 +30,11 @@ public class Enemy : MonoBehaviour
         _health = data.Health;
         _money = money;
         _moneyAmountOnDeath = data.MoneyAmountOnDeath;
-        GetComponent<EnemyMove>().InitializeMove(enemyCheckPoints, data.Speed);
+        GetComponent<EnemyMove>().InitializeMove(enemyCheckPoints, data.Speed, targetCheckPoint);
         GetComponent<EnemyFight>().InitialiseFight(data.PauseBetweenAttacks, data.Damage);
         GetComponent<EnemyAnimation>().InitialiseAnimation(data.AnimationSpeed);
         GetComponent<EnemyAudio>().Initialise(data.HitSound, data.AttackSound, data.DieSound);
         GetComponent<EnemyView>().Initialise(viewPanel);
-        OnStartMove?.Invoke();
-        //OnDied += RemoveComponents;
         OnDied += AddUserMoney;
     }
 

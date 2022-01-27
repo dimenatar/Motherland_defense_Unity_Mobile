@@ -175,7 +175,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: Hit
     m_Type: 9
@@ -289,13 +289,13 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102058389484071740}
-    m_Position: {x: 410, y: 350, z: 0}
+    m_Position: {x: 400, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102374379060715130}
     m_Position: {x: 710, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102470331326540848}
-    m_Position: {x: 400, y: 190, z: 0}
+    m_Position: {x: 400, y: 370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1525633731248039679}
     m_Position: {x: 80, y: 280, z: 0}
@@ -308,7 +308,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 420, y: 60, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102470331326540848}
+  m_DefaultState: {fileID: 1102058389484071740}
 --- !u!1102 &1525633731248039679
 AnimatorState:
   serializedVersion: 6

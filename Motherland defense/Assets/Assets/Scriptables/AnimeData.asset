@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecead4243937d174b9d8641898a865cf, type: 3}
+  m_Name: AnimeData
+  m_EditorClassIdentifier: 
+  _model: {fileID: 5558902232958245595, guid: 9170c06e5d6126e4e9be1c587605cc2d, type: 3}
+  _name: 1
+  _points: 3
+  _pauseBetweenAttacks: 2
+  _animationSpeed: 1
+  _moneyAmountOnDeath: 30
+  _hitSound: {fileID: 8300000, guid: cafe5d2014e1fed4c89560601d0ca8e6, type: 3}
+  _attackSound: {fileID: 8300000, guid: 9a0e5442da286fd428a7121ed957e07d, type: 3}
+  _dieSound: {fileID: 8300000, guid: 9cd5ee0471c122040aed5d992fdd84b6, type: 3}
+  _speed: 0.07
+  _damage: 3
+  _health: 25

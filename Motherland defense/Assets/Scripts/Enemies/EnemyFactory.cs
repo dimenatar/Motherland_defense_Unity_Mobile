@@ -13,10 +13,10 @@ public class EnemyFactory : MonoBehaviour
     [SerializeField] private ViewPanel _viewPanel;
     [SerializeField] private EnemyCounter _enemyCounter;
     [SerializeField] private LevelStatistics _levelStatistics;
-
+    [SerializeField] private int _startCheckPointIndex;
     private EnemyCheckPoints _enemyCheckPoints;
 
-    public void SpawnEnemy(CharacterList type)
+    public GameObject SpawnEnemy(CharacterList type)
     {
         GameObject enemy = Instantiate(_characterBundle.Characters.Where(t => t.Name == type).Select(prefab => prefab.Model).First(), _spawnPoint.position, transform.rotation);
         if (!enemy)
@@ -24,9 +24,10 @@ public class EnemyFactory : MonoBehaviour
             throw new FileNotFoundException();
         }
         enemy.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
-        enemy.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(enemyName => enemyName.Name == type).First(), _enemyCheckPoints, _money, _viewPanel);
+        enemy.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(enemyName => enemyName.Name == type).First(), _enemyCheckPoints, _enemyCheckPoints.GetEnemyCheckPointByIndex(_startCheckPointIndex), _money, _viewPanel);
         _levelStatistics.AddEnemy();
         SubscribeEnemy(enemy.GetComponent<Enemy>());
+        return enemy;
     }
 
     private void Start()

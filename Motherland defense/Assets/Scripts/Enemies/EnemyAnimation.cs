@@ -18,18 +18,18 @@ public class EnemyAnimation : MonoBehaviour
     public void InitialiseAnimation(float animationSpeed)
     {
         _animationSpeed = animationSpeed;
+        _enemyAnimator.SetFloat("Speed", _animationSpeed);
     }
 
-    private void Start()
+    private void Awake()
     {
+        _enemyAnimator = GetComponent<Animator>();
         _enemy = GetComponent<Enemy>();
         _enemy.OnStartFight += StartFight;
-        _enemy.OnStartMove += StartWalk;
+        _enemy.GetComponent<EnemyMove>().OnStartMove += StartWalk;
         _enemy.OnDied += Dead;
         _enemy.OnFoundOpponent += FoundOpponent;
         GetComponent<EnemyFight>().OnHitOpponent += PlayFightAnimation;
-        _enemyAnimator = GetComponent<Animator>();
-        _enemyAnimator.SetFloat("Speed", _animationSpeed);
     }
 
     private void FoundOpponent()
@@ -57,12 +57,12 @@ public class EnemyAnimation : MonoBehaviour
     {
         ChangeState(CharacterStates.Dead);
         _enemy.OnStartFight -= StartFight;
-        _enemy.OnStartMove -= StartWalk;
         _enemy.OnDied -= Dead;
     }
 
     private void ChangeState(CharacterStates newState)
     {
+        Debug.Log($"{gameObject.name} calls {newState}");
         if (_enemyState == newState || _enemyState == CharacterStates.Dead)
         {
             return;

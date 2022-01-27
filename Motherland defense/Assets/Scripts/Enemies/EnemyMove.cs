@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMove : MonoBehaviour
 {
+    public event Action OnStartMove;
+
     private float _speed;
     private int _targetCheckPointIndex;
     private EnemyCheckPoints _enemyCheckPoints;
@@ -22,35 +25,28 @@ public class EnemyMove : MonoBehaviour
             transform.LookAt(_targetCheckPoint.transform.position);
         }
     }
-    public void InitializeMove(EnemyCheckPoints enemyCheckPoints, float speed)
+    public void InitializeMove(EnemyCheckPoints enemyCheckPoints, float speed, EnemyCheckPoint targetCheckPoint)
     {
         _enemyCheckPoints = enemyCheckPoints;
         _speed = speed;
         _enemy = GetComponent<Enemy>();
-        _enemy.OnStartMove += StartMove;
+        OnStartMove += StartMove;
         _enemy.OnDied += StopMove;
         _enemy.OnFoundOpponent += StopMove;
-        _targetCheckPoint = _enemyCheckPoints.GetEnemyCheckPointByIndex(_targetCheckPointIndex);
-        
-        StartMove();
+        _targetCheckPoint = targetCheckPoint;
+
+        OnStartMove?.Invoke();
     }
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-    }
-    private void Start()
-    {
-        //Initialize();
     }
 
     public void StartMove()
     {
         StartCoroutine(nameof(Move));
     }
-    public void EndFight()
-    {
 
-    }
     public void StopMove()
     {
         StopCoroutine(nameof(Move));
