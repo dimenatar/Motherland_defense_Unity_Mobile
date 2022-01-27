@@ -9,7 +9,7 @@ public class CameraScaler : MonoBehaviour
     [SerializeField] private float _scaleForce;
     [SerializeField] private float _maxHeight;
     [SerializeField] private float _minHeight;
-
+    [SerializeField] private float _smoothness;
     private Touch _touch1;
     private Touch _touch2;
     private Vector2 _startDifferense = Vector2.zero;
@@ -34,8 +34,10 @@ public class CameraScaler : MonoBehaviour
                 _difference = _touch2.position - _touch1.position - _startDifferense;
                 if (CheckLimits())
                 {
-                    _limitBox.transform.localScale -= new Vector3(_difference.x, 0, _difference.x) * _scaleForce;
-                    _camera.localPosition += new Vector3(0, _difference.x * _scaleForce, 0);
+                    _limitBox.transform.localScale = Vector3.Lerp(_limitBox.transform.localScale, _limitBox.transform.localScale -= new Vector3(_difference.x * _scaleForce, 0, _difference.x * _scaleForce), _smoothness*Time.deltaTime);
+                    // _limitBox.transform.localScale = Vector3.Lerp(_limitBox.transform.localScale, new Vector3(_limitBox.transform.localScale.x - _difference.x * _scaleForce, _limitBox.transform.localScale.y, _difference.x * _scaleForce), _smoothness*Time.deltaTime) ;
+                    //_camera.localPosition += new Vector3(0, _difference.x * _scaleForce, 0);
+                    _camera.localPosition = Vector3.Lerp(_camera.localPosition, new Vector3(_camera.localPosition.x, _camera.localPosition.y + _difference.x * _scaleForce, _camera.localPosition.z), _smoothness*Time.deltaTime);
                 }
             }
             _startDifferense = _touch2.position - _touch1.position;
