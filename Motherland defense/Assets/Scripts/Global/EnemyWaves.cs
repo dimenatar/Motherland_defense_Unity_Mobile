@@ -11,6 +11,8 @@ public class EnemyWaves : MonoBehaviour
     private int _waveIndex = -1;
     private Timer _timer;
 
+    public List<EnemyWave> Waves => _enemyWaves;
+
     public float StartOffense()
     {
         _startWave.OnStartOffense -= StartOffense;

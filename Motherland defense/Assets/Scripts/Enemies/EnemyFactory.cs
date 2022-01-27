@@ -18,31 +18,13 @@ public class EnemyFactory : MonoBehaviour
 
     public void SpawnEnemy(CharacterList type)
     {
-        GameObject enemy;
-        switch (type)
+        GameObject enemy = Instantiate(_characterBundle.Characters.Where(t => t.Name == type).Select(prefab => prefab.Model).First(), _spawnPoint.position, transform.rotation);
+        if (!enemy)
         {
-            case CharacterList.Ork:
-                {
-                    enemy = SpawnOrk();
-                    break;
-                }
-            case CharacterList.Rabbit:
-                {
-                    enemy = SpawnRabbit();
-                    break;
-                }
-            case CharacterList.Zombie:
-                {
-                    enemy = SpawnZombie();
-                    break;
-                }
-            default:
-                {
-                    enemy = SpawnZombie();
-                    break;
-                }
+            throw new FileNotFoundException();
         }
-        _enemyCounter.AddEnemy();
+        enemy.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
+        enemy.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(enemyName => enemyName.Name == type).First(), _enemyCheckPoints, _money, _viewPanel);
         _levelStatistics.AddEnemy();
         SubscribeEnemy(enemy.GetComponent<Enemy>());
     }
@@ -50,43 +32,6 @@ public class EnemyFactory : MonoBehaviour
     private void Start()
     {
         _enemyCheckPoints = GetComponent<EnemyCheckPoints>();
-    }
-
-    private GameObject SpawnOrk()
-    {
-        var ork = LoadOrk();
-        ork.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
-        ork.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(ork => ork.Name == CharacterList.Ork).First(), _enemyCheckPoints, _money, _viewPanel);
-        return ork;
-    }
-
-    private GameObject LoadOrk()
-    {
-        return Instantiate(Resources.Load<GameObject>("OrkPrefab"), _spawnPoint.position, transform.rotation);
-    }
-
-    private GameObject SpawnRabbit()
-    {
-        var rabbit = Instantiate(Resources.Load<GameObject>("RabbitPrefab"), _spawnPoint.position, transform.rotation);
-        if (!rabbit)
-        {
-            throw new FileNotFoundException();
-        }
-        rabbit.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
-        rabbit.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(rabbit => rabbit.Name == CharacterList.Rabbit).First(), _enemyCheckPoints, _money, _viewPanel);
-        return rabbit;
-    }
-
-    private GameObject SpawnZombie()
-    {
-        var zombie = Instantiate(Resources.Load<GameObject>("ZombiePrefab"), _spawnPoint.position, transform.rotation);
-        if (!zombie)
-        {
-            throw new FileNotFoundException();
-        }
-        zombie.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
-        zombie.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(zombie => zombie.Name == CharacterList.Zombie).First(), _enemyCheckPoints, _money, _viewPanel);
-        return zombie;
     }
 
     private void SubscribeEnemy(Enemy enemy)

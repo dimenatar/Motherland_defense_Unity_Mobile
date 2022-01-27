@@ -9,9 +9,12 @@ public class EnemyWave : MonoBehaviour
     [Header("Seconds")]
     [SerializeField] private float _spawnPause;
     [SerializeField] private Transform _spawnPoint;
+    [SerializeField] private EnemyFactory _enemyFactory;
+
+    public List<CharacterList> Enemies => _enemies;
 
     private int _currentEnemyIndex = -1;
-    private EnemyFactory _enemyFactory;
+
 
     public void StartWave()
     {
@@ -43,7 +46,7 @@ public class EnemyWave : MonoBehaviour
 
     private void Start()
     {
-        _enemyFactory = transform.parent.parent.GetComponent<EnemyFactory>();
+
     }
 
     private void SpawnEnemy()

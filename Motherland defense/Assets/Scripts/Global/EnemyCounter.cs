@@ -1,17 +1,19 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCounter : MonoBehaviour
 {
+    [SerializeField] private EnemyWaves _waves;
     public event Action OnCounterEmpty;
 
     private int _enemyCounter;
     
-    public void AddEnemy()
+    public void AddEnemies(int amount)
     {
-        _enemyCounter++;
+        _enemyCounter += amount;
         Debug.Log(_enemyCounter);
     }
 
@@ -23,5 +25,10 @@ public class EnemyCounter : MonoBehaviour
         {
             OnCounterEmpty?.Invoke();
         }
+    }
+
+    private void Start()
+    {
+        _waves.Waves.ForEach(enemy => AddEnemies(enemy.Enemies.Count));
     }
 }

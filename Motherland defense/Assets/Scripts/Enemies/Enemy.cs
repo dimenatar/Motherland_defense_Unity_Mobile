@@ -87,9 +87,4 @@ public class Enemy : MonoBehaviour
     {
         _money.AddMoney(_moneyAmountOnDeath);
     }
-
-    private void OnDestroy()
-    {
-        OnDied?.Invoke();
-    }
 }
