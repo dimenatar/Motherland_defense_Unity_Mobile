@@ -155,6 +155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shotStartPosition: {fileID: 6137243548970989205}
+  _target: {fileID: 0}
+  _enemiesInArea: []
 --- !u!82 &8930469800700021022
 AudioSource:
   m_ObjectHideFlags: 0
@@ -583,6 +585,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6137243549710112307}
     m_Modifications:
+    - target: {fileID: 4734521747844048837, guid: 6d294e5ee40dc9944a2b19a1ef88f4a5, type: 3}
+      propertyPath: _damage
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4734521747844048838, guid: 6d294e5ee40dc9944a2b19a1ef88f4a5, type: 3}
       propertyPath: m_RootOrder
       value: 5

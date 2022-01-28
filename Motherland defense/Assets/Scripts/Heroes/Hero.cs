@@ -84,7 +84,7 @@ public class Hero : MonoBehaviour
     {
         if (_enemies.Contains(target))
         {
-            OnDied -= target.GetComponent<EnemyFight>().StopFight;
+            //OnDied -= target.GetComponent<EnemyFight>().StopFight;
             _enemies.Remove(target);
 
             if (_currentTarget == target)

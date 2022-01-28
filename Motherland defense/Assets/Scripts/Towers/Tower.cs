@@ -8,8 +8,8 @@ public class Tower : MonoBehaviour, ITower
     [SerializeField] private Transform _shotStartPosition;
 
     private float _reloadTime;
-    private GameObject _target = null;
-    private List<GameObject> _enemiesInArea = new List<GameObject>();
+    public GameObject _target = null;
+    public List<GameObject> _enemiesInArea = new List<GameObject>();
     private AudioSource _source;
     private AudioClip _shotSound;
     private Vector3 diff;
@@ -51,7 +51,7 @@ public class Tower : MonoBehaviour, ITower
         if (!_enemiesInArea.Contains(enemy))
         {
             _enemiesInArea.Add(enemy);
-            enemy.GetComponent<Enemy>().OnDied += RemoveTarget;
+            enemy.GetComponent<Enemy>().OnRemovedFromList += RemoveEnemyInArea;
         }
 
         if (!_target)
@@ -63,7 +63,6 @@ public class Tower : MonoBehaviour, ITower
     public void RemoveEnemyInArea(GameObject enemy)
     {
         _enemiesInArea.Remove(enemy);
-        enemy.GetComponent<Enemy>().OnDied -= RemoveTarget;
         if (_target == enemy)
         {
             ChangeTarget();
@@ -85,18 +84,9 @@ public class Tower : MonoBehaviour, ITower
         return _shotStartPosition;
     }
 
-    private void RemoveTarget()
-    {
-        if (_target)
-        {
-            Debug.Log(gameObject.name + " " + _target.name + " removed target");
-            _enemiesInArea.Remove(_target);
-            ChangeTarget();
-        }
-    }
-
     private void ChangeTarget()
     {
+        Debug.Log("Change target");
         if (_enemiesInArea.Count > 0)
         {
             _target = _enemiesInArea[Random.Range(0, _enemiesInArea.Count)];

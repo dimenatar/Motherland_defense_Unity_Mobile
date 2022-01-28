@@ -25,14 +25,15 @@ public class EnemyAnimation : MonoBehaviour
     {
         _enemyAnimator = GetComponent<Animator>();
         _enemy = GetComponent<Enemy>();
+        GetComponent<EnemyMove>().OnStop += StopMove;
         _enemy.OnStartFight += StartFight;
         _enemy.GetComponent<EnemyMove>().OnStartMove += StartWalk;
         _enemy.OnDied += Dead;
-        _enemy.OnFoundOpponent += FoundOpponent;
+        _enemy.OnFoundOpponent += StopMove;
         GetComponent<EnemyFight>().OnHitOpponent += PlayFightAnimation;
     }
 
-    private void FoundOpponent()
+    private void StopMove()
     {
         ChangeState(CharacterStates.Idle);
     }
@@ -62,7 +63,6 @@ public class EnemyAnimation : MonoBehaviour
 
     private void ChangeState(CharacterStates newState)
     {
-        Debug.Log($"{gameObject.name} calls {newState}");
         if (_enemyState == newState || _enemyState == CharacterStates.Dead)
         {
             return;

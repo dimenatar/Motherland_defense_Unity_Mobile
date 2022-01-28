@@ -9,6 +9,7 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     public event Action OnStartMove;
+    public event Action OnStop;
 
     private float _speed;
     private int _targetCheckPointIndex;
@@ -16,6 +17,8 @@ public class EnemyMove : MonoBehaviour
     private EnemyCheckPoint _targetCheckPoint;
     private Enemy _enemy;
     private Rigidbody _rigidbody;
+
+    public int TargetCheckPointIndex => _targetCheckPointIndex;
 
     public void ChangeNextCheckPoint(int index)
     {
@@ -25,17 +28,16 @@ public class EnemyMove : MonoBehaviour
             transform.LookAt(_targetCheckPoint.transform.position);
         }
     }
+
     public void InitializeMove(EnemyCheckPoints enemyCheckPoints, float speed, EnemyCheckPoint targetCheckPoint)
     {
         _enemyCheckPoints = enemyCheckPoints;
         _speed = speed;
         _enemy = GetComponent<Enemy>();
-        OnStartMove += StartMove;
         _enemy.OnDied += StopMove;
         _enemy.OnFoundOpponent += StopMove;
         _targetCheckPoint = targetCheckPoint;
-
-        OnStartMove?.Invoke();
+        StartMove();
     }
     private void Awake()
     {
@@ -44,12 +46,14 @@ public class EnemyMove : MonoBehaviour
 
     public void StartMove()
     {
+        OnStartMove?.Invoke();
         StartCoroutine(nameof(Move));
     }
 
     public void StopMove()
     {
         StopCoroutine(nameof(Move));
+        OnStop?.Invoke();
     }
 
     public IEnumerator Move()

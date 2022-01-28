@@ -16,6 +16,8 @@ public class EnemyFactory : MonoBehaviour
     [SerializeField] private int _startCheckPointIndex;
     private EnemyCheckPoints _enemyCheckPoints;
 
+    public EnemyCounter Counter => _enemyCounter;
+
     public GameObject SpawnEnemy(CharacterList type)
     {
         GameObject enemy = Instantiate(_characterBundle.Characters.Where(t => t.Name == type).Select(prefab => prefab.Model).First(), _spawnPoint.position, transform.rotation);
@@ -24,6 +26,7 @@ public class EnemyFactory : MonoBehaviour
             throw new FileNotFoundException();
         }
         enemy.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
+        enemy.transform.SetParent(transform);
         enemy.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(enemyName => enemyName.Name == type).First(), _enemyCheckPoints, _enemyCheckPoints.GetEnemyCheckPointByIndex(_startCheckPointIndex), _money, _viewPanel);
         _levelStatistics.AddEnemy();
         SubscribeEnemy(enemy.GetComponent<Enemy>());

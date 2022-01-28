@@ -14,7 +14,9 @@ public class Enemy : MonoBehaviour
 
     public delegate void Damaged(int health, int damage);
     public delegate void StartFight(GameObject opponent);
+    public delegate void RemovedFromList (GameObject current);
 
+    public event RemovedFromList OnRemovedFromList;
     public event Damaged OnDamageTaken;
     public event StartFight OnStartFight;
     public event Action OnDied;
@@ -36,6 +38,7 @@ public class Enemy : MonoBehaviour
         GetComponent<EnemyAudio>().Initialise(data.HitSound, data.AttackSound, data.DieSound);
         GetComponent<EnemyView>().Initialise(viewPanel);
         OnDied += AddUserMoney;
+        OnDied += ChangeNameToDied;
     }
 
     public int GetPoints()
@@ -64,6 +67,7 @@ public class Enemy : MonoBehaviour
         OnDamageTaken?.Invoke(GetHealth(), damage);
         if (_health <= 0)
         {
+            OnRemovedFromList?.Invoke(gameObject);
             OnDied?.Invoke();
             RemoveComponents();
         }
@@ -71,16 +75,22 @@ public class Enemy : MonoBehaviour
 
     private void RemoveComponents()
     {
-
         var scripts = GetComponents<MonoBehaviour>();
         foreach (var item in scripts)
         {
             Destroy(item);
         }
         Destroy(GetComponent<BoxCollider>());
+        Destroy(GetComponent<Rigidbody>());
     }
 
-    public void AddUserMoney()
+    private void ChangeNameToDied()
+    {
+        Debug.Log("died");
+        gameObject.name = "Died";
+    }
+
+    private void AddUserMoney()
     {
         _money.AddMoney(_moneyAmountOnDeath);
     }
