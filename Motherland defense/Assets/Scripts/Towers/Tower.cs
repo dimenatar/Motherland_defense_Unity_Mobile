@@ -8,8 +8,8 @@ public class Tower : MonoBehaviour, ITower
     [SerializeField] private Transform _shotStartPosition;
 
     private float _reloadTime;
-    public GameObject _target = null;
-    public List<GameObject> _enemiesInArea = new List<GameObject>();
+    private GameObject _target = null;
+    private List<GameObject> _enemiesInArea = new List<GameObject>();
     private AudioSource _source;
     private AudioClip _shotSound;
     private Vector3 diff;

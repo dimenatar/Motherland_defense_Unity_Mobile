@@ -83,7 +83,8 @@ public class HeroMove : MonoBehaviour
             }
             else
             {
-                transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, _currentPointToMove.position, 1, 5f));
+                //transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, _currentPointToMove.position, 1, 5f));
+                transform.LookAt(_currentPointToMove);
                 Vector2 pos = new Vector2(transform.position.x, transform.position.z);
                 pos = Vector2.MoveTowards(pos, new Vector2(_currentPointToMove.position.x, _currentPointToMove.position.z), _moveSpeed);
                 transform.position = new Vector3(pos.x, transform.position.y, pos.y);
