@@ -23,6 +23,7 @@ public class EnemyMove : MonoBehaviour
     public void ChangeNextCheckPoint(int index)
     {
         _targetCheckPoint = _enemyCheckPoints.GetEnemyCheckPointByIndex(index);
+        _targetCheckPointIndex = index;
         if (_targetCheckPoint)
         {
             transform.LookAt(_targetCheckPoint.transform.position);
