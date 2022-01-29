@@ -1,15 +1,21 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyFight : MonoBehaviour
 {
-    private GameObject Opponent = null;
+    private GameObject _opponent = null;
     private Enemy _enemy;
     private float _pauseBetweenAttacks;
     private int _damage;
 
+    public List<GameObject> _opponents = new List<GameObject>();
+
     public delegate void HitOpponent(Hero hero);
     public event HitOpponent OnHitOpponent;
+
+    public event Action OnStopFight;
 
     public void InitialiseFight(float pauseBetweenAttacks, int damage)
     {
@@ -21,9 +27,10 @@ public class EnemyFight : MonoBehaviour
     {
         while (true)
         {
-            if (Opponent)
+            if (_opponent)
             {
-                OnHitOpponent?.Invoke(Opponent.GetComponent<Hero>());
+                transform.LookAt(_opponent.transform);
+                OnHitOpponent?.Invoke(_opponent.GetComponent<Hero>());
             }
             yield return new WaitForSeconds(_pauseBetweenAttacks);
         }
@@ -40,22 +47,41 @@ public class EnemyFight : MonoBehaviour
         _enemy.OnStartFight += StartFight;
         _enemy.OnDied += StopFight;
         OnHitOpponent += HitHero;
+        OnStopFight += StopFight;
+        OnStopFight += GetComponent<EnemyMove>().StartMove;
     }
 
     public void StartFight(GameObject opponent)
     {
-        if (opponent.GetComponent<Hero>() && !Opponent)
+        _opponents.Add(opponent);
+        if (opponent.GetComponent<Hero>() && !_opponent)
         {
-            Opponent = opponent;
+            _opponent = opponent;
             StartCoroutine(nameof(FightWithOpponent));
         }
     }
 
-    public void StopFight()
+    public void ChangeTarget()
     {
-        if (Opponent)
+        if (_opponent)
         {
-            Opponent = null;
+            _opponents.Remove(_opponent);
+            if (_opponents.Count > 0)
+            {
+                _opponent = _opponents[0];
+            }
+            else
+            {
+                OnStopFight?.Invoke();
+            }
+        }
+    }
+
+    private void StopFight()
+    {
+        if (_opponent)
+        {
+            _opponent = null;
             StopCoroutine(nameof(FightWithOpponent));
         }
     }

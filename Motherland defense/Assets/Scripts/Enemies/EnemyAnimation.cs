@@ -79,7 +79,7 @@ public class EnemyAnimation : MonoBehaviour
             case CharacterStates.Fight:
                 {
                     _enemyAnimator.SetTrigger("Hit");
-                    _enemyAnimator.Play(_fightAnimation);
+                    //_enemyAnimator.Play(_fightAnimation);
                     break;
                 }
             case CharacterStates.Dead:

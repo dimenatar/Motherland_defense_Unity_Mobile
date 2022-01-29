@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroFight : MonoBehaviour
@@ -6,10 +7,11 @@ public class HeroFight : MonoBehaviour
     public delegate void HitEnemy(Enemy enemy);
     public event HitEnemy OnHitEnemy;
 
-    private float _attackDelay= 0.5f;
-    private int _damage = 1;
+    private float _attackDelay;
+    private int _damage;
     private Enemy _target;
     private Hero hero;
+    private List<GameObject> _enemies = new List<GameObject>();
 
     public void Initialise(float attackDelay, int damage)
     {
@@ -36,7 +38,6 @@ public class HeroFight : MonoBehaviour
     {
         _target.OnDied -= StopFight;
         StopCoroutine(nameof(FightWithEnemy));
-
     }
 
     private void DamageEnemy(Enemy enemy)

@@ -64,6 +64,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _health -= damage;
+        Debug.Log($"{gameObject.name} получил урон {damage} осталось хп {_health}");
         OnDamageTaken?.Invoke(GetHealth(), damage);
         if (_health <= 0)
         {

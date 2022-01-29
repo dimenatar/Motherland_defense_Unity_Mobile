@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
-
     public delegate void Damaged(int updatedHealth, int damage);
     public event Damaged OnDamageTaken;
     public delegate void EnemyInteract(GameObject enemy);
@@ -17,12 +16,14 @@ public class Hero : MonoBehaviour
     public CharacterData HeroData => _characterData;
 
     private int _health;
-    private GameObject _currentTarget;
+    public GameObject _currentTarget;
     private CharacterData _characterData;
-    private List<GameObject> _enemies = new List<GameObject>();
+    public List<GameObject> _enemies = new List<GameObject>();
 
     public void InitializeHero(CharacterData characterData,  Transform basePointToMove, float arrivalToPointRange, ViewPanel viewPanel)
     {
+        OnDied += RenameHero;
+        OnDied += RemoveScripts;
         _health = characterData.Health;
         _characterData = characterData;
         GetComponent<HeroMove>().Initialise(basePointToMove, characterData.Speed, arrivalToPointRange);
@@ -36,10 +37,10 @@ public class Hero : MonoBehaviour
         OnBasePointReached?.Invoke();
     }
 
-    public void RemoveCurrentTarget()
-    {
-        RemoveTarget(_currentTarget);
-    }
+    //public void RemoveCurrentTarget()
+    //{
+    //    RemoveTarget(_currentTarget);
+    //}
 
     public void ChangeTarget()
     {
@@ -63,15 +64,15 @@ public class Hero : MonoBehaviour
         }
     }
 
-
     public void TakeDamage(int damage)
     {
         _health -= damage;
+        Debug.Log($"{gameObject.name} получил урон {damage} осталось хп {_health}");
         OnDamageTaken?.Invoke(_health, damage);
         if (_health <= 0)
         {
             OnDied?.Invoke();
-            RemoveScripts();
+            //RemoveScripts();
         }
     }
 
@@ -84,9 +85,7 @@ public class Hero : MonoBehaviour
     {
         if (_enemies.Contains(target))
         {
-            //OnDied -= target.GetComponent<EnemyFight>().StopFight;
             _enemies.Remove(target);
-
             if (_currentTarget == target)
             {
                 _currentTarget = null;
@@ -94,6 +93,7 @@ public class Hero : MonoBehaviour
             }
         }
     }
+
     private GameObject FindClosestEnemy()
     {
         GameObject closestEnemy = _enemies[0];
@@ -112,8 +112,14 @@ public class Hero : MonoBehaviour
         return closestEnemy;
     }
 
+    private void RenameHero()
+    {
+        gameObject.name = "Dead hero";
+    }
+
     private void RemoveScripts()
     {
+        Debug.Log("Remove");
         var scripts = GetComponents<MonoBehaviour>();
         foreach (var script in scripts)
         {
@@ -121,12 +127,17 @@ public class Hero : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        _currentTarget.GetComponent<Enemy>().OnRemovedFromList -= RemoveTarget;
+    }
+
     private void SetNewTarget()
     {
         _currentTarget = FindClosestEnemy();
-        OnDied += _currentTarget.GetComponent<EnemyFight>().StopFight;
-        OnDied += _currentTarget.GetComponent<EnemyMove>().StartMove;
-        _currentTarget.GetComponent<Enemy>().OnDied += RemoveCurrentTarget;
+        OnDied += _currentTarget.GetComponent<EnemyFight>().ChangeTarget;
+        //_currentTarget.GetComponent<Enemy>().OnDied += RemoveCurrentTarget;
+        _currentTarget.GetComponent<Enemy>().OnRemovedFromList += RemoveTarget;
         OnTargetChanged?.Invoke(_currentTarget);
     }
 }
