@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class Health : MonoBehaviour
     public delegate void HealthChanged(int value);
     public event HealthChanged OnHealthChanged;
     public event HealthChanged OnHealthSetted;
+
+    public event Action OnLose;
 
     private Text _healthText;
     private int _currentHealth;
@@ -26,6 +29,10 @@ public class Health : MonoBehaviour
     {
         _currentHealth -= value;
         OnHealthChanged?.Invoke(value);
+        if (_currentHealth <= 0)
+        {
+            OnLose?.Invoke();
+        }
         SetText(_currentHealth);
     }
 

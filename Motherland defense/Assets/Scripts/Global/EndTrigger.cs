@@ -12,6 +12,7 @@ public class EndTrigger : MonoBehaviour
         if (other.GetComponent<Enemy>())
         {
             OnEnemyPassed?.Invoke(other.GetComponent<Enemy>());
+            Destroy(other.gameObject);
         }
     }
 }
