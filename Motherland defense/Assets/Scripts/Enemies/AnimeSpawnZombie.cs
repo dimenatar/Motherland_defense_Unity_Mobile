@@ -5,22 +5,28 @@ using UnityEngine;
 public class AnimeSpawnZombie : MonoBehaviour
 {
     [SerializeField] private List<Transform> _spawnPoints;
+    [SerializeField] private int _maxAmount;
     [SerializeField] private float _zombieSpawnDelay;
 
     private EnemyFactory _enemyFactory;
+    private int _spawnedAmount;
 
     public void SpawnZombies()
     {
-        if (_enemyFactory)
+        if (_spawnedAmount < _maxAmount)
         {
-            GameObject zombie;
-            for (int i = 0; i < _spawnPoints.Count; i++)
+            if (_enemyFactory)
             {
-                zombie = _enemyFactory.SpawnEnemy(CharacterList.Zombie);
-                zombie.transform.position = _spawnPoints[i].position;
-                zombie.GetComponent<EnemyMove>().ChangeNextCheckPoint(GetComponent<EnemyMove>().TargetCheckPointIndex);
+                GameObject zombie;
+                for (int i = 0; i < _spawnPoints.Count; i++)
+                {
+                    zombie = _enemyFactory.SpawnEnemy(CharacterList.Zombie);
+                    zombie.transform.position = _spawnPoints[i].position;
+                    zombie.GetComponent<EnemyMove>().ChangeNextCheckPoint(GetComponent<EnemyMove>().TargetCheckPointIndex);
+                    _spawnedAmount++;
+                }
+                _enemyFactory.Counter.AddEnemies(_spawnPoints.Count);
             }
-            _enemyFactory.Counter.AddEnemies(_spawnPoints.Count);
         }
     }
 
