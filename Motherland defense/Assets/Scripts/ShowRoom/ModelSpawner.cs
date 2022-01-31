@@ -12,6 +12,7 @@ public class ModelSpawner : MonoBehaviour
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _rotationSlowerForce;
     [SerializeField] private float _modelScale;
+    [SerializeField] private float _defaultRotationSpeed;
 
     public delegate void ModelSpawned(string characteristic1, string characteristic2, string characteristic3, string name);
     public event ModelSpawned OnTowerSpawned;
@@ -39,7 +40,7 @@ public class ModelSpawner : MonoBehaviour
             LoadCharacter();
         }
         _currentModel.transform.localScale *= _modelScale;
-        _currentModel.AddComponent<Rotater>().SetRotationSpeed(_rotationSpeed, _rotationSlowerForce);
+        _currentModel.AddComponent<Rotater>().SetRotationSpeed(_rotationSpeed, _rotationSlowerForce, _defaultRotationSpeed);
     }
 
     public void SwitchToTowers()

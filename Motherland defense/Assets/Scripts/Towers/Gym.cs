@@ -36,7 +36,10 @@ public class Gym : Tower
 
     private void Start()
     {
-        _viewPanel = transform.parent.GetComponent<ViewPanel>();
-        SpawnHero();
+        if (transform.parent)
+        {
+            _viewPanel = transform.parent.GetComponent<ViewPanel>();
+            SpawnHero();
+        }
     }
 }

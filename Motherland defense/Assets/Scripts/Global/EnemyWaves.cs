@@ -30,9 +30,7 @@ public class EnemyWaves : MonoBehaviour
         _timer = GetComponent<Timer>();
         _timer.OnTime += StartNewWave;
         _startWave.OnStartOffense += StartOffense;
-        //StartOffense();
     }
-
 
     private void StartNewWave()
     {

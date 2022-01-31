@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class UserProgressManager
 {
-    public static string Path { get; } = "UserData.bin";
+    public static string Path { get; } = Application.persistentDataPath + "/UserData.bin";
 
     public static UserData LoadUserData(string path)
     {

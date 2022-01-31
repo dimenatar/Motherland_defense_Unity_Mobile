@@ -20,7 +20,7 @@ public class LevelData
     private int _amountRemainingHealth;
     private int _damageToUnits;
     private int _amountEnemies;
-    private string _time = "123";
+    private string _time = "00:00";
 
     public int LevelNumber { get => _levelNumber;}
     public int AmountRemainingHealth { get => _amountRemainingHealth;}

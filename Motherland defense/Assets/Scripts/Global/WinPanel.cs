@@ -11,6 +11,7 @@ public class WinPanel : MonoBehaviour
     [SerializeField] private EnemyCounter _enemyCounter;
     [SerializeField] private LevelStatistics _levelStatistics;
     [SerializeField] private StatiscticsPanel _statiscticsPanel;
+    [SerializeField] private ObjectDisabler _disabler;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class WinPanel : MonoBehaviour
 
     private void ShowWinPanel()
     {
+        _disabler.Disable();
         _winPanel.SetActive(true);
         GetAndFillStatisctics();
         Time.timeScale = 0;

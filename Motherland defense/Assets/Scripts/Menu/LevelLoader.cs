@@ -15,10 +15,10 @@ public class LevelLoader : MonoBehaviour
         SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
     }
 
-    public void ExitFromLevel()
+    public void ExitToLevelSelection()
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene("LevelSelectionScene");
+        Time.timeScale = 1;
     }
 
     public void UnloadScene(string name)

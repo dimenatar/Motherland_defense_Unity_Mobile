@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     private int _moneyAmountOnDeath;
     private UserMoney _money;
     private CharacterData _data;
+    private bool _isDead = false;
 
     public delegate void Damaged(int health, int damage);
     public delegate void StartFight(GameObject opponent);
@@ -63,14 +64,17 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _health -= damage;
-        Debug.Log($"{gameObject.name} получил урон {damage} осталось хп {_health}");
-        OnDamageTaken?.Invoke(GetHealth(), damage);
-        if (_health <= 0)
+        if (!_isDead)
         {
-            OnRemovedFromList?.Invoke(gameObject);
-            OnDied?.Invoke();
-            RemoveComponents();
+            _health -= damage;
+            OnDamageTaken?.Invoke(GetHealth(), damage);
+            if (_health <= 0)
+            {
+                _isDead = true;
+                RemoveComponents();
+                OnRemovedFromList?.Invoke(gameObject);
+                OnDied?.Invoke();
+            }
         }
     }
 
@@ -87,7 +91,7 @@ public class Enemy : MonoBehaviour
 
     private void ChangeNameToDied()
     {
-        Debug.Log("died");
+        Debug.Log($"{gameObject.name} died");
         gameObject.name = "Died";
     }
 
