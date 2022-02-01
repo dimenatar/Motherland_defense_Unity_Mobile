@@ -160,11 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331e1e3fcf2574d4faf7bf1951c53a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _reloadTime: 0.5
   _shotStartPosition: {fileID: 7188966173196493439}
-  _shotSound: {fileID: 0}
-  _target: {fileID: 0}
-  _enemiesInArea: []
 --- !u!1 &1989504604785234
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +286,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5070647682829948714
 MonoBehaviour:

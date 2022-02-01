@@ -32,8 +32,11 @@ public class AnimeSpawnZombie : MonoBehaviour
 
     private void Start()
     {
-        _enemyFactory = transform.parent.GetComponent<EnemyFactory>();
-        StartCoroutine(nameof(Spawn));
+        if (transform.parent)
+        {
+            _enemyFactory = transform.parent.GetComponent<EnemyFactory>();
+            StartCoroutine(nameof(Spawn));
+        }
     }
 
     private void OnDestroy()

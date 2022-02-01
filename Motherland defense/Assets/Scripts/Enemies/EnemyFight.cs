@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyFight : MonoBehaviour
 {
-    private GameObject _opponent = null;
+    public GameObject _opponent = null;
     private Enemy _enemy;
     private float _pauseBetweenAttacks;
     private int _damage;
@@ -41,6 +41,15 @@ public class EnemyFight : MonoBehaviour
         hero.TakeDamage(_damage);
     }
 
+    private void OnDestroy()
+    {
+        _enemy.OnStartFight -= StartFight;
+        _enemy.OnDied -= StopFight;
+        OnHitOpponent -= HitHero;
+        OnStopFight -= StopFight;
+        OnStopFight -= GetComponent<EnemyMove>().StartMove;
+    }
+
     private void Start()
     {
         _enemy = GetComponent<Enemy>();
@@ -74,6 +83,10 @@ public class EnemyFight : MonoBehaviour
             {
                 OnStopFight?.Invoke();
             }
+        }
+        else
+        {
+            OnStopFight?.Invoke();
         }
     }
 

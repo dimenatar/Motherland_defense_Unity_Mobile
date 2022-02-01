@@ -9,6 +9,7 @@ public class SaveLevelPropress : MonoBehaviour
 
     public void SaveProgress()
     {
+        Debug.Log(_levelStatistics.name);
         UserData userData = UserProgressManager.LoadUserData(UserProgressManager.Path);
         userData.CompleteLevel(_levelStatistics.GetLevelStatistic());
         UserProgressManager.SaveUserData(UserProgressManager.Path, userData);

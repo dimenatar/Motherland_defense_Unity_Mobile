@@ -57,6 +57,7 @@ public class Hero : MonoBehaviour
     public void AddNewTarget(GameObject target)
     {
         _enemies.Add(target);
+        target.GetComponent<Enemy>().OnRemovedFromList += RemoveTarget;
         if (!_currentTarget)
         {
             _currentTarget = target;
@@ -72,7 +73,6 @@ public class Hero : MonoBehaviour
         if (_health <= 0)
         {
             OnDied?.Invoke();
-            //RemoveScripts();
         }
     }
 
@@ -83,6 +83,7 @@ public class Hero : MonoBehaviour
 
     public void RemoveTarget(GameObject target)
     {
+        target.GetComponent<Enemy>().OnRemovedFromList -= RemoveTarget;
         if (_enemies.Contains(target))
         {
             _enemies.Remove(target);
@@ -129,15 +130,19 @@ public class Hero : MonoBehaviour
 
     private void OnDestroy()
     {
-        _currentTarget.GetComponent<Enemy>().OnRemovedFromList -= RemoveTarget;
+        if (_currentTarget)
+        {
+            _currentTarget.GetComponent<Enemy>().OnRemovedFromList -= RemoveTarget;
+        }
     }
 
     private void SetNewTarget()
     {
         _currentTarget = FindClosestEnemy();
-        OnDied += _currentTarget.GetComponent<EnemyFight>().ChangeTarget;
-        //_currentTarget.GetComponent<Enemy>().OnDied += RemoveCurrentTarget;
-        _currentTarget.GetComponent<Enemy>().OnRemovedFromList += RemoveTarget;
-        OnTargetChanged?.Invoke(_currentTarget);
+        if (_currentTarget)
+        {
+            OnDied += _currentTarget.GetComponent<EnemyFight>().ChangeTarget;
+            OnTargetChanged?.Invoke(_currentTarget);
+        }
     }
 }

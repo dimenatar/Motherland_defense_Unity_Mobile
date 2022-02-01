@@ -86,7 +86,6 @@ public class Tower : MonoBehaviour, ITower
 
     private void ChangeTarget()
     {
-        Debug.Log("Change target");
         if (_enemiesInArea.Count > 0)
         {
             _target = _enemiesInArea[Random.Range(0, _enemiesInArea.Count)];

@@ -747,7 +747,7 @@ Transform:
   m_GameObject: {fileID: 2526731173044857286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 32.106064, y: 0.53, z: 26.846428}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_Children:
   - {fileID: 2526731173044499860}
   - {fileID: 2526731173044499872}
@@ -1395,7 +1395,7 @@ RectTransform:
   m_GameObject: {fileID: 6778540956028332434}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.09999999, y: 0.099999994, z: 0.09999999}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 3292892299356510202}
   m_Father: {fileID: 2526731173044499878}
@@ -1479,6 +1479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5aba6634a944ca4eac5099b3a1d60e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cameraTransform: {fileID: 0}
 --- !u!1 &7625478960398315741
 GameObject:
   m_ObjectHideFlags: 0

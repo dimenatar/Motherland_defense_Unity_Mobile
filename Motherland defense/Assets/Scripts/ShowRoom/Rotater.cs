@@ -8,6 +8,7 @@ public class Rotater : MonoBehaviour
     private Vector2 _startPosition;
     private Vector2 _endPosition;
     private Vector2 _difference;
+    private Vector2 _saveForce;
     private float _rotateSpeed;
     private float _slowerRotationForce;
     private float _defaultRotateSpeed = 0.1f;
@@ -26,27 +27,33 @@ public class Rotater : MonoBehaviour
 
     private void Rotate()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
+            _saveForce = Vector2.zero;
             _isHolding = true;
             _startPosition = Input.mousePosition;
         }
-        else if (Input.GetMouseButton(0))
+        else if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
         {
             _startPosition = Input.mousePosition;
             if (_endPosition != Vector2.zero && _isHolding)
             {
                 _difference = SetRotationSpeed();
+                if (_difference != Vector2.zero)
+                {
+                    _saveForce = _difference;
+                }
                 transform.Rotate(0, _difference.x, 0);
             }
             _endPosition = _startPosition;
         }
         else
         {
-            _difference = ManageRemainingForce(_difference);
+            _saveForce = ManageRemainingForce(_saveForce);
+            _difference = _saveForce;
             transform.Rotate(0, _difference.x, 0);
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.touchCount == 1 && (Input.GetTouch(0).phase == TouchPhase.Ended || Input.GetTouch(0).phase == TouchPhase.Canceled))
         {
             _isHolding = false;
             _startPosition = Vector2.zero;

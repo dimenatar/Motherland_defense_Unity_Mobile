@@ -15,6 +15,7 @@ public class MoneyView : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log(UserProgressManager.Path);
         _money.OnMoneyChanged += SetMoneyText;
     }
 }

@@ -129,5 +129,5 @@ MonoBehaviour:
   _fireForce: 100
   _speed: 30
   _flyHeight: 3
-  _hitRadius: 12
+  _hitRadius: 25
   _damage: 4

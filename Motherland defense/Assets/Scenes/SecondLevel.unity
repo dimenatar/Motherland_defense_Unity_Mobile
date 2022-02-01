@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 48249588}
   - component: {fileID: 48249587}
   - component: {fileID: 48249586}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TowerMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 473161547}
+  m_Camera: {fileID: 1274090685}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 79893497}
   - component: {fileID: 79893496}
   - component: {fileID: 79893495}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GymImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -692,7 +692,7 @@ GameObject:
   - component: {fileID: 208312371}
   - component: {fileID: 208312370}
   - component: {fileID: 208312369}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CanonImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11253,7 +11253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 421076040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.2, y: 10.2, z: 1.9}
+  m_LocalPosition: {x: -14.4, y: 10.2, z: -90}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children:
   - {fileID: 1533975065}
@@ -11383,7 +11383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 443902315}
   - component: {fileID: 443902316}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SelectedCircle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11753,7 +11753,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 471
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -11835,7 +11835,8 @@ Transform:
   m_LocalRotation: {x: 0.5835412, y: -0, z: -0, w: 0.81208354}
   m_LocalPosition: {x: 0, y: 97.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1274090684}
   m_Father: {fileID: 2025574804}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 71.4, y: 0, z: 0}
@@ -12116,7 +12117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 588503957}
   - component: {fileID: 588503958}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SelectedCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12644,7 +12645,7 @@ GameObject:
   - component: {fileID: 770568975}
   - component: {fileID: 770568974}
   - component: {fileID: 770568973}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: FreezerImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13041,7 +13042,7 @@ GameObject:
   - component: {fileID: 894872878}
   - component: {fileID: 894872877}
   - component: {fileID: 894872876}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TingImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13224,7 +13225,7 @@ GameObject:
   - component: {fileID: 1069618065}
   - component: {fileID: 1069618064}
   - component: {fileID: 1069618063}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GymImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13461,7 +13462,7 @@ GameObject:
   - component: {fileID: 1090249879}
   - component: {fileID: 1090249878}
   - component: {fileID: 1090249877}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TingImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14166,7 +14167,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.8301887, g: 0.77660656, b: 0.6304735, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -14636,6 +14637,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
+--- !u!1 &1274090683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1274090684}
+  - component: {fileID: 1274090685}
+  m_Layer: 0
+  m_Name: UICamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1274090684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274090683}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 473161553}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 71.4, y: 0, z: 0}
+--- !u!20 &1274090685
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274090683}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 32
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &1365943598
 GameObject:
   m_ObjectHideFlags: 0
@@ -14739,7 +14814,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453852584}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -57.9, y: 10.2, z: -30.1}
+  m_LocalPosition: {x: -19.6, y: 10.2, z: -19.4}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children:
   - {fileID: 48249585}
@@ -14995,7 +15070,7 @@ GameObject:
   - component: {fileID: 1533975068}
   - component: {fileID: 1533975067}
   - component: {fileID: 1533975066}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TowerMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15075,7 +15150,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 473161547}
+  m_Camera: {fileID: 1274090685}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -15656,7 +15731,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1607636809}
   - component: {fileID: 1607636810}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SelectedCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15897,7 +15972,7 @@ GameObject:
   - component: {fileID: 1634397721}
   - component: {fileID: 1634397720}
   - component: {fileID: 1634397719}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CanonImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16134,7 +16209,7 @@ GameObject:
   - component: {fileID: 1676641550}
   - component: {fileID: 1676641549}
   - component: {fileID: 1676641548}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: FreezerImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16392,7 +16467,7 @@ GameObject:
   - component: {fileID: 1690397765}
   - component: {fileID: 1690397764}
   - component: {fileID: 1690397763}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TingImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16903,7 +16978,7 @@ GameObject:
   - component: {fileID: 1748487198}
   - component: {fileID: 1748487197}
   - component: {fileID: 1748487196}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: FreezerImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17006,7 +17081,7 @@ GameObject:
   - component: {fileID: 1768635250}
   - component: {fileID: 1768635249}
   - component: {fileID: 1768635248}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: TowerMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17086,7 +17161,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 473161547}
+  m_Camera: {fileID: 1274090685}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -17462,7 +17537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2382254b661391242b140c00bdfebfac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _winPanel: {fileID: 0}
+  _winPanel: {fileID: 1715330496}
   _enemyCounter: {fileID: 1938070177}
   _levelStatistics: {fileID: 1938070174}
   _statiscticsPanel: {fileID: 1715330498}
@@ -17492,15 +17567,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 157a6dda096c41b4db33ea8e3e24392b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panel: {fileID: 0}
-  _nameText: {fileID: 0}
-  _firstCharacteristicText: {fileID: 0}
-  _secondCharacteristicText: {fileID: 0}
-  _thirdCharacteristicText: {fileID: 0}
+  _panel: {fileID: 1576333387}
+  _nameText: {fileID: 2121889537}
+  _firstCharacteristicText: {fileID: 100683293}
+  _secondCharacteristicText: {fileID: 1915879432}
+  _thirdCharacteristicText: {fileID: 1133369093}
   _imageList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1677892324}
+  - {fileID: 404299334}
+  - {fileID: 213446184}
   _characterSprites:
   - {fileID: 21300000, guid: ff1d2c3ddae58704ca7a8f179a8c792b, type: 3}
   - {fileID: 21300000, guid: 46471717d3b38574a84e6a6f65820e14, type: 3}
@@ -18034,7 +18109,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067903937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -17.72}
+  m_LocalPosition: {x: 0, y: 0, z: -62.5}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children:
   - {fileID: 1768635247}
@@ -18045,7 +18120,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.4, y: 10.2}
+  m_AnchoredPosition: {x: 10.1, y: 10.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2067903939
@@ -18101,7 +18176,7 @@ GameObject:
   - component: {fileID: 2075345301}
   - component: {fileID: 2075345300}
   - component: {fileID: 2075345299}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CanonImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18505,7 +18580,7 @@ GameObject:
   - component: {fileID: 2133572311}
   - component: {fileID: 2133572310}
   - component: {fileID: 2133572309}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GymImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
