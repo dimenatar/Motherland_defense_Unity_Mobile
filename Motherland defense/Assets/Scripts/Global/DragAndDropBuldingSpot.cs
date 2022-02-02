@@ -18,8 +18,10 @@ public class DragAndDropBuldingSpot : MonoBehaviour
     [SerializeField] private GameObject _stateImagePrefab;
     [SerializeField] private GameObject _circleBorder;
     [SerializeField] private ShowHideSlider _showHideSlider;
+    [SerializeField] private GameObject _spotImage;
+    [SerializeField] private Camera _UICamera;
 
-    private GameObject _stateImage;
+    public GameObject _stateImage;
     private GameObject _spot;
     private bool _isAllowedPlace;
 
@@ -34,7 +36,7 @@ public class DragAndDropBuldingSpot : MonoBehaviour
         {
             PlaceSpot();
         }
-        else if (Input.GetMouseButtonDown(0) && IsHoweringObject(gameObject))
+        else if (Input.GetMouseButtonDown(0) && IsHoweringObject(_spotImage))
         {
             CreateSpot();
         }
@@ -46,18 +48,20 @@ public class DragAndDropBuldingSpot : MonoBehaviour
 
     public void CreateSpot()
     {
-        if (_totalAmount > 0 && _showHideSlider.CheckAnimatorIdle())
+        if (_totalAmount > 0 && _showHideSlider.CheckAnimatorIdle() && !_spot)
         {
-            _spot = Instantiate(_spotPrefab, GetPosition(), Quaternion.identity);
+            _spot = Instantiate(_spotPrefab, GetRayCoordinate(Vector3.zero), Quaternion.identity);
+            _spot.GetComponent<TowerSpot>().Initialise(_towerFactory, _viewPanel, _userMoney);
             _stateImage = Instantiate(_stateImagePrefab);
             _stateImage.transform.SetParent(_spot.transform);
             _stateImage.transform.localPosition = Vector3.zero + new Vector3(0,0.1f,0);
-            _spot.GetComponent<TowerSpot>().Initialise(_towerFactory, _viewPanel);
             _spot.transform.SetParent(transform);
             _spot.AddComponent<TowerSpotCollisionChecker>();
             _spot.GetComponent<TowerSpotCollisionChecker>().OnCollisionWithBorder += ChangeStateToFalse;
             _spot.GetComponent<TowerSpotCollisionChecker>().OnNoCollision += ChangeStateToAllow;
             _stateImage.transform.SetParent(_spot.transform);
+            Canvas canvas = _spot.transform.Find("TowerMenu").GetComponent<Canvas>();
+            canvas.worldCamera = _UICamera;
             ChangeStateToAllow();
             ChangeAmount(--_totalAmount);
         }
@@ -65,13 +69,19 @@ public class DragAndDropBuldingSpot : MonoBehaviour
 
     private void ChangeStateToFalse()
     {
-        _stateImage.GetComponent<SpriteRenderer>().sprite = _badPlace;
+        if (_stateImage)
+        {
+            _stateImage.GetComponent<SpriteRenderer>().sprite = _badPlace;
+        }
         _isAllowedPlace = false;
     }
 
     private void ChangeStateToAllow()
     {
-        _stateImage.GetComponent<SpriteRenderer>().sprite = _allowedPlace;
+        if (_stateImage)
+        {
+            _stateImage.GetComponent<SpriteRenderer>().sprite = _allowedPlace;
+        }
         _isAllowedPlace = true;
     }
 
@@ -79,7 +89,7 @@ public class DragAndDropBuldingSpot : MonoBehaviour
     {
         if (_spot)
         {
-            _spot.transform.position = GetPosition();
+            _spot.transform.position = GetPosition(_spot);
         }
     }
 
@@ -142,16 +152,39 @@ public class DragAndDropBuldingSpot : MonoBehaviour
         return false;
     }
 
-    private Vector3 GetPosition()
+    private Vector3 GetPosition(GameObject spot)
     {
-        Vector3 worldPosition = Vector3.zero;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitData;
+        Debug.Log(spot.GetComponent<RectTransform>().lossyScale);
+        Debug.Log(spot.GetComponent<RectTransform>().localScale);
+        Vector3 highestPoint = GetHighestYPoint(new Vector3[] { GetRayCoordinate(Vector3.zero), GetRayCoordinate(new Vector3(spot.GetComponent<RectTransform>().localScale.x, 0, 0)), GetRayCoordinate(-new Vector3(spot.GetComponent<RectTransform>().localScale.x, 0, 0)), GetRayCoordinate(new Vector3(0, spot.GetComponent<RectTransform>().localScale.x, 0)), GetRayCoordinate(-new Vector3(0, spot.GetComponent<RectTransform>().localScale.x, 0)) });
+        Vector3 inputPosition =  GetRayCoordinate(Vector3.zero);
+        return new Vector3(inputPosition.x, highestPoint.y + 0.2f, inputPosition.z);
+    }
 
-        if (_terrainCollider.Raycast(ray, out hitData, 4000))
+    private Vector3 GetRayCoordinate(Vector3 modifier)
+    {
+        //Debug.Log(modifier);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition + modifier*9);
+        if (_terrainCollider.Raycast(ray, out RaycastHit hitData, 4000))
         {
-            worldPosition = hitData.point;
+            return hitData.point;
         }
-        return new Vector3(worldPosition.x, hitData.point.y + 0.2f, worldPosition.z);
+        return Vector3.zero;
+    }
+
+    private Vector3 GetHighestYPoint(Vector3[] points)
+    {
+        Vector3 max = Vector3.zero;
+        for (int i = 0; i < points.Length; i++)
+        {
+            Debug.DrawLine(points[i] + new Vector3(0,5,0), points[i], Color.red, 0.5f);
+            Debug.Log(i + "    " + points[i]);
+            if (points[i].y > max.y)
+            {
+                max = points[i];
+            }
+        }
+        Debug.DrawLine(max + new Vector3(0, 5, 0), max, Color.blue, 0.5f);
+        return max;
     }
 }

@@ -17,16 +17,21 @@ public class TowerImage : MonoBehaviour, IClickable, ITowerLoader
 
     public void ObjectClick()
     {
-        if (_money.IsEnoghtMoney(_towerData.Cost))
+        if (_money.IsEnoughMoney(_towerData.Cost))
         {
             _money.ReduceMoney(_towerData.Cost);
             _towerSpot.GetComponent<TowerSpot>().CreateTower(this);
         }
     }
 
+    private void Initialise()
+    {
+        _money = _towerSpot.GetComponent<UserMoney>();
+    }
+
     private void Start()
     {
         _towerSpot = transform.parent.parent.gameObject;
-        _money = _towerSpot.GetComponent<UserMoney>();
+        _towerSpot.GetComponent<TowerSpot>().OnInitialised += Initialise;
     }
 }

@@ -24,7 +24,7 @@ public class UserMoney : MonoBehaviour
         OnMoneyChanged?.Invoke(_money);
     }
 
-    public bool IsEnoghtMoney(int value)
+    public bool IsEnoughMoney(int value)
     {
         return _money >= value;
     }
