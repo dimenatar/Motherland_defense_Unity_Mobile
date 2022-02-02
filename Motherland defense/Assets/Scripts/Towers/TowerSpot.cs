@@ -7,13 +7,12 @@ using UnityEngine.UI;
 [RequireComponent(typeof(BoxCollider))]
 public class TowerSpot : MonoBehaviour, IClickable
 {
-    [SerializeField] private TowerFactory _towerFactory;
     [SerializeField] private DirectionEnum.Directions _direction;
-    [SerializeField] private ClickManager _clickManager;
     [SerializeField] private TowerBundle _towers;
     [SerializeField] private Canvas _towerMenu;
-    [SerializeField] private ViewPanel _viewPanel;
     [SerializeField] private GameObject _towerRangeImage;
+    [SerializeField] private TowerFactory _towerFactory;
+    [SerializeField] private ViewPanel _viewPanel;
 
     private Tower _tower = null;
     private BoxCollider _collider;
@@ -30,19 +29,21 @@ public class TowerSpot : MonoBehaviour, IClickable
         }
         else
         {
-            //_clickManager.OnObjectClick -= Deselect;
             _collider.enabled = false;
             _towerMenu.gameObject.transform.position = transform.position + new Vector3(0,0.1f,0);
             _towerMenu.gameObject.SetActive(true);
         }
     }
 
+    public void Initialise(TowerFactory towerFactory, ViewPanel viewPanel)
+    {
+        _towerFactory = towerFactory;
+        _viewPanel = viewPanel;
+    }
     public void CreateTower(ITowerLoader towerLoader)
     {
         GameObject tower = _towerFactory.CreateTower(towerLoader, transform.position, _direction);
-        if (tower == null) Debug.Log("tower null");
         _tower = tower.GetComponent<Tower>();
-        if (_tower == null) Debug.Log("_tower null");
         _tower.GetComponent<Tower>().Initialise(_towers.Towers.Where(towerName => towerName.Name.ToString() == _tower.name).First());
         _tower.transform.SetParent(transform);
     }
@@ -61,7 +62,6 @@ public class TowerSpot : MonoBehaviour, IClickable
 
     private void Start()
     {
-        //_clickManager.OnObjectClick += Deselect;
         _collider = GetComponent<BoxCollider>();
     }
 }

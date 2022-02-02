@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TowerImage : MonoBehaviour, IClickable, ITowerLoader
 {
-    [SerializeField] private int _cost;
-    [SerializeField] private UserMoney _money;
+    [SerializeField] TowerData _towerData;
+    private UserMoney _money;
     private GameObject _towerSpot;
 
     public void Deselect() { }
@@ -17,9 +17,9 @@ public class TowerImage : MonoBehaviour, IClickable, ITowerLoader
 
     public void ObjectClick()
     {
-        if (_money.IsEnoghtMoney(_cost))
+        if (_money.IsEnoghtMoney(_towerData.Cost))
         {
-            _money.ReduceMoney(_cost);
+            _money.ReduceMoney(_towerData.Cost);
             _towerSpot.GetComponent<TowerSpot>().CreateTower(this);
         }
     }
@@ -27,5 +27,6 @@ public class TowerImage : MonoBehaviour, IClickable, ITowerLoader
     private void Start()
     {
         _towerSpot = transform.parent.parent.gameObject;
+        _money = _towerSpot.GetComponent<UserMoney>();
     }
 }
