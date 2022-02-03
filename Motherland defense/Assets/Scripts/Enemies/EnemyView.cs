@@ -27,7 +27,7 @@ public class EnemyView : MonoBehaviour, IClickable
     {
         if (_isSelected)
         {
-            _viewPanel.ShowCharacterPanel(_enemy.Data.Name.ToString(), newHealth.ToString(), _enemy.Data.Damage.ToString(), _enemy.Data.Points.ToString());
+            _viewPanel.ShowCharacterPanel(_enemy.Data.Name.ToString(), newHealth.ToString(), _enemy.Data.Damage.ToString(), _enemy.Data.Points.ToString(), gameObject);
         }
         _healthBar.SetSliderValue(newHealth);
     }
@@ -35,7 +35,7 @@ public class EnemyView : MonoBehaviour, IClickable
     public void ObjectClick()
     {
         _selectCircle.SetActive(true);
-        _viewPanel.ShowCharacterPanel(_enemy.Data.Name.ToString(), _enemy.GetHealth().ToString(), _enemy.Data.Damage.ToString(), _enemy.Data.Points.ToString());
+        _viewPanel.ShowCharacterPanel(_enemy.Data.Name.ToString(), _enemy.GetHealth().ToString(), _enemy.Data.Damage.ToString(), _enemy.Data.Points.ToString(), gameObject);
         _isSelected = true;
     }
 

@@ -28,7 +28,7 @@ public class HeroView : MonoBehaviour, IClickable
     public void ObjectClick()
     {
         _selectCircle.SetActive(true);
-        _viewPanel.ShowCharacterPanel(_hero.HeroData.Name.ToString(), _hero.GetHealth().ToString(), _hero.HeroData.Damage.ToString(), _hero.HeroData.Points.ToString());
+        _viewPanel.ShowCharacterPanel(_hero.HeroData.Name.ToString(), _hero.GetHealth().ToString(), _hero.HeroData.Damage.ToString(), _hero.HeroData.Points.ToString(), gameObject);
         _isSelected = true;
     }
 
@@ -46,7 +46,7 @@ public class HeroView : MonoBehaviour, IClickable
     {
         if (_isSelected)
         {
-            _viewPanel.ShowCharacterPanel(_hero.HeroData.Name.ToString(), newHealth.ToString(), _hero.HeroData.Damage.ToString(), _hero.HeroData.Points.ToString());
+            _viewPanel.ShowCharacterPanel(_hero.HeroData.Name.ToString(), newHealth.ToString(), _hero.HeroData.Damage.ToString(), _hero.HeroData.Points.ToString(), gameObject);
         }
         _healthBar.SetSliderValue(newHealth);
     }

@@ -6,7 +6,7 @@ public class TowerImage : MonoBehaviour, IClickable, ITowerLoader
 {
     [SerializeField] TowerData _towerData;
     private UserMoney _money;
-    private GameObject _towerSpot;
+    private TowerSpot _towerSpot;
 
     public void Deselect() { }
 
@@ -20,18 +20,14 @@ public class TowerImage : MonoBehaviour, IClickable, ITowerLoader
         if (_money.IsEnoughMoney(_towerData.Cost))
         {
             _money.ReduceMoney(_towerData.Cost);
-            _towerSpot.GetComponent<TowerSpot>().CreateTower(this);
+            _towerSpot.CreateTower(this);
         }
-    }
-
-    private void Initialise()
-    {
-        _money = _towerSpot.GetComponent<UserMoney>();
     }
 
     private void Start()
     {
-        _towerSpot = transform.parent.parent.gameObject;
-        _towerSpot.GetComponent<TowerSpot>().OnInitialised += Initialise;
+        _towerSpot = transform.parent.parent.gameObject.GetComponent<TowerSpot>();
+        _money = _towerSpot.Money;
+        Debug.Log(_money);
     }
 }

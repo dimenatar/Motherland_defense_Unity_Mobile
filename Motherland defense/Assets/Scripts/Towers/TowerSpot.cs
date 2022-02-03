@@ -15,12 +15,12 @@ public class TowerSpot : MonoBehaviour, IClickable
     [SerializeField] private TowerFactory _towerFactory;
     [SerializeField] private ViewPanel _viewPanel;
 
-    public event Action OnInitialised;
-
     private Tower _tower = null;
     private BoxCollider _collider;
     private UserMoney _money;
     private bool _isSelected;
+
+    public UserMoney Money => _money;
 
     public void ObjectClick()
     {
@@ -44,7 +44,6 @@ public class TowerSpot : MonoBehaviour, IClickable
         _towerFactory = towerFactory;
         _viewPanel = viewPanel;
         _money = userMoney;
-        OnInitialised?.Invoke();
     }
 
     public void CreateTower(ITowerLoader towerLoader)

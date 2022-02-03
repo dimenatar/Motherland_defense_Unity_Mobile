@@ -13,4 +13,12 @@ public class ObjectDisabler : MonoBehaviour
             obj.SetActive(false);
         }
     }
+
+    public void Enable()
+    {
+        foreach (var item in _objects)
+        {
+            item.SetActive(true);
+        }
+    }
 }

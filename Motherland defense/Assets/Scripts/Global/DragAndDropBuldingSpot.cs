@@ -154,8 +154,6 @@ public class DragAndDropBuldingSpot : MonoBehaviour
 
     private Vector3 GetPosition(GameObject spot)
     {
-        Debug.Log(spot.GetComponent<RectTransform>().lossyScale);
-        Debug.Log(spot.GetComponent<RectTransform>().localScale);
         Vector3 highestPoint = GetHighestYPoint(new Vector3[] { GetRayCoordinate(Vector3.zero), GetRayCoordinate(new Vector3(spot.GetComponent<RectTransform>().localScale.x, 0, 0)), GetRayCoordinate(-new Vector3(spot.GetComponent<RectTransform>().localScale.x, 0, 0)), GetRayCoordinate(new Vector3(0, spot.GetComponent<RectTransform>().localScale.x, 0)), GetRayCoordinate(-new Vector3(0, spot.GetComponent<RectTransform>().localScale.x, 0)) });
         Vector3 inputPosition =  GetRayCoordinate(Vector3.zero);
         return new Vector3(inputPosition.x, highestPoint.y + 0.2f, inputPosition.z);
@@ -178,7 +176,6 @@ public class DragAndDropBuldingSpot : MonoBehaviour
         for (int i = 0; i < points.Length; i++)
         {
             Debug.DrawLine(points[i] + new Vector3(0,5,0), points[i], Color.red, 0.5f);
-            Debug.Log(i + "    " + points[i]);
             if (points[i].y > max.y)
             {
                 max = points[i];
