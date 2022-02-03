@@ -5,13 +5,29 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     private bool _isHolding;
+    private bool _canMove = true;
     private Vector2 _startPosition = Vector2.zero;
     private Vector2 _endPosition = Vector2.zero;
     private Vector2 _difference;
 
     private void Update()
     {
-        if (Time.deltaTime != 0)
+        Move();
+    }
+
+    public void StopMove()
+    {
+        _canMove = false;
+    }
+
+    public void StartMove()
+    {
+        _canMove = true;
+    }
+
+    private void Move()
+    {
+        if (Time.deltaTime != 0 && _canMove)
         {
             if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
@@ -35,32 +51,5 @@ public class CameraMove : MonoBehaviour
                 _endPosition = Vector2.zero;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-        //if (Input.touchCount > 0)
-        //{
-        //    Debug.Log("1");
-        //    Touch touch = Input.GetTouch(0);
-        //    if (touch.phase == TouchPhase.Began)
-        //    {
-        //        _startPosition = touch.position;
-        //    }
-        //    else if (touch.phase == TouchPhase.Moved)
-        //    {
-        //        _difference = touch.position - _startPosition;
-        //        transform.position += new Vector3(_difference.x, _difference.y);
-        //    }
-        //}
-
     }
-
 }

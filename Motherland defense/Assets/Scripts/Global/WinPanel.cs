@@ -20,7 +20,7 @@ public class WinPanel : MonoBehaviour
 
     private void ShowWinPanel()
     {
-        _disabler.Disable();
+        _disabler.DisableForever();
         _winPanel.SetActive(true);
         GetAndFillStatisctics();
         Time.timeScale = 0;

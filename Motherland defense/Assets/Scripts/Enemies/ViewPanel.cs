@@ -17,9 +17,15 @@ public class ViewPanel : MonoBehaviour
     [SerializeField] private List<Sprite> _towerSprites;
     [SerializeField] private GameObject _exitFromFollowingCameraButton;
     [SerializeField] private ObjectDisabler _disabler;
+    [SerializeField] private EnemyCounter _enemyCounter;
 
     private GameObject _followedObject;
     private bool _isFollowing;
+
+    private void Start()
+    {
+        _enemyCounter.OnCounterEmpty += StopFollowingObject;
+    }
 
     public void HidePanel()
     {
@@ -52,8 +58,9 @@ public class ViewPanel : MonoBehaviour
         ShowPanel();
     }
 
-    public void ShowTowerPanel(string towerName, string damage, string radius, string reloadTime)
+    public void ShowTowerPanel(string towerName, string damage, string radius, string reloadTime, GameObject sender)
     {
+        _followedObject = sender;
         _nameText.text = towerName;
         _firstCharacteristicText.text = damage;
         _secondCharacteristicText.text = radius;
@@ -67,21 +74,36 @@ public class ViewPanel : MonoBehaviour
 
     public void StopFollowingObject()
     {
-        _followedObject.GetComponent<Enemy>().OnDied -= StopFollowingObject;
-        _exitFromFollowingCameraButton.SetActive(false);
+        if (_followedObject)
+        {
+            if (_followedObject.GetComponent<Enemy>())
+            {
+                _followedObject.GetComponent<Enemy>().OnDied -= StopFollowingObject;
+                _followedObject.GetComponent<Enemy>().OnDestroed -= StopFollowingObject;
+            }
+            _exitFromFollowingCameraButton.SetActive(false);
+            _disabler.Enable();
+        }
         _isFollowing = false;
-        _disabler.Enable();
         _followedObject = null;
         HidePanel();
     }
 
     public void SetCameraOnFollowedObject()
     {
-        _followedObject.GetComponent<Enemy>().OnDied += StopFollowingObject;
         _isFollowing = true;
         _addCamera.SetActive(true);
         _addCamera.transform.SetParent(_followedObject.transform);
-        _addCamera.transform.localPosition = new Vector3(0, 2, -2f);
+        if (_followedObject.GetComponent<Enemy>())
+        {
+            _followedObject.GetComponent<Enemy>().OnDied += StopFollowingObject;
+            _followedObject.GetComponent<Enemy>().OnDestroed += StopFollowingObject;
+            _addCamera.transform.localPosition = new Vector3(0, 2, -2f);
+        }
+        else
+        {
+            _addCamera.transform.localPosition = new Vector3(0, 15, -2f);
+        }
         _addCamera.transform.rotation = _followedObject.transform.rotation;
         _mainCamera.SetActive(false);
         _exitFromFollowingCameraButton.SetActive(true);

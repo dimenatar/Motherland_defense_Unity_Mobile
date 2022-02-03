@@ -22,8 +22,14 @@ public class Enemy : MonoBehaviour
     public event StartFight OnStartFight;
     public event Action OnDied;
     public event Action OnFoundOpponent;
+    public event Action OnDestroed;
 
     public CharacterData Data => _data;
+
+    private void OnDestroy()
+    {
+        OnDestroed?.Invoke();
+    }
 
     public void Initialize(CharacterData data, EnemyCheckPoints enemyCheckPoints, EnemyCheckPoint targetCheckPoint, UserMoney money, ViewPanel viewPanel)
     {

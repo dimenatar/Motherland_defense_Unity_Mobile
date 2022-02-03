@@ -29,7 +29,7 @@ public class CompleteLevels : MonoBehaviour
             {
                 InitialiseLevelMarker(i, _userData.LevelData[i]);
             }
-            if (_userData.LevelData.Count < _totalAmountLevels)
+            if (_userData.LevelData.Count < _totalAmountLevels && _userData.LevelData[_userData.LevelData.Count-1].IsCompleted)
             {
                 InitialiseLevelMarker(_userData.LevelData.Count, new LevelData());
             }

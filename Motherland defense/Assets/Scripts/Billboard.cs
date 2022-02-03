@@ -21,7 +21,7 @@ public class Billboard : MonoBehaviour
         }
         else
         {
-            _cameraTransform = Camera.main.transform;
+            _cameraTransform = Camera.current.transform;
             Debug.Log("null");
         }
     }

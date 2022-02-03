@@ -20,6 +20,6 @@ public class UserHealthTriggerConnector : MonoBehaviour
         _health.Initialise(_startHealth);
         _trigger.OnEnemyPassed += ReduceHealth;
         _health.OnLose += _losePanel.ShowLosePanel;
-        _health.OnLose += _disabler.Disable;
+        _health.OnLose += _disabler.DisableForever;
     }
 }

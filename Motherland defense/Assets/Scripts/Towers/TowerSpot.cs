@@ -29,7 +29,7 @@ public class TowerSpot : MonoBehaviour, IClickable
             _isSelected = true;
             _towerRangeImage.SetActive(true);
             _towerRangeImage.transform.localScale = new Vector2(_tower.Data.Radius, _tower.Data.Radius)/20;
-            _viewPanel.ShowTowerPanel(_tower.Data.Name.ToString(), _tower.Data.Damage.ToString(), _tower.Data.Radius.ToString(), _tower.Data.ReloadTime.ToString());
+            _viewPanel.ShowTowerPanel(_tower.Data.Name.ToString(), _tower.Data.Damage.ToString(), _tower.Data.Radius.ToString(), _tower.Data.ReloadTime.ToString(), gameObject);
         }
         else
         {

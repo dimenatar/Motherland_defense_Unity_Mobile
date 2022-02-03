@@ -394,6 +394,7 @@ MonoBehaviour:
   - {fileID: 0}
   _exitFromFollowingCameraButton: {fileID: 1705356040}
   _disabler: {fileID: 1853115960}
+  _enemyCounter: {fileID: 54636327}
 --- !u!114 &54636326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,6 +634,7 @@ MonoBehaviour:
   _showHideSlider: {fileID: 921318529}
   _spotImage: {fileID: 611953885}
   _UICamera: {fileID: 1582629200}
+  _cameraMove: {fileID: 963194229}
   _stateImage: {fileID: 0}
 --- !u!1 &55995876
 GameObject:
@@ -5522,6 +5524,7 @@ GameObject:
   - component: {fileID: 1186933852}
   - component: {fileID: 1186933851}
   - component: {fileID: 1186933850}
+  - component: {fileID: 1186933853}
   m_Layer: 0
   m_Name: AddCamera
   m_TagString: MainCamera
@@ -5536,7 +5539,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186933849}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &1186933851
 Camera:
   m_ObjectHideFlags: 0
@@ -5594,6 +5597,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 71, y: 0, z: 0.49}
+--- !u!114 &1186933853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186933849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56cb2def5ea3db4e9dcff1e3d2022fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotateSpeed: 0.2
 --- !u!1 &1222754313
 GameObject:
   m_ObjectHideFlags: 0

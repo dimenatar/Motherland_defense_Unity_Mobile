@@ -14,7 +14,7 @@ public class LevelStatistics : MonoBehaviour
 
     public LevelData GetLevelStatistic()
     {
-        return new LevelData(_levelNumber, _health.CurrentHealth, _totalDamage, _amountEnemies, ConvertFloatTimeToString(_levelTimer));
+        return new LevelData(_levelNumber, _health.CurrentHealth, _totalDamage, _amountEnemies, ConvertFloatTimeToString(_levelTimer), true);
     }
 
     public void AddTotalDamage(int health, int damage)

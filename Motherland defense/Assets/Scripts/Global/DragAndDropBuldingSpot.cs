@@ -20,6 +20,7 @@ public class DragAndDropBuldingSpot : MonoBehaviour
     [SerializeField] private ShowHideSlider _showHideSlider;
     [SerializeField] private GameObject _spotImage;
     [SerializeField] private Camera _UICamera;
+    [SerializeField] private CameraMove _cameraMove;
 
     public GameObject _stateImage;
     private GameObject _spot;
@@ -50,6 +51,7 @@ public class DragAndDropBuldingSpot : MonoBehaviour
     {
         if (_totalAmount > 0 && _showHideSlider.CheckAnimatorIdle() && !_spot)
         {
+            _cameraMove.StopMove();
             _spot = Instantiate(_spotPrefab, GetRayCoordinate(Vector3.zero), Quaternion.identity);
             _spot.GetComponent<TowerSpot>().Initialise(_towerFactory, _viewPanel, _userMoney);
             _stateImage = Instantiate(_stateImagePrefab);
@@ -109,6 +111,7 @@ public class DragAndDropBuldingSpot : MonoBehaviour
                 CancelPlace();
             }
             _spot = null;
+            _cameraMove.StartMove();
         }
     }
 
