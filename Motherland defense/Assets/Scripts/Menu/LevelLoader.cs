@@ -5,9 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
+    private bool _isLoading;
+
+    private void Start()
+    {
+        SceneManager.sceneLoaded += SceneLoaded;
+    }
+
     public void LoadLevel(string name)
     {
-        SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
+        if (!_isLoading)
+        {
+            _isLoading = true;
+            SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
+        }
     }
 
     public void LoadLevelAdditive(string name)
@@ -34,6 +45,15 @@ public class LevelLoader : MonoBehaviour
     public void Reload()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (!_isLoading)
+        {
+            _isLoading = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    private void SceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        _isLoading = false;
     }
 }

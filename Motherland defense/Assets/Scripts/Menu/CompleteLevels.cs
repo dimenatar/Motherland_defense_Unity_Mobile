@@ -27,6 +27,7 @@ public class CompleteLevels : MonoBehaviour
         {
             for (int i = 0; i < _userData.LevelData.Count; i++)
             {
+                Debug.Log(i + "   " + _userData.LevelData[i].IsCompleted);
                 InitialiseLevelMarker(i, _userData.LevelData[i]);
             }
             if (_userData.LevelData.Count < _totalAmountLevels && _userData.LevelData[_userData.LevelData.Count-1].IsCompleted)

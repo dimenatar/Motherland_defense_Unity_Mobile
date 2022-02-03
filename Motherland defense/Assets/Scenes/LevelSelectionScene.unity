@@ -177,8 +177,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelNumber: 2
   _loadingLevelName: SecondLevel
+  _activeImage: {fileID: 21300000, guid: 56d9fd655cf95244284ba147441583c2, type: 3}
+  _passiveImage: {fileID: 21300000, guid: 7d1c6a4655c9c434597fceb0847dacee, type: 3}
   _loader: {fileID: 146347046}
   _levelPanel: {fileID: 2067618364}
+  _markerDeselector: {fileID: 2024295613}
 --- !u!114 &8381682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +614,8 @@ GameObject:
   - component: {fileID: 220256175}
   - component: {fileID: 220256177}
   - component: {fileID: 220256176}
+  - component: {fileID: 220256179}
+  - component: {fileID: 220256178}
   m_Layer: 5
   m_Name: Map
   m_TagString: Untagged
@@ -675,6 +680,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220256174}
   m_CullTransparentMesh: 1
+--- !u!114 &220256178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220256174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 0
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 220256176}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 220256179}
+        m_TargetAssemblyTypeName: SelectionMap, Assembly-CSharp
+        m_MethodName: Press
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &220256179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220256174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9affcc87508e74691bbd462987fb88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _markerDeselector: {fileID: 2024295613}
 --- !u!1 &597564709
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,8 +976,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelNumber: 1
   _loadingLevelName: FirstLevel
+  _activeImage: {fileID: 21300000, guid: 56d9fd655cf95244284ba147441583c2, type: 3}
+  _passiveImage: {fileID: 21300000, guid: 7d1c6a4655c9c434597fceb0847dacee, type: 3}
   _loader: {fileID: 146347046}
   _levelPanel: {fileID: 2067618364}
+  _markerDeselector: {fileID: 2024295613}
 --- !u!1 &808826258
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,8 +1833,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelNumber: 3
   _loadingLevelName: ThirdLevel
+  _activeImage: {fileID: 21300000, guid: 56d9fd655cf95244284ba147441583c2, type: 3}
+  _passiveImage: {fileID: 21300000, guid: 7d1c6a4655c9c434597fceb0847dacee, type: 3}
   _loader: {fileID: 146347046}
   _levelPanel: {fileID: 2067618364}
+  _markerDeselector: {fileID: 2024295613}
 --- !u!114 &1541251714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2101,6 +2181,7 @@ GameObject:
   - component: {fileID: 2024295610}
   - component: {fileID: 2024295609}
   - component: {fileID: 2024295612}
+  - component: {fileID: 2024295613}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2190,6 +2271,23 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024295608}
   m_Enabled: 1
+--- !u!114 &2024295613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024295608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cf52c892c516b4449dbf2e8423c13af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _markers:
+  - {fileID: 760526134}
+  - {fileID: 8381681}
+  - {fileID: 1541251713}
+  _panel: {fileID: 2067618362}
 --- !u!1 &2067618362
 GameObject:
   m_ObjectHideFlags: 0
