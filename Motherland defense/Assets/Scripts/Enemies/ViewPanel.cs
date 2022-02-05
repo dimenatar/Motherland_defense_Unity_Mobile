@@ -76,10 +76,10 @@ public class ViewPanel : MonoBehaviour
     {
         if (_followedObject)
         {
-            if (_followedObject.GetComponent<Enemy>())
+            if (_followedObject.GetComponent<ICharacter>() != null)
             {
-                _followedObject.GetComponent<Enemy>().OnDied -= StopFollowingObject;
-                _followedObject.GetComponent<Enemy>().OnDestroed -= StopFollowingObject;
+                _followedObject.GetComponent<ICharacter>().OnDied -= StopFollowingObject;
+                _followedObject.GetComponent<ICharacter>().OnDestroed -= StopFollowingObject;
             }
             _exitFromFollowingCameraButton.SetActive(false);
             _disabler.Enable();
@@ -94,10 +94,10 @@ public class ViewPanel : MonoBehaviour
         _isFollowing = true;
         _addCamera.SetActive(true);
         _addCamera.transform.SetParent(_followedObject.transform);
-        if (_followedObject.GetComponent<Enemy>())
+        if (_followedObject.GetComponent<ICharacter>() != null)
         {
-            _followedObject.GetComponent<Enemy>().OnDied += StopFollowingObject;
-            _followedObject.GetComponent<Enemy>().OnDestroed += StopFollowingObject;
+            _followedObject.GetComponent<ICharacter>().OnDied += StopFollowingObject;
+            _followedObject.GetComponent<ICharacter>().OnDestroed += StopFollowingObject;
             _addCamera.transform.localPosition = new Vector3(0, 2, -2f);
         }
         else

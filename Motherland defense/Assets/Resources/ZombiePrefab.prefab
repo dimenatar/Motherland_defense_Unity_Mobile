@@ -2285,7 +2285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2992747741497505308}
   - component: {fileID: 7109737792043398596}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SelectedCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2457,6 +2457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f44d724edbcfed47a18d839d90be1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _opponent: {fileID: 0}
   _opponents: []
 --- !u!54 &7122788187288975190
 Rigidbody:

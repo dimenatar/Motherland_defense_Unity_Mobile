@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(Enemy))]
 [RequireComponent(typeof(Transform))]
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyMove : MonoBehaviour
@@ -47,6 +46,7 @@ public class EnemyMove : MonoBehaviour
 
     public void StartMove()
     {
+        Debug.Log(gameObject.name +  " Start move");
         OnStartMove?.Invoke();
         StartCoroutine(nameof(Move));
     }

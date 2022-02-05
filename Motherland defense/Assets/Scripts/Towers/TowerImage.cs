@@ -28,6 +28,5 @@ public class TowerImage : MonoBehaviour, IClickable, ITowerLoader
     {
         _towerSpot = transform.parent.parent.gameObject.GetComponent<TowerSpot>();
         _money = _towerSpot.Money;
-        Debug.Log(_money);
     }
 }

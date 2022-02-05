@@ -84,7 +84,6 @@ public class HeroMove : MonoBehaviour
             }
             else
             {
-                Debug.Log(Vector3.Distance(transform.position, _currentPointToMove.position));
                 transform.LookAt(_currentPointToMove);
                 Vector2 pos = new Vector2(transform.position.x, transform.position.z);
                 pos = Vector2.MoveTowards(pos, new Vector2(_currentPointToMove.position.x, _currentPointToMove.position.z), _moveSpeed);

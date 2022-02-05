@@ -12,6 +12,7 @@ public class DragAndDropBuldingSpot : MonoBehaviour
     [SerializeField] private ViewPanel _viewPanel;
     [SerializeField] private Sprite _allowedPlace;
     [SerializeField] private Sprite _badPlace;
+    [SerializeField] private Sprite _defaultPlace;
     [SerializeField] private GameObject _spotPrefab;
     [SerializeField] private int _totalAmount;
     [SerializeField] private Text _amountText;
@@ -21,8 +22,8 @@ public class DragAndDropBuldingSpot : MonoBehaviour
     [SerializeField] private GameObject _spotImage;
     [SerializeField] private Camera _UICamera;
     [SerializeField] private CameraMove _cameraMove;
+    [SerializeField] private GameObject _stateImage;
 
-    public GameObject _stateImage;
     private GameObject _spot;
     private bool _isAllowedPlace;
 
@@ -31,19 +32,22 @@ public class DragAndDropBuldingSpot : MonoBehaviour
         ChangeAmount(_totalAmount);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Time.timeScale != 0)
         {
-            PlaceSpot();
-        }
-        else if (Input.GetMouseButtonDown(0) && IsHoweringObject(_spotImage))
-        {
-            CreateSpot();
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            DragSpot();
+            if (Input.GetMouseButtonDown(0) && IsHoweringObject(_spotImage))
+            {
+                CreateSpot();
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                DragSpot();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                PlaceSpot();
+            }
         }
     }
 
@@ -54,14 +58,10 @@ public class DragAndDropBuldingSpot : MonoBehaviour
             _cameraMove.StopMove();
             _spot = Instantiate(_spotPrefab, GetRayCoordinate(Vector3.zero), Quaternion.identity);
             _spot.GetComponent<TowerSpot>().Initialise(_towerFactory, _viewPanel, _userMoney);
-            _stateImage = Instantiate(_stateImagePrefab);
-            _stateImage.transform.SetParent(_spot.transform);
-            _stateImage.transform.localPosition = Vector3.zero + new Vector3(0,0.1f,0);
             _spot.transform.SetParent(transform);
             _spot.AddComponent<TowerSpotCollisionChecker>();
             _spot.GetComponent<TowerSpotCollisionChecker>().OnCollisionWithBorder += ChangeStateToFalse;
             _spot.GetComponent<TowerSpotCollisionChecker>().OnNoCollision += ChangeStateToAllow;
-            _stateImage.transform.SetParent(_spot.transform);
             Canvas canvas = _spot.transform.Find("TowerMenu").GetComponent<Canvas>();
             canvas.worldCamera = _UICamera;
             ChangeStateToAllow();
@@ -73,16 +73,24 @@ public class DragAndDropBuldingSpot : MonoBehaviour
     {
         if (_stateImage)
         {
-            _stateImage.GetComponent<SpriteRenderer>().sprite = _badPlace;
+            _stateImage.GetComponent<Image>().sprite = _badPlace;
         }
         _isAllowedPlace = false;
+    }
+
+    private void ChangeStateToDefault()
+    {
+        if (_stateImage)
+        {
+            _stateImage.GetComponent<Image>().sprite = _defaultPlace;
+        }
     }
 
     private void ChangeStateToAllow()
     {
         if (_stateImage)
         {
-            _stateImage.GetComponent<SpriteRenderer>().sprite = _allowedPlace;
+            _stateImage.GetComponent<Image>().sprite = _allowedPlace;
         }
         _isAllowedPlace = true;
     }
@@ -100,7 +108,6 @@ public class DragAndDropBuldingSpot : MonoBehaviour
         if (_spot)
         {
             Destroy(_spot.GetComponent<TowerSpotCollisionChecker>());
-            Destroy(_stateImage);
             _spot.GetComponent<BoxCollider>().isTrigger = false;
             if (_isAllowedPlace)
             {
@@ -112,6 +119,7 @@ public class DragAndDropBuldingSpot : MonoBehaviour
             }
             _spot = null;
             _cameraMove.StartMove();
+            ChangeStateToDefault();
         }
     }
 
@@ -125,7 +133,8 @@ public class DragAndDropBuldingSpot : MonoBehaviour
     private void CancelPlace()
     {
         ChangeAmount(++_totalAmount);
-        Destroy(_spot);
+        Debug.Log("destroy");
+        _spot.SetActive(false);
     }
 
     private void ChangeAmount(int value)
@@ -164,7 +173,6 @@ public class DragAndDropBuldingSpot : MonoBehaviour
 
     private Vector3 GetRayCoordinate(Vector3 modifier)
     {
-        //Debug.Log(modifier);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition + modifier*9);
         if (_terrainCollider.Raycast(ray, out RaycastHit hitData, 4000))
         {

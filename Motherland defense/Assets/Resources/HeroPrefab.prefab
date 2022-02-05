@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7445651105873075655}
   - component: {fileID: 8131470211528268806}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SelectedCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -842,6 +842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b319905387a55f40aa7f0b7986170ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentPointToMove: {fileID: 0}
+  _arrivalToPointRange: 0
 --- !u!114 &2526731173086908805
 MonoBehaviour:
   m_ObjectHideFlags: 0

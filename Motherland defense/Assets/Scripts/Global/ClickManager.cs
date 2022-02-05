@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +7,11 @@ using UnityEngine.EventSystems;
 
 public class ClickManager : MonoBehaviour
 {
-    public delegate void ObjectClick();
-    public event ObjectClick OnObjectClick;
+    public event Action OnObjectClick;
 
     [SerializeField] private Camera _camera;
     private IClickable clickedObject = null;
+
     private void Update()
     {
         if (Input.GetMouseButtonUp(0))
@@ -49,8 +50,6 @@ public class ClickManager : MonoBehaviour
             }
 
         }
-
-        
         clickedObject = null;
     }
     private void FilterRaycast(ref RaycastHit[] raycasts)

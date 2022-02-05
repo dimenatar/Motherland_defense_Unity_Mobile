@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : MonoBehaviour
+public class Hero : MonoBehaviour, ICharacter
 {
     public delegate void Damaged(int updatedHealth, int damage);
     public event Damaged OnDamageTaken;
@@ -12,6 +12,7 @@ public class Hero : MonoBehaviour
 
     public event Action OnDied;
     public event Action OnBasePointReached;
+    public event Action OnDestroed;
 
     public CharacterData HeroData => _characterData;
 
@@ -37,13 +38,9 @@ public class Hero : MonoBehaviour
         OnBasePointReached?.Invoke();
     }
 
-    //public void RemoveCurrentTarget()
-    //{
-    //    RemoveTarget(_currentTarget);
-    //}
-
     public void ChangeTarget()
     {
+        Debug.Log("ChangeTarget");
         if (_enemies.Count > 0)
         {
             SetNewTarget();
@@ -89,6 +86,7 @@ public class Hero : MonoBehaviour
             _enemies.Remove(target);
             if (_currentTarget == target)
             {
+                OnDied -= target.GetComponent<EnemyFight>().ChangeTarget;
                 _currentTarget = null;
                 ChangeTarget();
             }
@@ -130,6 +128,7 @@ public class Hero : MonoBehaviour
 
     private void OnDestroy()
     {
+        OnDestroed?.Invoke();
         if (_currentTarget)
         {
             _currentTarget.GetComponent<Enemy>().OnRemovedFromList -= RemoveTarget;
@@ -141,6 +140,7 @@ public class Hero : MonoBehaviour
         _currentTarget = FindClosestEnemy();
         if (_currentTarget)
         {
+            Debug.LogWarning("SetNewTarget: " + _currentTarget.name);
             OnDied += _currentTarget.GetComponent<EnemyFight>().ChangeTarget;
             OnTargetChanged?.Invoke(_currentTarget);
         }

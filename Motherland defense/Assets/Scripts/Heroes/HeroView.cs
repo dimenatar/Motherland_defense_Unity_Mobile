@@ -11,8 +11,6 @@ public class HeroView : MonoBehaviour, IClickable
     private ViewPanel _viewPanel;
     private Hero _hero;
 
-
-
     private void Start()
     {
         _hero = GetComponent<Hero>();

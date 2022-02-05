@@ -47,6 +47,10 @@ public class EnemyFight : MonoBehaviour
         _enemy.OnDied -= StopFight;
         OnHitOpponent -= HitHero;
         OnStopFight -= StopFight;
+        if (GetComponent<EnemyMove>())
+        {
+            OnStopFight -= GetComponent<EnemyMove>().StartMove;
+        }
     }
 
     private void Start()

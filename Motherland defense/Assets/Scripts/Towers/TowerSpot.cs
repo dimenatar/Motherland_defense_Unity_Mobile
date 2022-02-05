@@ -10,7 +10,7 @@ public class TowerSpot : MonoBehaviour, IClickable
 {
     [SerializeField] private DirectionEnum.Directions _direction;
     [SerializeField] private TowerBundle _towers;
-    [SerializeField] private Canvas _towerMenu;
+    [SerializeField] public Canvas _towerMenu;
     [SerializeField] private GameObject _towerRangeImage;
     [SerializeField] private TowerFactory _towerFactory;
     [SerializeField] private ViewPanel _viewPanel;
@@ -21,6 +21,7 @@ public class TowerSpot : MonoBehaviour, IClickable
     private bool _isSelected;
 
     public UserMoney Money => _money;
+    public ViewPanel ViewPanel => _viewPanel;
 
     public void ObjectClick()
     {

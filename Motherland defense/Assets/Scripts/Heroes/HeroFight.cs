@@ -36,7 +36,7 @@ public class HeroFight : MonoBehaviour
 
     private void StopFight()
     {
-        _target.OnDied -= StopFight;
+        //_target.OnDied -= StopFight;
         StopCoroutine(nameof(FightWithEnemy));
     }
 

@@ -701,6 +701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f44d724edbcfed47a18d839d90be1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _opponent: {fileID: 0}
   _opponents: []
 --- !u!114 &1190873054945348333
 MonoBehaviour:
@@ -1583,7 +1584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7591450139500965810}
   - component: {fileID: 8428964287036402428}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SelectedCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

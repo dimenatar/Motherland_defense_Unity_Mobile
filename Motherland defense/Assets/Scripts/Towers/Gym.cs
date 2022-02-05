@@ -11,6 +11,7 @@ public class Gym : Tower
     [SerializeField] private float arrivalToPointRange;
 
     private ViewPanel _viewPanel;
+
     public void SpawnHero()
     {
         SetUpHero(InstantiateHero());
@@ -38,7 +39,7 @@ public class Gym : Tower
     {
         if (transform.parent)
         {
-            _viewPanel = transform.parent.GetComponent<ViewPanel>();
+            _viewPanel = transform.parent.GetComponent<TowerSpot>().ViewPanel;
             SpawnHero();
         }
     }
