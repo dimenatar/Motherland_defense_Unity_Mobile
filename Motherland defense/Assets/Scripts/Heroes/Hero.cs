@@ -17,9 +17,9 @@ public class Hero : MonoBehaviour, ICharacter
     public CharacterData HeroData => _characterData;
 
     private int _health;
-    public GameObject _currentTarget;
+    private GameObject _currentTarget;
     private CharacterData _characterData;
-    public List<GameObject> _enemies = new List<GameObject>();
+    private List<GameObject> _enemies = new List<GameObject>();
 
     public void InitializeHero(CharacterData characterData,  Transform basePointToMove, float arrivalToPointRange, ViewPanel viewPanel)
     {

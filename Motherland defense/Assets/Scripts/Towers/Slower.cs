@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Slower : MonoBehaviour
 {
-    public EnemyMove _enemy;
+    private EnemyMove _enemyMove;
+    private EnemyAnimation _enemyAnimation;
     private float _slowDownDuraton;
-    private float _saveSpeed;
+    private float _startSpeed;
+    private float _startAnimationSpeed;
     private float _percentage;
     private float _timer;
+
     public void UpdateTimer()
     {
         _timer = 0;
@@ -16,10 +19,23 @@ public class Slower : MonoBehaviour
     
     public void SlowEnemy(float percentage)
     {
-        _enemy = GetComponent<EnemyMove>();
-        _saveSpeed = _enemy.GetSpeed();
-        _enemy.SetSpeed(_enemy.GetSpeed() * (1 - (percentage/100)));
+        SaveValues();
+        SetNewValues(percentage);
         StartCoroutine(nameof(RemoveSlowDown));
+    }
+
+    private void SetNewValues(float percentage)
+    {
+        _enemyMove.SetSpeed(_enemyMove.GetSpeed() * (1 - (percentage / 100)));
+        _enemyAnimation.ChangeAnimationSpeed(_startAnimationSpeed * (1 - (percentage / 100)));
+    }
+
+    private void SaveValues()
+    {
+        _enemyMove = GetComponent<EnemyMove>();
+        _enemyAnimation = GetComponent<EnemyAnimation>();
+        _startAnimationSpeed = _enemyAnimation.AnimationSpeed;
+        _startSpeed = _enemyMove.GetSpeed();
     }
 
     public void SetSlowDownDuration(float slowDownDuration)
@@ -33,7 +49,7 @@ public class Slower : MonoBehaviour
         {
             if (_timer >= _slowDownDuraton)
             {
-                _enemy.SetSpeed(_saveSpeed);
+                ReturnDefaultValuesToEnemy();
                 Destroy(this.GetComponent<Slower>());
             }
             else
@@ -45,4 +61,9 @@ public class Slower : MonoBehaviour
         }
     }
 
+    private void ReturnDefaultValuesToEnemy()
+    {
+        _enemyMove.SetSpeed(_startSpeed);
+        _enemyAnimation.ChangeAnimationSpeed(_startAnimationSpeed);
+    }
 }

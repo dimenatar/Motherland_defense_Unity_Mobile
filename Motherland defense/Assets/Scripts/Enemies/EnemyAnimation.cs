@@ -15,10 +15,18 @@ public class EnemyAnimation : MonoBehaviour
     private readonly string _fightAnimation = "Fight";
     private readonly string _deadAnimation = "Death";
 
+    public float AnimationSpeed => _animationSpeed;
+
     public void InitialiseAnimation(float animationSpeed)
     {
         _animationSpeed = animationSpeed;
-        _enemyAnimator.SetFloat("Speed", _animationSpeed);
+        ChangeAnimationSpeed(animationSpeed);
+    }
+
+    public void ChangeAnimationSpeed(float value)
+    {
+        _animationSpeed = value;
+        _enemyAnimator.SetFloat("Speed", value);
     }
 
     private void Awake()
