@@ -6,9 +6,9 @@ public class HeroMove : MonoBehaviour
 {
     public event Action OnStartMove;
 
-    private Transform _basePointToMove;
-    public Transform _currentPointToMove;
-    public float _arrivalToPointRange;
+    public Transform _basePointToMove;
+    private Transform _currentPointToMove;
+    private float _arrivalToPointRange;
     private float _moveSpeed;
     private Hero hero;
 
@@ -26,6 +26,16 @@ public class HeroMove : MonoBehaviour
         SetNewPoint(null);
     }
 
+    public void ChangeDefaultPoint(Vector3 position)
+    {
+        Debug.Log("Change hero point");
+        if (_currentPointToMove == _basePointToMove)
+        { 
+            _currentPointToMove.position = position;
+            OnStartMove?.Invoke();
+        }
+        _basePointToMove.position = position;
+    }
 
     private void SetNewPoint(GameObject target)
     {
@@ -33,7 +43,6 @@ public class HeroMove : MonoBehaviour
         {
             if (target.GetComponent<Enemy>())
             {
-                Debug.Log("enemy found opponent");
                 target.GetComponent<Enemy>().FoundOpponent();
                 _currentPointToMove = target.transform;
             }
@@ -87,11 +96,13 @@ public class HeroMove : MonoBehaviour
                 transform.LookAt(_currentPointToMove);
                 Vector2 pos = new Vector2(transform.position.x, transform.position.z);
                 pos = Vector2.MoveTowards(pos, new Vector2(_currentPointToMove.position.x, _currentPointToMove.position.z), _moveSpeed);
+                Debug.Log(_moveSpeed);
                 transform.position = new Vector3(pos.x, transform.position.y, pos.y);
             }
             yield return new WaitForFixedUpdate();
         }
     }
+
     private bool CheckDistance(Vector3 currentPosition, Vector3 targetPosition)
     {
         return Vector2.Distance(new Vector2(currentPosition.x, currentPosition.z), new Vector2(targetPosition.x, targetPosition.z)) <= _arrivalToPointRange;

@@ -12,6 +12,9 @@ public class Gym : Tower
 
     private ViewPanel _viewPanel;
     private Hero _hero;
+    private TerrainCollider _terrainCollider;
+
+    public Hero Hero => _hero;
 
     public void SpawnHero()
     {
@@ -47,6 +50,7 @@ public class Gym : Tower
         if (transform.parent)
         {
             _viewPanel = transform.parent.GetComponent<TowerSpot>().ViewPanel;
+            _terrainCollider = transform.parent.GetComponent<TowerSpot>().Collider;
             SpawnHero();
         }
     }

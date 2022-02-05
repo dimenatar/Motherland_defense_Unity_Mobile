@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _model: {fileID: 5163323238438279653, guid: f3b9b8e68bdbb8342904924257619036, type: 3}
   _name: 3
-  _radius: 2
+  _radius: 4
   _damage: 0
   _cost: 40
   _reloadTime: 5

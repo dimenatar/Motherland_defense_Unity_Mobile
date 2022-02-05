@@ -14,14 +14,29 @@ public class TowerSpot : MonoBehaviour, IClickable
     [SerializeField] private GameObject _towerRangeImage;
     [SerializeField] private TowerFactory _towerFactory;
     [SerializeField] private ViewPanel _viewPanel;
+    [SerializeField] private ChangeHeroBasePoint _changeHeroBasePoint;
 
     private Tower _tower = null;
     private BoxCollider _collider;
     private UserMoney _money;
     private bool _isSelected;
+    private TerrainCollider _terrainCollider;
+    private bool _canDeselect = true;
 
     public UserMoney Money => _money;
     public ViewPanel ViewPanel => _viewPanel;
+    public TerrainCollider Collider => _terrainCollider;
+    public GameObject TowerRange => _towerRangeImage;
+
+    public void PreventDeselect()
+    {
+        _canDeselect = false;
+    }
+
+    public void AllowDeselect()
+    {
+        _canDeselect = true;
+    }
 
     public void ObjectClick()
     {
@@ -30,6 +45,14 @@ public class TowerSpot : MonoBehaviour, IClickable
             _isSelected = true;
             _towerRangeImage.SetActive(true);
             _towerRangeImage.transform.localScale = new Vector2(_tower.Data.Radius, _tower.Data.Radius)/20;
+            if (_tower.Data.Name == TowerList.Gym)
+            {
+                _changeHeroBasePoint.EnableChangePointButton(transform.Find(_tower.Data.Name.ToString()).GetComponent<Gym>().Hero);
+            }
+            else
+            {
+                _changeHeroBasePoint.DisableChangePointButton();
+            }
             _viewPanel.ShowTowerPanel(_tower.Data.Name.ToString(), _tower.Data.Damage.ToString(), _tower.Data.Radius.ToString(), _tower.Data.ReloadTime.ToString(), gameObject);
         }
         else
@@ -48,11 +71,12 @@ public class TowerSpot : MonoBehaviour, IClickable
         _tower = null;
     }
 
-    public void Initialise(TowerFactory towerFactory, ViewPanel viewPanel, UserMoney userMoney)
+    public void Initialise(TowerFactory towerFactory, ViewPanel viewPanel, UserMoney userMoney, TerrainCollider terrainCollider)
     {
         _towerFactory = towerFactory;
         _viewPanel = viewPanel;
         _money = userMoney;
+        _terrainCollider = terrainCollider;
     }
 
     public void CreateTower(ITowerLoader towerLoader)
@@ -65,7 +89,7 @@ public class TowerSpot : MonoBehaviour, IClickable
 
     public void Deselect()
     {
-        if (_tower && _isSelected)
+        if (_tower && _isSelected && _canDeselect)
         {
             _viewPanel.HidePanel();
             _towerRangeImage.SetActive(false);

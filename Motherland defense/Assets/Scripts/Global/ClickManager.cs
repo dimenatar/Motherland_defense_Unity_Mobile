@@ -19,6 +19,7 @@ public class ClickManager : MonoBehaviour
             ClickOnScreen();
         }
     }
+
     private void ClickOnScreen()
     {
         
@@ -50,8 +51,13 @@ public class ClickManager : MonoBehaviour
             }
 
         }
+        else
+        {
+            OnObjectClick?.Invoke();
+        }
         clickedObject = null;
     }
+
     private void FilterRaycast(ref RaycastHit[] raycasts)
     {
         List<RaycastHit> raycastList = raycasts.ToList();

@@ -57,7 +57,7 @@ public class DragAndDropBuldingSpot : MonoBehaviour
         {
             _cameraMove.StopMove();
             _spot = Instantiate(_spotPrefab, GetRayCoordinate(Vector3.zero), Quaternion.identity);
-            _spot.GetComponent<TowerSpot>().Initialise(_towerFactory, _viewPanel, _userMoney);
+            _spot.GetComponent<TowerSpot>().Initialise(_towerFactory, _viewPanel, _userMoney, _terrainCollider);
             _spot.transform.SetParent(transform);
             _spot.AddComponent<TowerSpotCollisionChecker>();
             _spot.GetComponent<TowerSpotCollisionChecker>().OnCollisionWithBorder += ChangeStateToFalse;

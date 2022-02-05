@@ -731,6 +731,7 @@ GameObject:
   - component: {fileID: 3933637246224149144}
   - component: {fileID: 8895507893460677151}
   - component: {fileID: 2034657747441397473}
+  - component: {fileID: 7376442307159407862}
   m_Layer: 0
   m_Name: HeroPrefab
   m_TagString: Untagged
@@ -816,8 +817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4addce2d6da905c41a3173f49fd0a924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentTarget: {fileID: 0}
-  _enemies: []
 --- !u!114 &2526731173086908807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,8 +841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b319905387a55f40aa7f0b7986170ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentPointToMove: {fileID: 0}
-  _arrivalToPointRange: 0
+  _basePointToMove: {fileID: 0}
 --- !u!114 &2526731173086908805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,6 +988,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &7376442307159407862
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526731173044857286}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!1 &2526731173044857296
 GameObject:
   m_ObjectHideFlags: 0
