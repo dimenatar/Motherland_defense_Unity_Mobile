@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerImage : MonoBehaviour, IClickable, ITowerLoader
 {
     [SerializeField] TowerData _towerData;
+    [SerializeField] private Text _costText;
+
     private UserMoney _money;
     private TowerSpot _towerSpot;
 
@@ -28,5 +31,6 @@ public class TowerImage : MonoBehaviour, IClickable, ITowerLoader
     {
         _towerSpot = transform.parent.parent.gameObject.GetComponent<TowerSpot>();
         _money = _towerSpot.Money;
+        _costText.text = _towerData.Cost.ToString();
     }
 }

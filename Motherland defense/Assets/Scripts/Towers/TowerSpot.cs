@@ -40,6 +40,14 @@ public class TowerSpot : MonoBehaviour, IClickable
         }
     }
 
+    public void RemoveTower()
+    {
+        Deselect();
+        _money.AddMoney(_tower.Data.Cost);
+        Destroy(_tower.gameObject);
+        _tower = null;
+    }
+
     public void Initialise(TowerFactory towerFactory, ViewPanel viewPanel, UserMoney userMoney)
     {
         _towerFactory = towerFactory;

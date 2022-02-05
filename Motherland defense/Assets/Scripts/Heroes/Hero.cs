@@ -38,6 +38,12 @@ public class Hero : MonoBehaviour, ICharacter
         OnBasePointReached?.Invoke();
     }
 
+    public void KillHero()
+    {
+        OnDied?.Invoke();
+        Destroy(gameObject);
+    }
+
     public void ChangeTarget()
     {
         Debug.Log("ChangeTarget");

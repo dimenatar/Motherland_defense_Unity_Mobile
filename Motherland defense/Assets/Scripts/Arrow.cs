@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-
 public class Arrow : MonoBehaviour
 {
     [SerializeField] private float _speed;

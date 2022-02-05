@@ -20970,7 +20970,7 @@ MonoBehaviour:
   _viewPanel: {fileID: 1752071543}
   _allowedPlace: {fileID: 21300000, guid: 96fff47c0e5bd37479baaf4d1d9e24c6, type: 3}
   _badPlace: {fileID: 21300000, guid: 0f5a4edaf66d2f142a9c97d3f32a9db3, type: 3}
-  _defaultPlace: {fileID: 0}
+  _defaultPlace: {fileID: 21300000, guid: faa512f8c0b2a744aa287e6e5d4c5925, type: 3}
   _spotPrefab: {fileID: 1129285552957038021, guid: e2e9c55901a0a0a4aa93f66f74cbfaa4, type: 3}
   _totalAmount: 5
   _amountText: {fileID: 1170494306}
@@ -20980,7 +20980,7 @@ MonoBehaviour:
   _spotImage: {fileID: 146417409}
   _UICamera: {fileID: 547138386}
   _cameraMove: {fileID: 1189120274}
-  _stateImage: {fileID: 0}
+  _stateImage: {fileID: 941735617}
 --- !u!114 &1752071552
 MonoBehaviour:
   m_ObjectHideFlags: 0

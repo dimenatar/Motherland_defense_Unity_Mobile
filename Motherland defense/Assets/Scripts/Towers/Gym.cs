@@ -11,6 +11,7 @@ public class Gym : Tower
     [SerializeField] private float arrivalToPointRange;
 
     private ViewPanel _viewPanel;
+    private Hero _hero;
 
     public void SpawnHero()
     {
@@ -22,6 +23,11 @@ public class Gym : Tower
         Invoke(nameof(SpawnHero), _spawnTime);
     }
 
+    private void OnDestroy()
+    {
+        _hero.KillHero();
+    }
+
     private GameObject InstantiateHero()
     {
         return Instantiate(Resources.Load<GameObject>("HeroPrefab"), _spawnPoint.position, transform.rotation);
@@ -29,6 +35,7 @@ public class Gym : Tower
 
     private void SetUpHero(GameObject hero)
     {
+        _hero = hero.GetComponent<Hero>();
         hero.transform.position = _spawnPoint.position;
         hero.SetActive(true);
         hero.GetComponent<Hero>().InitializeHero(_characterData ,basePointToMove, arrivalToPointRange, _viewPanel);
