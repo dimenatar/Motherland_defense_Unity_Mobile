@@ -10,7 +10,7 @@ public class HeroMove : MonoBehaviour
     private Transform _currentPointToMove;
     private float _arrivalToPointRange;
     private float _moveSpeed;
-    private Hero hero;
+    private Hero _hero;
 
     public void Initialise(Transform basePointToMove, float moveSpeed, float arrivalToPointRange)
     {
@@ -18,10 +18,12 @@ public class HeroMove : MonoBehaviour
         _moveSpeed = moveSpeed;
         _arrivalToPointRange = arrivalToPointRange;
 
-        hero = GetComponent<Hero>();
-        hero.OnTargetChanged += SetNewPoint;
-        hero.OnStartFight += StopMove;
-        hero.OnDied += StopMove;
+        _hero = GetComponent<Hero>();
+        _hero.OnTargetChanged += SetNewPoint;
+        _hero.OnStartFight += StopMove;
+        _hero.OnDied += StopMove;
+        _hero.OnBasePointReached += StopMove;
+        _hero.OnDied += ChangeRotationToZero;
         OnStartMove += StartMove;
         SetNewPoint(null);
     }
@@ -74,6 +76,11 @@ public class HeroMove : MonoBehaviour
         StopCoroutine(nameof(MoveToPoint));
     }   
 
+    private void ChangeRotationToZero()
+    {
+        transform.rotation = Quaternion.Euler(Vector3.zero);
+    }
+
     private IEnumerator MoveToPoint()
     {
         while (true)
@@ -83,21 +90,25 @@ public class HeroMove : MonoBehaviour
                 if (_currentPointToMove.gameObject.GetComponent<Enemy>())
                 {
                     _currentPointToMove.gameObject.GetComponent<Enemy>().StartFightWith(gameObject);
-                    hero.OnStartFight?.Invoke(_currentPointToMove.gameObject);
+                    _hero.OnStartFight?.Invoke(_currentPointToMove.gameObject);
                 }
                 else
                 {
-                    GetComponent<Hero>().ReachBasePoint();
                 }
-                StopMove(null);
+                GetComponent<Hero>().ReachBasePoint();
+                //StopMove(null);
             }
             else
             {
                 transform.LookAt(_currentPointToMove);
-                Vector2 pos = new Vector2(transform.position.x, transform.position.z);
-                pos = Vector2.MoveTowards(pos, new Vector2(_currentPointToMove.position.x, _currentPointToMove.position.z), _moveSpeed);
-                Debug.Log(_moveSpeed);
-                transform.position = new Vector3(pos.x, transform.position.y, pos.y);
+                transform.eulerAngles = new Vector3(0,transform.eulerAngles.y,0);
+
+                //Vector2 pos = new Vector2(transform.position.x, transform.position.z);
+                //pos = Vector2.MoveTowards(pos, new Vector2(_currentPointToMove.position.x, _currentPointToMove.position.z), _moveSpeed);
+                
+                //transform.position = new Vector3(pos.x, transform.position.y, pos.y);
+
+                transform.position = Vector3.MoveTowards(transform.position, _currentPointToMove.position, _moveSpeed);
             }
             yield return new WaitForFixedUpdate();
         }

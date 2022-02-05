@@ -13,13 +13,9 @@ public class UICharacteristic : MonoBehaviour
         _slider.maxValue = float.Parse(value);
     }
 
-
-
     public void SetValues(string value)
     {
         _slider.value = float.Parse(value);
         _value.text = value;
     }
-
-
 }

@@ -56,12 +56,12 @@ public class UserInterface : MonoBehaviour
 
     private void SetCharacterValues(string speed, string damage, string health, string name)
     {
-        _characterPanel.SetValues(speed, damage, health, name);
+        _characterPanel.SetValues((float.Parse(speed)*10).ToString(), damage, health, name);
     }
 
     private void SetCharacterMaxValues()
     {
-        float maxSpeed = _characters.Characters.Select(speed => speed.Speed).Max();
+        float maxSpeed = _characters.Characters.Select(speed => speed.Speed).Max()*10;
         int maxCharacterDamage = _characters.Characters.Select(damage => damage.Damage).Max();
         int maxHealth = _characters.Characters.Select(health => health.Health).Max();
         _characterPanel.SetMaxValues(maxSpeed.ToString(), maxCharacterDamage.ToString(), maxHealth.ToString());
