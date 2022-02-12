@@ -9892,6 +9892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e9559691df6314280944e2618706f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyCounter: {fileID: 1311285340}
 --- !u!65 &1246819966
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17899,7 +17900,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816701874}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0.8}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1046784261}
@@ -17907,8 +17908,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -539.2, y: -0.3}
-  m_SizeDelta: {x: 50, y: 120}
+  m_AnchoredPosition: {x: -586.9, y: 0}
+  m_SizeDelta: {x: 100, y: 240}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1816701876
 MonoBehaviour:

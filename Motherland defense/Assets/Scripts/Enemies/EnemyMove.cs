@@ -39,6 +39,7 @@ public class EnemyMove : MonoBehaviour
         _targetCheckPoint = targetCheckPoint;
         StartMove();
     }
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();

@@ -12,7 +12,7 @@ public class EnemyCheckPoint : MonoBehaviour
     {
         if (other.GetComponent<EnemyMove>())
         {
-            other.GetComponent<EnemyMove>().ChangeNextCheckPoint(checkPointOrderNumber+1);
+            other.GetComponent<EnemyMove>().ChangeNextCheckPoint(other.GetComponent<EnemyMove>().TargetCheckPointIndex + 1);
         }
     }
 }

@@ -13256,7 +13256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1043785141
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27036,6 +27036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e9559691df6314280944e2618706f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyCounter: {fileID: 0}
 --- !u!65 &1961376540
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27691,8 +27692,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -537, y: 0}
-  m_SizeDelta: {x: 50, y: 120}
+  m_AnchoredPosition: {x: -586.9, y: 0}
+  m_SizeDelta: {x: 100, y: 240}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &2139367411
 MonoBehaviour:

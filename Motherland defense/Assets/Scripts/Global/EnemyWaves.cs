@@ -15,33 +15,37 @@ public class EnemyWaves : MonoBehaviour
 
     public float StartOffense()
     {
-        _startWave.OnStartOffense -= StartOffense;
+        _startWave.OnStartWave += StartNewWave;
         _timer.Initialise(_waveActivatePause);
         StartNewWave();
         return _waveActivatePause;
     }
+
     public void EndOffense()
     {
-        
+        _startWave.EndOffense();
     }
+
     //убрать потом
     private void Start()
     {
         _timer = GetComponent<Timer>();
         _timer.OnTime += StartNewWave;
-        _startWave.OnStartOffense += StartOffense;
+        _startWave.OnStartWave += StartOffense;
     }
 
-    private void StartNewWave()
+    private float StartNewWave()
     {
         _waveIndex++;
         if (_waveIndex >= _enemyWaves.Count)
         {
             EndOffense();
+            return 0;
         }
         else
         {
             _enemyWaves[_waveIndex].StartWave();
+            return _enemyWaves[_waveIndex].WavePause;
         }
     }
 }

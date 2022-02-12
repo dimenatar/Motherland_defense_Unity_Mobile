@@ -10,7 +10,7 @@ public class StartWaves : MonoBehaviour, IClickable
     [SerializeField] Timer _timer;
 
     public delegate float StartOffense();
-    public event StartOffense OnStartOffense;
+    public event StartOffense OnStartWave;
     public event Action OnEndOffense;
 
     private float? _timeToFill;
@@ -21,7 +21,7 @@ public class StartWaves : MonoBehaviour, IClickable
     {
         if (!isStarted)
         {
-            _timeToFill = OnStartOffense?.Invoke();
+            _timeToFill = OnStartWave?.Invoke();
             if (_timeToFill != null)
             {
                 _timer.Initialise(_timeToFill.Value);
@@ -36,9 +36,10 @@ public class StartWaves : MonoBehaviour, IClickable
         StopCoroutine(nameof(FillCircle));
     }
 
-    private void RestartCircle()
+    private float RestartCircle()
     {
         _startWaveImage.fillAmount = 0;
+        return 0;
     }
 
     private void Start()

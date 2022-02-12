@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EndTrigger : MonoBehaviour
 {
+    [SerializeField] private EnemyCounter _enemyCounter;
+
     public delegate void EnemyPassed(Enemy enemy);
     public event EnemyPassed OnEnemyPassed;
 
@@ -11,6 +13,7 @@ public class EndTrigger : MonoBehaviour
     {
         if (other.GetComponent<Enemy>())
         {
+            _enemyCounter.ReduceEnemy();
             OnEnemyPassed?.Invoke(other.GetComponent<Enemy>());
             Destroy(other.gameObject);
         }

@@ -20,7 +20,7 @@ public class AnimeSpawnZombie : MonoBehaviour
                 GameObject zombie;
                 for (int i = 0; i < _spawnPoints.Count; i++)
                 {
-                    zombie = _enemyFactory.SpawnEnemy(CharacterList.Zombie);
+                    zombie = _enemyFactory.SpawnEnemy(CharacterList.Zombie, _spawnPoints[i]);
                     zombie.transform.position = _spawnPoints[i].position;
                     zombie.GetComponent<EnemyMove>().ChangeNextCheckPoint(GetComponent<EnemyMove>().TargetCheckPointIndex);
                     _spawnedAmount++;

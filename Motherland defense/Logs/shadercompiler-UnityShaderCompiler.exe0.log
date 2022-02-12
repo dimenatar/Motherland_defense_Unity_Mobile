@@ -1,3 +1,6 @@
 Base path: 'C:/Program Files/Unity/Hub/Editor/2020.3.14f1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2020.3.14f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
 
+Cmd: compileComputeKernel
+  insize=925 file=C:/Users/dimenatar/Desktop/Work/MotherlandDefense/Motherland_defense_Unity_Mobile/Motherland defense/Library/PackageCache/com.unity.terrain-tools@3.0.2-preview.3/Editor/TerrainTools/Resources/Height.compute kernel=HeightRemap cachingPP=1 ppOnly=0 stripLineD=0 buildPlatform=13 km=<UNITY_VERSION=202039> pKW=UNITY_NO_DXT5nm UNITY_ENABLE_REFLECTION_BUFFERS UNITY_NO_CUBEMAP_ARRAY UNITY_NO_SCREENSPACE_SHADOWS UNITY_PBS_USE_BRDF2 UNITY_COLORSPACE_GAMMA UNITY_LIGHTMAP_DLDR_ENCODING uKW=SHADER_STAGE_COMPUTE platform=d3d11 flags=0 ok=1 outsize=1119
+
