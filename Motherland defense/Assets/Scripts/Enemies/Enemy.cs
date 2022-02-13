@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour, ICharacter
         OnDestroed?.Invoke();
     }
 
-    public void Initialize(CharacterData data, EnemyCheckPoints enemyCheckPoints, EnemyCheckPoint targetCheckPoint, UserMoney money, ViewPanel viewPanel)
+    public void Initialize(CharacterData data, EnemyCheckPoints enemyCheckPoints, Vector3 targetCheckPoint, UserMoney money, ViewPanel viewPanel)
     {
         _data = data;
         _enemyName = data.Name;

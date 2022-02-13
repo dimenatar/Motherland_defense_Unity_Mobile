@@ -27,7 +27,7 @@ public class EnemyFactory : MonoBehaviour
         enemy.transform.LookAt(_enemyCheckPoints.GetEnemyCheckPointByIndex(0).transform);
         enemy.transform.SetParent(transform);
         Debug.Log($"{gameObject.name} {enemy.name} {_enemyCheckPoints}");
-        enemy.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(enemyName => enemyName.Name == type).First(), _enemyCheckPoints, _enemyCheckPoints.GetEnemyCheckPointByIndex(_startCheckPointIndex), _money, _viewPanel);
+        enemy.GetComponent<Enemy>().Initialize(_characterBundle.Characters.Where(enemyName => enemyName.Name == type).First(), _enemyCheckPoints, _enemyCheckPoints.GetEnemyCheckPointByIndex(_startCheckPointIndex).transform.position, _money, _viewPanel);
         _levelStatistics.AddEnemy();
         SubscribeEnemy(enemy.GetComponent<Enemy>());
         return enemy;

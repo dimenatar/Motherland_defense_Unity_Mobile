@@ -13,30 +13,39 @@ public class EnemyMove : MonoBehaviour
     private float _speed;
     private int _targetCheckPointIndex;
     private EnemyCheckPoints _enemyCheckPoints;
-    private EnemyCheckPoint _targetCheckPoint;
+    //private EnemyCheckPoint _targetCheckPoint;
     private Enemy _enemy;
     private Rigidbody _rigidbody;
+    private Vector3 _targetPoint;
 
     public int TargetCheckPointIndex => _targetCheckPointIndex;
 
-    public void ChangeNextCheckPoint(int index)
+    public void ChangeNextCheckPoint(EnemyCheckPoint checkPoint)
     {
-        _targetCheckPoint = _enemyCheckPoints.GetEnemyCheckPointByIndex(index);
-        _targetCheckPointIndex = index;
-        if (_targetCheckPoint)
+        int index = _enemyCheckPoints.GetCheckPointIndex(checkPoint);
+        if (index != -1)
         {
-            transform.LookAt(_targetCheckPoint.transform.position);
+            _targetCheckPointIndex = index + 1;
+            _targetPoint = _enemyCheckPoints.GetNextCheckPointPosition(checkPoint);
+            transform.LookAt(_targetPoint);
         }
     }
 
-    public void InitializeMove(EnemyCheckPoints enemyCheckPoints, float speed, EnemyCheckPoint targetCheckPoint)
+    public void ChangeNextCheckPoint(int index)
+    {
+        _targetPoint = _enemyCheckPoints.GetNextCheckPointPosition(index);
+        _targetCheckPointIndex = index;
+        transform.LookAt(_targetPoint);
+    }
+
+    public void InitializeMove(EnemyCheckPoints enemyCheckPoints, float speed, Vector3 targetCheckPoint)
     {
         _enemyCheckPoints = enemyCheckPoints;
         _speed = speed;
         _enemy = GetComponent<Enemy>();
         _enemy.OnDied += StopMove;
         _enemy.OnFoundOpponent += StopMove;
-        _targetCheckPoint = targetCheckPoint;
+        _targetPoint = targetCheckPoint;
         StartMove();
     }
 
@@ -47,7 +56,6 @@ public class EnemyMove : MonoBehaviour
 
     public void StartMove()
     {
-        Debug.Log(gameObject.name +  " Start move");
         OnStartMove?.Invoke();
         StartCoroutine(nameof(Move));
     }
@@ -62,8 +70,8 @@ public class EnemyMove : MonoBehaviour
     {
         while (true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _targetCheckPoint.transform.position, _speed);
-            transform.LookAt(_targetCheckPoint.transform.position);
+            transform.LookAt(_targetPoint);
+            transform.position = Vector3.MoveTowards(transform.position, _targetPoint, _speed);
             yield return new WaitForFixedUpdate();
         }
     }
