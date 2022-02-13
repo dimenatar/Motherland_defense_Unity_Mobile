@@ -31,9 +31,13 @@ public class Health : MonoBehaviour
         OnHealthChanged?.Invoke(value);
         if (_currentHealth <= 0)
         {
+            SetText(0);
             OnLose?.Invoke();
         }
-        SetText(_currentHealth);
+        else
+        {
+            SetText(_currentHealth);
+        }
     }
 
     private void Awake()

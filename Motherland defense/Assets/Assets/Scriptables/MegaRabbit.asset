@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ecead4243937d174b9d8641898a865cf, type: 3}
-  m_Name: AnimeData
+  m_Name: MegaRabbit
   m_EditorClassIdentifier: 
-  _model: {fileID: 5558902232958245595, guid: 9170c06e5d6126e4e9be1c587605cc2d, type: 3}
-  _name: 1
-  _points: 3
-  _pauseBetweenAttacks: 2
-  _animationSpeed: 1
-  _moneyAmountOnDeath: 30
+  _model: {fileID: 3740560785446900745, guid: 6e384187fd68ac8469263f752cb67bc8, type: 3}
+  _name: 4
+  _points: 20
+  _pauseBetweenAttacks: 3
+  _animationSpeed: 0.5
+  _moneyAmountOnDeath: 350
   _hitSound: {fileID: 8300000, guid: cafe5d2014e1fed4c89560601d0ca8e6, type: 3}
-  _attackSound: {fileID: 8300000, guid: 9a0e5442da286fd428a7121ed957e07d, type: 3}
-  _dieSound: {fileID: 8300000, guid: 9cd5ee0471c122040aed5d992fdd84b6, type: 3}
-  _speed: 0.012
-  _damage: 3
-  _health: 25
+  _attackSound: {fileID: 8300000, guid: 82e73e03abd5e4a46a3afa753ebcce05, type: 3}
+  _dieSound: {fileID: 8300000, guid: b10dffd0260b8284d925d8e840a9ba7f, type: 3}
+  _speed: 0.08
+  _damage: 30
+  _health: 120

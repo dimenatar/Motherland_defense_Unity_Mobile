@@ -520,7 +520,7 @@ PrefabInstance:
       objectReference: {fileID: 2060414209}
     - target: {fileID: 9063026811642680090, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
       propertyPath: _freezeForce
-      value: 60
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 9063026811642680090, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
       propertyPath: _freezeCapsule
@@ -528,7 +528,7 @@ PrefabInstance:
       objectReference: {fileID: 2060414209}
     - target: {fileID: 9063026811642680090, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
       propertyPath: _slowDownDuration
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9063026811642680090, guid: 77a599bd67f72e24999e1d5d60f433d0, type: 3}
       propertyPath: _shotStartPosition

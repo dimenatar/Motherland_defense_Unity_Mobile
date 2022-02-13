@@ -24,6 +24,7 @@ public class EnemyCheckPoints : MonoBehaviour
 
     public Vector3 GetNextCheckPointPosition(EnemyCheckPoint current)
     {
+        //
         return GetRandomCheckPointPosition(checkPoints[checkPoints.FindIndex(c => c == current)+1]);
     }
 
@@ -34,11 +35,8 @@ public class EnemyCheckPoints : MonoBehaviour
 
     private Vector3 GetRandomCheckPointPosition(EnemyCheckPoint point)
     {
-        Debug.Log($"start = {point.transform.position}");
-        //Vector3 p1 = point.GetComponent<CapsuleCollider>().b
-        Vector3 p = point.transform.forward.normalized * UnityEngine.Random.Range(-point.GetComponent<CapsuleCollider>().height / 2, point.GetComponent<CapsuleCollider>().height / 2);
-        Debug.DrawLine(point.transform.position, p + point.transform.position, Color.red, 5);
-        Debug.Log($"end = {p + point.transform.position}");
-        return p + point.transform.position;
+        //Vector3 p = point.transform.forward.normalized * UnityEngine.Random.Range(-point.GetComponent<CapsuleCollider>().height / 2, point.GetComponent<CapsuleCollider>().height / 2);
+        //Debug.DrawLine(point.transform.position, p + point.transform.position, Color.red, 5);
+        return point.transform.forward.normalized * UnityEngine.Random.Range(-point.GetComponent<CapsuleCollider>().height / 2, point.GetComponent<CapsuleCollider>().height / 2) + point.transform.position;
     }
 }

@@ -35,10 +35,22 @@ public class Arrow : MonoBehaviour
 
     public void HitEnemy()
     {
-        _target.GetComponent<Enemy>().TakeDamage(_damage);
-        _isHit = true;
-        Destroy(gameObject);
+        try
+        {
+            _target.GetComponent<Enemy>().TakeDamage(_damage);
+            _isHit = true;
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+        finally
+        {
+            Destroy(gameObject);
+        }
     }
+
     public void SetTarget(GameObject target, int damage)
     {
         _target = target;

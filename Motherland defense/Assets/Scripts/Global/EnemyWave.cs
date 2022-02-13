@@ -11,10 +11,12 @@ public class EnemyWave : MonoBehaviour
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private EnemyFactory _enemyFactory;
     [SerializeField] private List<EnemyWave> _parallelWaves;
-    public List<CharacterList> Enemies => _enemies;
-    public float WavePause => _spawnPause * (_enemies.Count + 1);
-
+    [SerializeField] private float _wavePause;
     private int _currentEnemyIndex = -1;
+
+    public List<CharacterList> Enemies => _enemies;
+
+    public float WavePause => _wavePause;
 
     public void StartWave()
     {
@@ -23,6 +25,13 @@ public class EnemyWave : MonoBehaviour
         {
             wave.StartWave();
         }
+    }
+
+    public int GetEnemyCount()
+    {
+        int counter = 0;
+       _parallelWaves.ForEach(wave => counter += wave.Enemies.Count);
+        return counter + _enemies.Count;
     }
 
     public void StopWave()
@@ -34,7 +43,6 @@ public class EnemyWave : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(_spawnPause);
             if (_currentEnemyIndex >= _enemies.Count-1)
             {
                 StopWave();
@@ -44,6 +52,7 @@ public class EnemyWave : MonoBehaviour
                 _currentEnemyIndex++;
                 SpawnEnemy();
             }
+            yield return new WaitForSeconds(_spawnPause);
         }
     }
 

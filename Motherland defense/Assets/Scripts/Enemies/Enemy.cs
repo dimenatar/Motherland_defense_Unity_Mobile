@@ -46,6 +46,7 @@ public class Enemy : MonoBehaviour, ICharacter
         GetComponent<EnemyView>().Initialise(viewPanel);
         OnDied += AddUserMoney;
         OnDied += ChangeNameToDied;
+        OnDied += AddDestroyEffect;
     }
 
     public int GetPoints()
@@ -82,6 +83,11 @@ public class Enemy : MonoBehaviour, ICharacter
                 OnDied?.Invoke();
             }
         }
+    }
+
+    private void AddDestroyEffect()
+    {
+        gameObject.AddComponent<DestroyBodyAfterTime>();
     }
 
     private void RemoveComponents()

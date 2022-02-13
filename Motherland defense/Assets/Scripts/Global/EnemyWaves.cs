@@ -7,7 +7,7 @@ public class EnemyWaves : MonoBehaviour
 {
     [SerializeField] private StartWaves _startWave;
     [SerializeField] private List<EnemyWave> _enemyWaves;
-    [SerializeField] private float _waveActivatePause;
+    //[SerializeField] private float _waveActivatePause;
     private int _waveIndex = -1;
     private Timer _timer;
 
@@ -16,9 +16,9 @@ public class EnemyWaves : MonoBehaviour
     public float StartOffense()
     {
         _startWave.OnStartWave += StartNewWave;
-        _timer.Initialise(_waveActivatePause);
+        _timer.Initialise(_enemyWaves[0].WavePause);
         StartNewWave();
-        return _waveActivatePause;
+        return _enemyWaves[0].WavePause;
     }
 
     public void EndOffense()
@@ -44,6 +44,10 @@ public class EnemyWaves : MonoBehaviour
         }
         else
         {
+            if (_waveIndex == _enemyWaves.Count -1)
+            {
+                EndOffense();
+            }
             _enemyWaves[_waveIndex].StartWave();
             return _enemyWaves[_waveIndex].WavePause;
         }

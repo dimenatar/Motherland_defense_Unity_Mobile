@@ -15,7 +15,7 @@ MonoBehaviour:
   _model: {fileID: 6137243549709688209, guid: 9f850540629d1574185a6ed006d54888, type: 3}
   _name: 2
   _radius: 7
-  _damage: 15
+  _damage: 10
   _cost: 50
   _reloadTime: 4
   _shotSound: {fileID: 8300000, guid: d8574e460cfa19f4bbd8dd4d3bf7b39d, type: 3}

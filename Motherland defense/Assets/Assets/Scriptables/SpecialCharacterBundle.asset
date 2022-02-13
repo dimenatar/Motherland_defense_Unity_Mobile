@@ -9,13 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37fbc1de458f6e747a74d6733a3ce2e8, type: 3}
-  m_Name: GymData
+  m_Script: {fileID: 11500000, guid: 9cf6abe90388e704395d386630633df9, type: 3}
+  m_Name: SpecialCharacterBundle
   m_EditorClassIdentifier: 
-  _model: {fileID: 5163323238438279653, guid: f3b9b8e68bdbb8342904924257619036, type: 3}
-  _name: 3
-  _radius: 8
-  _damage: 0
-  _cost: 40
-  _reloadTime: 5
-  _shotSound: {fileID: 0}
+  _characters:
+  - {fileID: 11400000, guid: 65ae8623c67ac7648a6af0a740e240e9, type: 2}

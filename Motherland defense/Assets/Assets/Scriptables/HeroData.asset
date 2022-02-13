@@ -21,6 +21,6 @@ MonoBehaviour:
   _hitSound: {fileID: 8300000, guid: cafe5d2014e1fed4c89560601d0ca8e6, type: 3}
   _attackSound: {fileID: 8300000, guid: 6702e370b8c299d41a2c481e66f7ee51, type: 3}
   _dieSound: {fileID: 8300000, guid: ebfa0746b8bd2f64294e611f422c6f2c, type: 3}
-  _speed: 0.15
+  _speed: 0.18
   _damage: 1
   _health: 10

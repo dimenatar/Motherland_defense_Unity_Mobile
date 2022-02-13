@@ -14,13 +14,11 @@ public class EnemyCounter : MonoBehaviour
     public void AddEnemies(int amount)
     {
         _enemyCounter += amount;
-        Debug.Log(_enemyCounter);
     }
 
     public void ReduceEnemy()
     {
         _enemyCounter--;
-        Debug.Log(_enemyCounter);
         if (_enemyCounter == 0)
         {
             OnCounterEmpty?.Invoke();
@@ -29,6 +27,6 @@ public class EnemyCounter : MonoBehaviour
 
     private void Start()
     {
-        _waves.Waves.ForEach(enemy => AddEnemies(enemy.Enemies.Count));
+        _waves.Waves.ForEach(wave => AddEnemies(wave.GetEnemyCount()));
     }
 }

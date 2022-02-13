@@ -25,6 +25,7 @@ public class Hero : MonoBehaviour, ICharacter
     {
         OnDied += RenameHero;
         OnDied += RemoveScripts;
+        OnDied += AddDestroyEffect;
         _health = characterData.Health;
         _characterData = characterData;
         GetComponent<HeroMove>().Initialise(basePointToMove, characterData.Speed, arrivalToPointRange);
@@ -120,6 +121,11 @@ public class Hero : MonoBehaviour, ICharacter
     private void RenameHero()
     {
         gameObject.name = "Dead hero";
+    }
+
+    private void AddDestroyEffect()
+    {
+        gameObject.AddComponent<DestroyBodyAfterTime>();
     }
 
     private void RemoveScripts()

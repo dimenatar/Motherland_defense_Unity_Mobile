@@ -8,5 +8,6 @@ public enum CharacterList : uint
     Anime,
     Rabbit,
     Zombie,
+    MegaRabbit,
     Hero
 }

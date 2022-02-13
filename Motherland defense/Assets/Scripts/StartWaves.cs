@@ -22,9 +22,14 @@ public class StartWaves : MonoBehaviour, IClickable
         if (!isStarted)
         {
             _timeToFill = OnStartWave?.Invoke();
-            if (_timeToFill != null)
+            if (_timeToFill != null && _timeToFill != -1)
             {
                 _timer.Initialise(_timeToFill.Value);
+            }
+            else if (_timeToFill == -1)
+            {
+                StopCircle();
+                return;
             }
             isStarted = true;
             StartCoroutine(nameof(FillCircle));
@@ -33,7 +38,14 @@ public class StartWaves : MonoBehaviour, IClickable
 
     public void EndOffense()
     {
+        _startWaveImage.fillAmount = 0;
         StopCoroutine(nameof(FillCircle));
+    }
+
+    private void StopCircle()
+    {
+        StopCoroutine(nameof(FillCircle));
+        _startWaveImage.fillAmount = 0;
     }
 
     private float RestartCircle()
