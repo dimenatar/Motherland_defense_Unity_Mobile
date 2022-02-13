@@ -17,9 +17,9 @@ public class EnemyCheckPoints : MonoBehaviour
         return checkPoints[index];
     }
 
-    public Vector3 GetNextCheckPointPosition(int index)
+    public Vector3 GetCheckPointPosition(int index)
     {
-        return GetRandomCheckPointPosition(checkPoints[index + 1]);
+        return GetRandomCheckPointPosition(checkPoints[index]);
     }
 
     public Vector3 GetNextCheckPointPosition(EnemyCheckPoint current)
