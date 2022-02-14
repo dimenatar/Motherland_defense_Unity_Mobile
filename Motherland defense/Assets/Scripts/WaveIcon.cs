@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StartWaves : MonoBehaviour, IClickable
+public class WaveIcon : MonoBehaviour, IClickable
 {
     [SerializeField] Image _startWaveImage;
     [SerializeField] Timer _timer;
@@ -15,6 +15,7 @@ public class StartWaves : MonoBehaviour, IClickable
 
     private float? _timeToFill;
     private bool isStarted;
+
     public void Deselect() {}
 
     public void ObjectClick()
@@ -28,7 +29,7 @@ public class StartWaves : MonoBehaviour, IClickable
             }
             else if (_timeToFill == -1)
             {
-                StopCircle();
+                StopFilling();
                 return;
             }
             isStarted = true;
@@ -36,27 +37,18 @@ public class StartWaves : MonoBehaviour, IClickable
         }
     }
 
-    public void EndOffense()
+    public void StartFilling(float seconds)
     {
-        _startWaveImage.fillAmount = 0;
+        Debug.Log(seconds);
+        _timeToFill = seconds;
+        _timer.Initialise(_timeToFill.Value);
+        StartCoroutine(nameof(FillCircle));
+    }
+
+    public void StopFilling()
+    {
         StopCoroutine(nameof(FillCircle));
-    }
-
-    private void StopCircle()
-    {
-        StopCoroutine(nameof(FillCircle));
         _startWaveImage.fillAmount = 0;
-    }
-
-    private float RestartCircle()
-    {
-        _startWaveImage.fillAmount = 0;
-        return 0;
-    }
-
-    private void Start()
-    {
-        _timer.OnTime += RestartCircle;
     }
 
     private IEnumerator FillCircle()
@@ -64,6 +56,10 @@ public class StartWaves : MonoBehaviour, IClickable
         while (true)
         {
             _startWaveImage.fillAmount = _timer.GetPassedTime() / _timeToFill.Value;
+            if (_startWaveImage.fillAmount == 1)
+            {
+                StopFilling();
+            }
             yield return new WaitForFixedUpdate();
         }
     }

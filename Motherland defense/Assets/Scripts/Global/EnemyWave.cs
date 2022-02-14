@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyWave : MonoBehaviour
 {
+    public delegate void StartedWave(EnemyWave enemyWave);
+    public event StartedWave OnStartedWave;
+
     [Header("Place in right order")]
     [SerializeField] private List<CharacterList> _enemies;
     [Header("Seconds")]
@@ -12,6 +15,8 @@ public class EnemyWave : MonoBehaviour
     [SerializeField] private EnemyFactory _enemyFactory;
     [SerializeField] private List<EnemyWave> _parallelWaves;
     [SerializeField] private float _wavePause;
+    [SerializeField] private WaveIcon _waveIcon;
+
     private int _currentEnemyIndex = -1;
 
     public List<CharacterList> Enemies => _enemies;
@@ -20,6 +25,9 @@ public class EnemyWave : MonoBehaviour
 
     public void StartWave()
     {
+        _waveIcon.StopFilling();
+        _waveIcon.gameObject.SetActive(false);
+        OnStartedWave?.Invoke(this);
         StartCoroutine(nameof(SpawnNextEnemy));
         foreach (EnemyWave wave in _parallelWaves)
         {
@@ -38,6 +46,22 @@ public class EnemyWave : MonoBehaviour
     {
         StopCoroutine(nameof(SpawnNextEnemy));
     }
+
+    public void EnableIcon(float seconds)
+    {
+        _waveIcon.gameObject.SetActive(true);
+        _waveIcon.StartFilling(seconds);
+        foreach (EnemyWave wave in _parallelWaves)
+        {
+            wave.EnableIcon(seconds);
+        }
+    }
+
+    //public void EnableIcon(float seconds)
+    //{
+    //    _waveIcon.gameObject.SetActive(true);
+    //    _waveIcon.StartFilling(seconds);
+    //}
 
     private IEnumerator SpawnNextEnemy()
     {

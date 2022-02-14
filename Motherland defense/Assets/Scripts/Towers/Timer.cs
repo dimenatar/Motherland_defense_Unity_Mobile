@@ -15,6 +15,7 @@ public class Timer : MonoBehaviour
 
     public void Initialise(float delay) 
     {
+        _time = 0;
         _delay = delay;
         _isInitialised = true;
     }

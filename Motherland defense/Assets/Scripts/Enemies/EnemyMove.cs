@@ -34,7 +34,6 @@ public class EnemyMove : MonoBehaviour
     public void ChangeNextCheckPoint(int index)
     {
         _targetPoint = _enemyCheckPoints.GetCheckPointPosition(index);
-        Debug.Log(index);
         _targetCheckPointIndex = index;
         transform.LookAt(_targetPoint);
     }
