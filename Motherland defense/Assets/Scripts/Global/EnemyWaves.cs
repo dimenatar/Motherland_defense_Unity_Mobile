@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(Timer))]
 public class EnemyWaves : MonoBehaviour
 {
+    public event Action OnStartNewWave;
+
     [SerializeField] private List<EnemyWave> _enemyWaves;
     [SerializeField] private List<WaveIcon> _startOffenseIcons;
-    //[SerializeField] private float _waveActivatePause;
     private int _waveIndex = -1;
     private Timer _timer;
     private bool _isStartedOffense;
@@ -18,6 +20,7 @@ public class EnemyWaves : MonoBehaviour
     {
         _timer = GetComponent<Timer>();
         _timer.OnTime += StartNewWave;
+        _enemyWaves.ForEach(wave => wave.OnStartedWave += DisableCurrentWaveIcon);
         _enemyWaves.ForEach(wave => wave.OnStartedWave += EnableNextWaveIcon);
         _startOffenseIcons.ForEach(icon => icon.OnStartWave += StartOffense);
     }
@@ -26,7 +29,6 @@ public class EnemyWaves : MonoBehaviour
     {
         if (!_isStartedOffense)
         {
-            Debug.Log("start");
             _isStartedOffense = true;
             _timer.Initialise(_enemyWaves[0].WavePause);
             StartNewWave();
@@ -43,22 +45,36 @@ public class EnemyWaves : MonoBehaviour
         int currentIndex = _enemyWaves.FindIndex(wave => wave == current);
         if (currentIndex < _enemyWaves.Count-1)
         {
+          
             _enemyWaves[currentIndex + 1].EnableIcon(_enemyWaves[currentIndex].WavePause);
         }
     }
 
+    private void DisableCurrentWaveIcon(EnemyWave current)
+    {
+        int currentIndex = _enemyWaves.FindIndex(wave => wave == current);
+        _enemyWaves[currentIndex].DisableIcon();
+    }
+
     private float StartNewWave()
     {
-        _waveIndex++;
-        if (_waveIndex >= _enemyWaves.Count)
+        if (_waveIndex >= _enemyWaves.Count-1)
         {
+            StopWaves();
             return 0;
         }
         else
         {
+            OnStartNewWave?.Invoke();
+            _waveIndex++;
             _enemyWaves[_waveIndex].StartWave();
             _timer.Initialise(_enemyWaves[_waveIndex].WavePause);
             return _enemyWaves[_waveIndex].WavePause;
         }
+    }
+
+    private void StopWaves()
+    {
+        _timer.StopTimer();
     }
 }

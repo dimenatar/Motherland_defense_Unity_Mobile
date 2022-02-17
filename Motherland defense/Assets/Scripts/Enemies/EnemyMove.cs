@@ -13,21 +13,25 @@ public class EnemyMove : MonoBehaviour
     private float _speed;
     private int _targetCheckPointIndex;
     private EnemyCheckPoints _enemyCheckPoints;
-    //private EnemyCheckPoint _targetCheckPoint;
     private Enemy _enemy;
     private Rigidbody _rigidbody;
     private Vector3 _targetPoint;
-
+    private EnemyCheckPoint _passedCheckPoint = null;
+    private int index = 0;
     public int TargetCheckPointIndex => _targetCheckPointIndex;
 
     public void ChangeNextCheckPoint(EnemyCheckPoint checkPoint)
     {
-        int index = _enemyCheckPoints.GetCheckPointIndex(checkPoint);
-        if (index != -1)
+        if (_passedCheckPoint != checkPoint)
         {
-            _targetCheckPointIndex = index + 1;
-            _targetPoint = _enemyCheckPoints.GetNextCheckPointPosition(checkPoint);
-            transform.LookAt(_targetPoint);
+            _passedCheckPoint = checkPoint;
+            index = _enemyCheckPoints.GetCheckPointIndex(checkPoint);
+            if (index != -1 && index >= TargetCheckPointIndex)
+            {
+                _targetCheckPointIndex = index + 1;
+                _targetPoint = _enemyCheckPoints.GetNextCheckPointPosition(checkPoint);
+                transform.LookAt(_targetPoint);
+            }
         }
     }
 

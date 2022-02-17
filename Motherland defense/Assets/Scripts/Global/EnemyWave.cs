@@ -25,8 +25,8 @@ public class EnemyWave : MonoBehaviour
 
     public void StartWave()
     {
-        _waveIcon.StopFilling();
-        _waveIcon.gameObject.SetActive(false);
+
+
         OnStartedWave?.Invoke(this);
         StartCoroutine(nameof(SpawnNextEnemy));
         foreach (EnemyWave wave in _parallelWaves)
@@ -57,11 +57,15 @@ public class EnemyWave : MonoBehaviour
         }
     }
 
-    //public void EnableIcon(float seconds)
-    //{
-    //    _waveIcon.gameObject.SetActive(true);
-    //    _waveIcon.StartFilling(seconds);
-    //}
+    public void DisableIcon()
+    {
+        _waveIcon.StopFilling();
+        _waveIcon.gameObject.SetActive(false);
+        foreach (EnemyWave wave in _parallelWaves)
+        {
+            wave.DisableIcon();
+        }
+    }
 
     private IEnumerator SpawnNextEnemy()
     {

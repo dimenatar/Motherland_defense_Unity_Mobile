@@ -579,6 +579,8 @@ GameObject:
   - component: {fileID: 1190873054945348333}
   - component: {fileID: 226983388739544927}
   - component: {fileID: 5664648317079087925}
+  - component: {fileID: 8985016256002027594}
+  - component: {fileID: 5019328304714073148}
   m_Layer: 0
   m_Name: MegaRabbit
   m_TagString: Untagged
@@ -825,6 +827,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &8985016256002027594
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3740560785446900745}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 0.7, z: 0.7}
+  m_Center: {x: 0, y: 0.33, z: 0}
+--- !u!114 &5019328304714073148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3740560785446900745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a47d3849b9995b4783629d6b1bf7d46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3740566551405732167
 GameObject:
   m_ObjectHideFlags: 0

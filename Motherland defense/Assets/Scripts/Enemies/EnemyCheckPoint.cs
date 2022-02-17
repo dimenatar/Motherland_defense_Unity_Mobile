@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Transform))]
@@ -5,8 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 public class EnemyCheckPoint : MonoBehaviour
 {
-    [SerializeField] private Transform checkPoint;
-    [SerializeField] private int checkPointOrderNumber;
+    [SerializeField] private int _checkPointOrderNumber;
+
+    public int CheckPointOrderNumber => _checkPointOrderNumber;
 
     private void OnTriggerEnter(Collider other)
     {

@@ -13,8 +13,8 @@ public class EndTrigger : MonoBehaviour
     {
         if (other.GetComponent<Enemy>())
         {
-            _enemyCounter.ReduceEnemy();
             OnEnemyPassed?.Invoke(other.GetComponent<Enemy>());
+            _enemyCounter.ReduceEnemy();
             Destroy(other.gameObject);
         }
     }

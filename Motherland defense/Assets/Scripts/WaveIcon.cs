@@ -38,8 +38,7 @@ public class WaveIcon : MonoBehaviour, IClickable
     }
 
     public void StartFilling(float seconds)
-    {
-        Debug.Log(seconds);
+    { 
         _timeToFill = seconds;
         _timer.Initialise(_timeToFill.Value);
         StartCoroutine(nameof(FillCircle));

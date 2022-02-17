@@ -14,9 +14,9 @@ public class LevelMarker : MonoBehaviour
     [SerializeField] private LevelLoader _loader;
     [SerializeField] private StatiscticsPanel _levelPanel;
     [SerializeField] private MarkerDeselector _markerDeselector;
+    [SerializeField] private Button _startLevel;
 
     private LevelData _levelData = new LevelData();
-    private bool _isFirstClick = true;
 
     public int LevelNumber => _levelNumber;
 
@@ -29,27 +29,25 @@ public class LevelMarker : MonoBehaviour
     public void Deselect()
     {
         GetComponent<Image>().sprite = _passiveImage;
-        _isFirstClick = true;
+        _startLevel.onClick.RemoveAllListeners();
     }
 
     public void Select()
     {
         GetComponent<Image>().sprite = _activeImage;
+        _startLevel.onClick.AddListener(LoadLevel);
     }
 
     public void OnMarkerClick()
     {
-        if (_isFirstClick)
-        {
-            _markerDeselector.Deselect();
-            Select();
-            _levelPanel.gameObject.SetActive(true);
-            _levelPanel.Initialise(_levelData.AmountRemainingHealth, _levelData.DamageToUnits, _levelData.AmountEnemies, _levelData.Time);
-            _isFirstClick = false;
-        }
-        else
-        {
-            _loader.LoadLevel(_loadingLevelName);
-        }
+        _markerDeselector.Deselect();
+        Select();
+        _levelPanel.gameObject.SetActive(true);
+        _levelPanel.Initialise(_levelData.AmountRemainingHealth, _levelData.DamageToUnits, _levelData.AmountEnemies, _levelData.Time);
+    }
+
+    private void LoadLevel()
+    {
+        _loader.LoadLevel(_loadingLevelName);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 
 public class DragAndDropBuldingSpot : MonoBehaviour
 {
+    public event Action OnPlaceDropped;
+
     [SerializeField] private TerrainCollider _terrainCollider;
     [SerializeField] private UserMoney _userMoney;
     [SerializeField] private TowerFactory _towerFactory;
@@ -107,6 +110,7 @@ public class DragAndDropBuldingSpot : MonoBehaviour
     {
         if (_spot)
         {
+            OnPlaceDropped?.Invoke();
             Destroy(_spot.GetComponent<TowerSpotCollisionChecker>());
             _spot.GetComponent<BoxCollider>().isTrigger = false;
             if (_isAllowedPlace)

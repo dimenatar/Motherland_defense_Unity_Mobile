@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
@@ -16,7 +17,7 @@ public class PauseMenu : MonoBehaviour
     public void HidePauseMenu()
     {
         _pausePanel.SetActive(false);
-        Time.timeScale = 1;
+        Time.timeScale = SpeedGameUp.Speeds.Where(pair => pair.Key == SpeedGameUp.CurrentSpeed).Select(pair => pair.Value).FirstOrDefault();
     }
 
     private void OnApplicationPause(bool pause)

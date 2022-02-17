@@ -23,4 +23,4 @@ MonoBehaviour:
   _dieSound: {fileID: 8300000, guid: b10dffd0260b8284d925d8e840a9ba7f, type: 3}
   _speed: 0.08
   _damage: 30
-  _health: 120
+  _health: 150

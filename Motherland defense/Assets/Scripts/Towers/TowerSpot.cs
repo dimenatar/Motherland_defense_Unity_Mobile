@@ -38,6 +38,12 @@ public class TowerSpot : MonoBehaviour, IClickable
         _canDeselect = true;
     }
 
+    public void DestroySpot()
+    {
+        RemoveTower();
+        gameObject.SetActive(false);
+    }
+
     public void ObjectClick()
     {
         if (_tower)
