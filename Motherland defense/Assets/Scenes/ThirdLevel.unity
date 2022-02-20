@@ -747,7 +747,7 @@ MonoBehaviour:
   _spawnPoint: {fileID: 1333338654}
   _enemyFactory: {fileID: 625335857}
   _parallelWaves: []
-  _wavePause: 65
+  _wavePause: 40
   _waveIcon: {fileID: 314550394}
 --- !u!1 &164137630
 GameObject:
@@ -793,7 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemies: 020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000
-  _spawnPause: 2
+  _spawnPause: 0.75
   _spawnPoint: {fileID: 1333338654}
   _enemyFactory: {fileID: 625335857}
   _parallelWaves: []
@@ -5867,7 +5867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemies: 0000000000000000030000000200000002000000020000000300000002000000020000000100000002000000020000000200000001000000
-  _spawnPause: 2
+  _spawnPause: 1
   _spawnPoint: {fileID: 1333338654}
   _enemyFactory: {fileID: 625335857}
   _parallelWaves: []
@@ -18118,6 +18118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pausePanel: {fileID: 1893762680}
+  _gameSpeed: {fileID: 625335859}
 --- !u!114 &625335861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18802,7 +18803,7 @@ MonoBehaviour:
   _spawnPoint: {fileID: 1333338654}
   _enemyFactory: {fileID: 625335857}
   _parallelWaves: []
-  _wavePause: 50
+  _wavePause: 30
   _waveIcon: {fileID: 314550394}
 --- !u!1 &737151719
 GameObject:
@@ -23384,7 +23385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemies: 030000000300000003000000030000000300000003000000030000000300000003000000030000000300000003000000030000000300000003000000
-  _spawnPause: 2
+  _spawnPause: 1
   _spawnPoint: {fileID: 1333338654}
   _enemyFactory: {fileID: 625335857}
   _parallelWaves: []
@@ -23438,7 +23439,7 @@ MonoBehaviour:
   _spawnPoint: {fileID: 1333338654}
   _enemyFactory: {fileID: 625335857}
   _parallelWaves: []
-  _wavePause: 60
+  _wavePause: 30
   _waveIcon: {fileID: 314550394}
 --- !u!1 &1778713329
 GameObject:
@@ -24068,7 +24069,7 @@ MonoBehaviour:
   _spawnPoint: {fileID: 1333338654}
   _enemyFactory: {fileID: 625335857}
   _parallelWaves: []
-  _wavePause: 45
+  _wavePause: 25
   _waveIcon: {fileID: 314550394}
 --- !u!4 &1866717588
 Transform:

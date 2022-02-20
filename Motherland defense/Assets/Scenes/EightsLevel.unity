@@ -1300,6 +1300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pausePanel: {fileID: 1746725427}
+  _gameSpeed: {fileID: 261188007}
 --- !u!114 &261188009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1430,7 +1431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b1f489f3403dbf499d5a71937ae838d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startHealth: 5
+  _startHealth: 10
   _health: {fileID: 1968449523}
   _trigger: {fileID: 2078904855}
   _losePanel: {fileID: 261188012}
@@ -9999,7 +10000,7 @@ Transform:
   m_GameObject: {fileID: 824445458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.3, y: 36, z: -47.1}
-  m_LocalScale: {x: 221.5, y: 1, z: 202.3}
+  m_LocalScale: {x: 171.5, y: 1, z: 152.3}
   m_Children:
   - {fileID: 1588940415}
   m_Father: {fileID: 0}
@@ -22805,7 +22806,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1588940408}
   m_LocalRotation: {x: 0.5835412, y: -0, z: -0, w: 0.81208354}
-  m_LocalPosition: {x: -0.625, y: 70, z: 0.198}
+  m_LocalPosition: {x: -0.17, y: 120, z: -0.208}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1072865205}
@@ -23173,7 +23174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1626183569
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24267,7 +24268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemies: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  _spawnPause: 4
+  _spawnPause: 3
   _spawnPoint: {fileID: 1340336036}
   _enemyFactory: {fileID: 261188004}
   _parallelWaves: []
@@ -25136,7 +25137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemies: 0200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000
-  _spawnPause: 2
+  _spawnPause: 0.8
   _spawnPoint: {fileID: 1340336036}
   _enemyFactory: {fileID: 261188004}
   _parallelWaves: []

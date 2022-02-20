@@ -16,11 +16,11 @@ MonoBehaviour:
   _name: 2
   _points: 1
   _pauseBetweenAttacks: 0.5
-  _animationSpeed: 1
+  _animationSpeed: 1.5
   _moneyAmountOnDeath: 7
   _hitSound: {fileID: 8300000, guid: cafe5d2014e1fed4c89560601d0ca8e6, type: 3}
   _attackSound: {fileID: 8300000, guid: 82e73e03abd5e4a46a3afa753ebcce05, type: 3}
   _dieSound: {fileID: 8300000, guid: b10dffd0260b8284d925d8e840a9ba7f, type: 3}
-  _speed: 0.23
+  _speed: 0.28
   _damage: 1
-  _health: 12
+  _health: 13

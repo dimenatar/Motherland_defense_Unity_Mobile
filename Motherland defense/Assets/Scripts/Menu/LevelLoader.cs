@@ -18,6 +18,7 @@ public class LevelLoader : MonoBehaviour
         {
             _isLoading = true;
             SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
+            Time.timeScale = 1;
         }
     }
 

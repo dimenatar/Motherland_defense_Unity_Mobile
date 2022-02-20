@@ -57,11 +57,6 @@ public class CanonBall : MonoBehaviour
         _target = null;
     }
 
-    private void Update()
-    {
-       //  MoveBall();
-    }
-
     IEnumerator MoveBall()
     {
         float mn = 0;
@@ -92,12 +87,6 @@ public class CanonBall : MonoBehaviour
         CreateExplosion();
         HitEnemies(FindEnemies());
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawSphere(transform.position, _hitRadius);
-    //}
 
     private List<Collider> FindEnemies()
     {

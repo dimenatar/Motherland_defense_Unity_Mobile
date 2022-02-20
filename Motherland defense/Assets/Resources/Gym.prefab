@@ -1613,7 +1613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shotStartPosition: {fileID: 0}
-  _spawnTime: 2
+  _spawnTime: 4
   _spawnPoint: {fileID: 753248166278678547}
   _characterData: {fileID: 11400000, guid: a9ccacc7e9035ee49a50cb82e097dc97, type: 2}
   basePointToMove: {fileID: 753248166271577365}

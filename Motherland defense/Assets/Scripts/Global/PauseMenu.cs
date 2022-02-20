@@ -6,7 +6,7 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _pausePanel;
-
+    [SerializeField] private SpeedGameUp _gameSpeed;
     public void ShowPauseMenu()
     {
         _pausePanel.SetActive(true);
@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
     public void HidePauseMenu()
     {
         _pausePanel.SetActive(false);
-        Time.timeScale = SpeedGameUp.Speeds.Where(pair => pair.Key == SpeedGameUp.CurrentSpeed).Select(pair => pair.Value).FirstOrDefault();
+        Time.timeScale = SpeedGameUp.Speeds.Where(pair => pair.Key == _gameSpeed.CurrentSpeed).Select(pair => pair.Value).FirstOrDefault();
     }
 
     private void OnApplicationPause(bool pause)

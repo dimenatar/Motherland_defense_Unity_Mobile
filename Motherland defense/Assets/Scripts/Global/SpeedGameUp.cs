@@ -14,10 +14,10 @@ public class SpeedGameUp : MonoBehaviour
         Quadruple
     }
 
-    private static Speed _currentSpeed = Speed.Default;
+    private Speed _currentSpeed = Speed.Default;
     public static Dictionary<Speed, int> Speeds = new Dictionary<Speed, int>() { { Speed.Default, 1 }, { Speed.Double, 2 }, { Speed.Quadruple, 4 } };
 
-    public static Speed CurrentSpeed => _currentSpeed;
+    public Speed CurrentSpeed => _currentSpeed;
 
     public void ChangeSpeed()
     {

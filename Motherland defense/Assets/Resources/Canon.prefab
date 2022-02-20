@@ -585,11 +585,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4734521747844048837, guid: 6d294e5ee40dc9944a2b19a1ef88f4a5, type: 3}
       propertyPath: _damage
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4734521747844048837, guid: 6d294e5ee40dc9944a2b19a1ef88f4a5, type: 3}
       propertyPath: _hitRadius
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4734521747844048838, guid: 6d294e5ee40dc9944a2b19a1ef88f4a5, type: 3}
       propertyPath: m_RootOrder

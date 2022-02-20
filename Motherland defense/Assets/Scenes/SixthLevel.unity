@@ -10770,6 +10770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pausePanel: {fileID: 1363879393}
+  _gameSpeed: {fileID: 1311285343}
 --- !u!114 &1311285345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17269,7 +17270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1607746146
 RectTransform:
   m_ObjectHideFlags: 0

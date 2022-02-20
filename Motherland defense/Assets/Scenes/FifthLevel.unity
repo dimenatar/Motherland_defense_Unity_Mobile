@@ -1483,6 +1483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pausePanel: {fileID: 1746725427}
+  _gameSpeed: {fileID: 261188007}
 --- !u!114 &261188009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2247,7 +2248,7 @@ MonoBehaviour:
   _spawnPoint: {fileID: 1340336036}
   _enemyFactory: {fileID: 261188004}
   _parallelWaves: []
-  _wavePause: 50
+  _wavePause: 35
   _waveIcon: {fileID: 631970732}
 --- !u!1 &334841756
 GameObject:
@@ -3902,7 +3903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemies: 0000000001000000020000000200000002000000010000000200000002000000
-  _spawnPause: 2
+  _spawnPause: 1
   _spawnPoint: {fileID: 1340336036}
   _enemyFactory: {fileID: 261188004}
   _parallelWaves: []
@@ -9301,7 +9302,7 @@ MonoBehaviour:
   _spawnPoint: {fileID: 1340336036}
   _enemyFactory: {fileID: 261188004}
   _parallelWaves: []
-  _wavePause: 55
+  _wavePause: 30
   _waveIcon: {fileID: 631970732}
 --- !u!4 &746978124
 Transform:
@@ -22637,7 +22638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemies: 00000000000000000000000001000000020000000200000002000000010000000200000002000000020000000200000002000000
-  _spawnPause: 2
+  _spawnPause: 1
   _spawnPoint: {fileID: 1340336036}
   _enemyFactory: {fileID: 261188004}
   _parallelWaves: []
@@ -24417,7 +24418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1626183569
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25089,8 +25090,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0779192a7699f3a468a0d606037fcd56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemies: 020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000
-  _spawnPause: 2
+  _enemies: 0200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000020000000200000002000000
+  _spawnPause: 1
   _spawnPoint: {fileID: 1340336036}
   _enemyFactory: {fileID: 261188004}
   _parallelWaves: []
@@ -31565,7 +31566,7 @@ MonoBehaviour:
   _spawnPoint: {fileID: 1340336036}
   _enemyFactory: {fileID: 261188004}
   _parallelWaves: []
-  _wavePause: 46
+  _wavePause: 30
   _waveIcon: {fileID: 631970732}
 --- !u!1001 &2114807911
 PrefabInstance:
